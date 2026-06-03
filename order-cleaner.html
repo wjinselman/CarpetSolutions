@@ -123,6 +123,20 @@
       font-size: clamp(24px, 5vw, 34px);
       line-height: 1.1;
     }
+    .value-badge {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #d4af37;
+      color: #123d32;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      box-shadow: 0 8px 16px rgba(212, 175, 55, .25);
+    }
 
     .choice p {
       margin: 0;
@@ -146,6 +160,11 @@
       background: #dcefe3;
       color: var(--green-dark);
       border: 1px solid #a8d4b6;
+    }
+    .button.bundle {
+      background: #78b98b;
+      color: var(--green-dark);
+      border: 1px solid #5fa877;
     }
 
     .back {
@@ -197,7 +216,7 @@
       text-align: center;
     }
 
-    .choices { grid-template-columns: 1fr 1fr; }
+    .choices { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -220,8 +239,15 @@
         <a class="button" href="https://square.link/u/HIAZ5Ds8?src=sheet" target="_blank" rel="noopener">Order Local</a>
       </article>
 
+
       <article class="choice">
-        <h2>Ship Cleaner</h2>
+        <h2>CarPET Friendly Bundle (Shipped)</h2>
+        <div class="value-badge">Best Value</div>
+        <p>Use this option if you want the shipped bundle option.</p>
+        <a class="button bundle" href="https://square.link/u/yKX09jYD?src=sheet" target="_blank" rel="noopener">Order Bundle</a>
+      </article>
+      <article class="choice">
+        <h2>Order Cleaner</h2>
         <p>Use this option if you need CarPET Friendly Solutions cleaner shipped to you.</p>
         <a class="button secondary" href="https://square.link/u/JmdFFxnr?src=sheet" target="_blank" rel="noopener">Order Shipped</a>
       </article>
@@ -231,6 +257,13 @@
   </main>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
