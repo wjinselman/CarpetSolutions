@@ -87,13 +87,66 @@
       font-size: clamp(17px, 4vw, 20px);
       line-height: 1.6;
     }
+    .review-banner {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 auto 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff8df;
+      color: var(--green-dark);
+      font-size: clamp(15px, 3.4vw, 18px);
+      font-weight: 900;
+      line-height: 1.2;
+      box-shadow: 0 8px 18px rgba(212, 175, 55, .18);
+    }
+    .review-stars {
+      color: #d4af37;
+      letter-spacing: .04em;
+      line-height: 1;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, .12);
+    }
 
     .product strong {
       color: var(--green-dark);
     }
+    .product-trust {
+      margin-top: 18px !important;
+      color: var(--green-dark) !important;
+      font-weight: 750;
+    }
 
 
-    .choice-intro {
+
+    .benefits {
+      max-width: 760px;
+      margin: 0 auto 26px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--wash);
+      box-shadow: 0 12px 26px rgba(18, 49, 43, .08);
+    }
+
+    .benefits h2 {
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-size: clamp(24px, 5vw, 34px);
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .benefits ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 22px;
+      color: var(--green-dark);
+      font-size: clamp(16px, 3.6vw, 18px);
+      font-weight: 750;
+    }    .choice-intro {
       max-width: 700px;
       margin: 4px auto 18px;
       color: var(--muted);
@@ -101,7 +154,14 @@
       text-align: center;
     }
 
-    .choices {
+
+    .shipping-note {
+      margin: 0 auto 18px;
+      color: #123d32;
+      font-size: clamp(17px, 4vw, 20px);
+      font-weight: 700;
+      text-align: center;
+    }    .choices {
       display: grid;
       gap: 18px;
       margin-top: 28px;
@@ -167,7 +227,58 @@
       border: 1px solid #5fa877;
     }
 
-    .back {
+
+    .upholstery-results {
+      max-width: 860px;
+      margin: 34px auto 0;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 14px 30px rgba(18, 49, 43, .1);
+      text-align: center;
+    }
+
+    .upholstery-results h2 {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: clamp(24px, 5vw, 34px);
+      line-height: 1.1;
+    }
+
+    .upholstery-results p {
+      max-width: 640px;
+      margin: 0 auto 18px;
+      color: var(--muted);
+      font-size: clamp(16px, 3.6vw, 18px);
+    }
+
+    .upholstery-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .upholstery-card {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--wash);
+      text-align: left;
+    }
+
+    .upholstery-card img {
+      display: block;
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .upholstery-card figcaption {
+      padding: 12px 14px;
+      color: var(--green-dark);
+      font-weight: 900;
+    }    .back {
       margin-top: 28px;
       text-align: center;
     }
@@ -202,21 +313,20 @@
       color: var(--muted);
       font-size: clamp(17px, 4vw, 20px);
       line-height: 1.6;
-    }
-
-    .product strong {
+    }.product strong {
       color: var(--green-dark);
-    }
-  
-    .choice-intro {
+    }.choice-intro {
       max-width: 700px;
       margin: 4px auto 18px;
       color: var(--muted);
       font-size: clamp(18px, 4.2vw, 22px);
       text-align: center;
-    }
-
-    .choices { grid-template-columns: repeat(3, 1fr); }
+    }.choices { grid-template-columns: repeat(3, 1fr); }
+          .upholstery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    
+  
     }
   </style>
 </head>
@@ -229,34 +339,104 @@
 
     <section class="product" aria-label="CarPET Friendly Solutions cleaner bottle">
       <img src="cleaner-bottle.png" alt="20 ounce CarPET Friendly Solutions carpet and upholstery cleaner bottle" />
-      <p><strong>A 20-ounce bottle of our patented carbonated cleaner</strong> with advanced fabric guard and odor-eliminating enzymes. Simply spray the stained area, blot with a cloth until dry, and repeat as necessary. Watch the stain magically disappear. Suitable for all organic stains. Non-toxic, safe for people and pets.</p>
+      <div class="review-banner"><span class="review-stars">★★★★★</span> Rated by customers across Southern Oklahoma</div>
+      <p class="product-trust">Used daily by our professional carpet cleaning company on real customer jobs.</p>
+      <p class="product-trust">Proudly Made and Bottled in Oklahoma 🇺🇸</p>
+      <p><strong>20 oz CarPET Friendly Solutions Cleaner</strong><br>
+      Professional-strength carbonated carpet and upholstery cleaner with odor-eliminating enzymes and advanced fabric protectant.<br><br>
+      ✔ Non-Toxic &amp; Safe for Children and Pets<br>
+      ✔ Removes Organic Stains &amp; Odors<br>
+      ✔ Advanced Carbonated Cleaning Technology<br>
+      ✔ Fabric Protection Lasting Up To 6 Months<br>
+      ✔ Used Daily By Professional Carpet Cleaners<br><br>
+      Simply spray damp, blot dry, and repeat if necessary.</p>
+      <p class="product-trust">Trusted carpet cleaner and stain remover from CarPET Friendly Solutions in Ardmore, Oklahoma. Effective on carpets, upholstery, furniture, area rugs, vehicle interiors, pet accidents, food spills, and most organic stains.</p>
     </section>
-    <p class="choice-intro">Choose the option that fits you best. Local customers can use the local option, and out-of-area customers can order cleaner shipped.</p>
+
+    <section class="upholstery-results" aria-label="Upholstery before and after photos">
+      <h2>Upholstery Restored With Our Cleaner</h2>
+      <p>Real upholstery results on decorative pillows restored with CarPET Friendly Solutions cleaner.</p>
+      <div class="upholstery-grid">
+        <figure class="upholstery-card">
+          <img src="upholstery-before.jpeg" alt="Stained decorative pillow before using CarPET Friendly Solutions cleaner" />
+          <figcaption>Before Using Our Cleaner</figcaption>
+        </figure>
+        <figure class="upholstery-card">
+          <img src="upholstery-after.jpeg" alt="Decorative pillow restored with CarPET Friendly Solutions cleaner" />
+          <figcaption>Restored With Our Cleaner</figcaption>
+        </figure>
+      </div>
+    </section>
+<p class="choice-intro">Choose the option that fits you best. Local customers can use the local option, and out-of-area customers can order cleaner shipped.</p>
+
+    <section class="benefits">
+      <h2>Why CarPET Friendly Solutions?</h2>
+      <ul>
+        <li>Professional-grade carbonated cleaning technology</li>
+        <li>Safe around children and pets</li>
+        <li>No harsh chemical smell</li>
+        <li>Odor-eliminating enzymes</li>
+        <li>Works on carpet, upholstery, rugs, and vehicle interiors</li>
+        <li>Quick drying formula</li>
+      </ul>
+    </section>
+    <p class="shipping-note">Free Shipping Included While Available</p>
+    <p class="shipping-note">Small-Batch Production - Limited Inventory</p>
+    <div class="review-banner">Professional cleaning formula trusted for over 20 years</div>
     <section class="choices" aria-label="Order cleaner options">
       <article class="choice">
-        <h2>Local Customers</h2>
-        <p>Pickup only. Please message or call to arrange local pickup.</p>
-        <a class="button" href="https://square.link/u/HIAZ5Ds8?src=sheet" target="_blank" rel="noopener">Order Local</a>
-      </article>
-
-
-      <article class="choice">
-        <h2>CarPET Friendly Bundle (Shipped)</h2>
+        <h2>Best Value Bundle</h2>
         <div class="value-badge">Best Value</div>
-        <p>Use this option if you want the shipped bundle option.</p>
-        <a class="button bundle" href="https://square.link/u/yKX09jYD?src=sheet" target="_blank" rel="noopener">Order Bundle</a>
+        <p>Our best value package. Perfect for pet owners, families, and anyone who wants extra cleaner on hand while saving on shipping.</p>
+        <a class="button" href="https://square.link/u/yKX09jYD?src=sheet" target="_blank" rel="noopener">Bundle - Save Money</a>
       </article>
+
       <article class="choice">
-        <h2>Order Cleaner</h2>
+        <h2>Single Bottle (Shipped)</h2>
         <p>Use this option if you need CarPET Friendly Solutions cleaner shipped to you.</p>
-        <a class="button secondary" href="https://square.link/u/JmdFFxnr?src=sheet" target="_blank" rel="noopener">Order Shipped</a>
+        <a class="button secondary" href="https://square.link/u/JmdFFxnr?src=sheet" target="_blank" rel="noopener">Order Shipped - $24.99</a>
+      </article>
+
+      <article class="choice">
+        <h2>Local Pickup</h2>
+        <p>Pickup only. Please message or call to arrange local pickup.</p>
+        <p class="shipping-note">Local Pickup Only</p>
+        <a class="button bundle" href="https://square.link/u/HIAZ5Ds8?src=sheet" target="_blank" rel="noopener">Order Local</a>
       </article>
     </section>
-
-    <p class="back"><a href="index.html">Back to main page</a></p>
+<p class="back"><a href="index.html">Back to main page</a></p>
   </main>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
