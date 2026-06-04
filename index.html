@@ -666,6 +666,7 @@
     }
 
     .review-card {
+      width: 100%;
       max-width: 680px;
       margin: 24px auto 0;
       padding: 22px;
@@ -675,11 +676,22 @@
       background: var(--wash);
       text-align: left;
       box-shadow: 0 12px 28px rgba(18, 49, 43, .08);
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .review-card:hover,
+    .review-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(47, 122, 75, .34);
+      box-shadow: 0 16px 34px rgba(18, 49, 43, .14);
+      outline: none;
     }
     .review-grid {
       display: grid;
       gap: 18px;
       margin-top: 24px;
+      justify-items: stretch;
     }
 
     @media (min-width: 821px) {
@@ -689,7 +701,6 @@
       }
 
       .review-card {
-        width: 100%;
         height: 100%;
         max-width: none;
         margin: 0;
@@ -722,6 +733,81 @@
       color: var(--text);
       font-size: 16px;
       line-height: 1.6;
+    }
+
+    .review-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(18, 49, 43, .48);
+    }
+
+    .review-popup.is-open {
+      display: flex;
+    }
+
+    .review-popup-card {
+      position: relative;
+      width: min(720px, 100%);
+      max-height: min(82vh, 720px);
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 24px 70px rgba(18, 49, 43, .28);
+      padding: 28px;
+      text-align: left;
+      transform: scale(.97);
+      animation: reviewPop .16s ease forwards;
+    }
+
+    .review-popup-card .review-card {
+      max-width: none;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      cursor: default;
+      transform: none;
+    }
+
+    .review-popup-card .review-card:hover,
+    .review-popup-card .review-card:focus-visible {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .review-popup-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--wash);
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .review-popup-close:hover,
+    .review-popup-close:focus-visible {
+      background: #dcefe3;
+      outline: none;
+    }
+
+    @keyframes reviewPop {
+      to {
+        transform: scale(1);
+      }
     }
 
     footer {
@@ -1240,6 +1326,13 @@
     </div>
   </div>
 
+  <div class="review-popup" id="reviewPopup" role="dialog" aria-modal="true" aria-label="Customer review" aria-hidden="true">
+    <div class="review-popup-card">
+      <button class="review-popup-close" type="button" id="closeReviewPopup" aria-label="Close review">×</button>
+      <div id="reviewPopupContent"></div>
+    </div>
+  </div>
+
   <script>
     (() => {
       const isMobileLike = window.matchMedia("(pointer: coarse)").matches || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
@@ -1286,6 +1379,55 @@
         } catch {
           copyButton.textContent = phoneNumber;
         }
+      });
+    })();
+
+    (() => {
+      const reviewPopup = document.getElementById("reviewPopup");
+      const reviewPopupContent = document.getElementById("reviewPopupContent");
+      const closeReviewPopup = document.getElementById("closeReviewPopup");
+      const reviewCards = document.querySelectorAll(".review-grid .review-card");
+      let lastOpenedReview = null;
+
+      if (!reviewPopup || !reviewPopupContent || !closeReviewPopup || !reviewCards.length) return;
+
+      const closePopup = () => {
+        reviewPopup.classList.remove("is-open");
+        reviewPopup.setAttribute("aria-hidden", "true");
+        reviewPopupContent.innerHTML = "";
+        lastOpenedReview?.focus();
+      };
+
+      const openPopup = (card) => {
+        lastOpenedReview = card;
+        reviewPopupContent.innerHTML = "";
+        reviewPopupContent.appendChild(card.cloneNode(true));
+        reviewPopup.classList.add("is-open");
+        reviewPopup.setAttribute("aria-hidden", "false");
+        closeReviewPopup.focus();
+      };
+
+      reviewCards.forEach((card) => {
+        const name = card.querySelector(".review-card-name")?.textContent?.trim() || "customer review";
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", `Read ${name}'s full review`);
+
+        card.addEventListener("click", () => openPopup(card));
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openPopup(card);
+          }
+        });
+      });
+
+      closeReviewPopup.addEventListener("click", closePopup);
+      reviewPopup.addEventListener("click", (event) => {
+        if (event.target === reviewPopup) closePopup();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && reviewPopup.classList.contains("is-open")) closePopup();
       });
     })();
   </script>
