@@ -669,11 +669,31 @@
       max-width: 680px;
       margin: 24px auto 0;
       padding: 22px;
+      box-sizing: border-box;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--wash);
       text-align: left;
       box-shadow: 0 12px 28px rgba(18, 49, 43, .08);
+    }
+    .review-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    @media (min-width: 821px) {
+      .review-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+      }
+
+      .review-card {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        margin: 0;
+      }
     }
 
     .review-card-stars {
@@ -1027,6 +1047,7 @@
               <h3>Very low moisture burnisher</h3>
               <p>The VLM process uses less water and helps carpet dry within 3-4 hours.</p>
             </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1136,6 +1157,7 @@
 <h2>Had a great experience?</h2>
             <p>A quick review helps more local customers find CarPET Friendly Solutions.</p>
             <a class="button button-primary" href="https://g.page/r/CVPQdd3LZG2YEBM/review" target="_blank" rel="noopener">Leave a Review</a>
+            <div class="review-grid">
             <div class="review-card">
               <div class="review-card-stars" aria-label="5 out of 5 stars">★★★★★</div>
               <div class="review-card-name">Debbie Conley</div>
@@ -1194,6 +1216,7 @@
                 Great customer service. Their carpet cleaning is top notch. Their bottle solution works on all stains.
               </blockquote>
             </div>
+          </div>
           </div>
         </div>
       </section>
@@ -1268,6 +1291,7 @@
   </script>
 </body>
 </html>
+
 
 
 
