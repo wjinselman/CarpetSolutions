@@ -220,6 +220,7 @@
       font-weight: 900;
       text-align: center;
       text-decoration: none;
+      transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
     }
 
     .button.secondary {
@@ -351,6 +352,28 @@
         min-height: 76px !important;
         padding: 12px 16px;
         line-height: 1.2;
+      }
+
+      .choice .button:hover,
+      .choice .button:focus-visible {
+        background: #246f37;
+        border-color: #246f37;
+        color: #fff;
+        transform: translateY(-1px);
+      }
+
+      .choice .button.secondary:hover,
+      .choice .button.secondary:focus-visible {
+        background: #b9dfc5;
+        border-color: #7cbc91;
+        color: var(--green-dark);
+      }
+
+      .choice .button.bundle:hover,
+      .choice .button.bundle:focus-visible {
+        background: #5fa877;
+        border-color: #428b5d;
+        color: var(--green-dark);
       }
           .upholstery-grid {
         grid-template-columns: 1fr 1fr;
