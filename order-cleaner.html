@@ -328,6 +328,19 @@
       font-size: clamp(18px, 4.2vw, 22px);
       text-align: center;
     }.choices { grid-template-columns: repeat(3, 1fr); }
+      /* Desktop order card sizing */
+      .choices {
+        align-items: start;
+      }
+
+      .choice {
+        align-content: start;
+      }
+
+      .choice .button {
+        align-self: start;
+        min-height: 0;
+      }
           .upholstery-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -415,6 +428,7 @@
   </main>
 </body>
 </html>
+
 
 
 
