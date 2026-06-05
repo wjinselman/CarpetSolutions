@@ -435,6 +435,89 @@
       font-size: 15px;
     }
 
+    .pricing-callout {
+      width: min(980px, calc(100% - 40px));
+      margin: 46px auto 0;
+      padding: 34px 32px;
+      border: 1px solid rgba(47, 125, 87, .28);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #f4fbf6 0%, var(--green-soft) 100%);
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      box-shadow: 0 14px 34px rgba(18, 49, 43, .08);
+    }
+
+    .pricing-callout h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(22px, 3vw, 31px);
+      line-height: 1.15;
+    }
+
+    .pricing-kicker {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .pricing-price {
+      display: block;
+      margin: 10px auto 8px;
+      color: var(--green-dark);
+      font-family: "Segoe UI", "Aptos", Calibri, Arial, sans-serif;
+      font-size: clamp(58px, 9vw, 86px);
+      font-weight: 700;
+      line-height: 1;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+
+    .pricing-subtitle {
+      display: block;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 800;
+    }
+
+    .pricing-list {
+      width: min(760px, 100%);
+      margin: 26px auto 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      color: var(--green-dark);
+      font-size: 17px;
+      font-weight: 750;
+      text-align: left;
+    }
+
+    .pricing-list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .pricing-list li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .pricing-note {
+      margin: 24px 0 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
     .section {
       width: min(980px, calc(100% - 40px));
       margin: 0 auto;
@@ -879,10 +962,25 @@
       mix-blend-mode: multiply;
     }
 .hero-proof-left,
-  .proof {
+      .proof {
         width: min(100% - 28px, 980px);
         grid-template-columns: 1fr;
         gap: 0;
+      }
+
+      .pricing-callout {
+        width: min(100% - 28px, 980px);
+        margin-top: 28px;
+        padding: 28px 22px;
+      }
+
+      .pricing-list {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+      }
+
+      .pricing-note {
+        max-width: none;
       }
 
       .proof-item {
@@ -1090,6 +1188,24 @@
             <a class="button button-secondary" href="order-cleaner.html">Order Cleaner</a>
           </div>
         </div>
+      </section>
+
+      <section class="pricing-callout" aria-labelledby="pricingCalloutTitle">
+        <div>
+          <p class="pricing-kicker">Professional Carpet Cleaning</p>
+          <h2 id="pricingCalloutTitle">
+            Starting at just
+            <span class="pricing-price">$125</span>
+            <span class="pricing-subtitle">for residential cleaning appointments</span>
+          </h2>
+          <ul class="pricing-list">
+            <li>Non-Toxic &amp; Safe for Children and Pets</li>
+            <li>Advanced Carbonated Cleaning Technology</li>
+            <li>Fast Dry Times</li>
+            <li>Free Estimates by Call or Text</li>
+          </ul>
+        </div>
+        <p class="pricing-note">Most residential cleaning projects range from $125&ndash;$300.</p>
       </section>
 
       <section class="proof" aria-label="Service highlights">
