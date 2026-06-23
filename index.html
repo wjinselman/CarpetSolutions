@@ -721,6 +721,17 @@
       height: 360px;
     }
 
+    .photo-card.full-result-image img {
+      height: auto;
+      max-height: 560px;
+      object-fit: contain;
+      background: var(--wash);
+    }
+
+    .mobile-result-image {
+      display: none;
+    }
+
     .store-inner {
       width: min(980px, calc(100% - 40px));
       margin: 0 auto;
@@ -1068,10 +1079,24 @@
         grid-template-columns: 1fr;
       }
 
+      .mobile-result-image {
+        display: block;
+        margin-bottom: 18px;
+      }
+
+      .desktop-result-image {
+        display: none;
+      }
+
       .process-photo img,
       .photo-card img,
       .after-stack .photo-card img {
         height: 300px;
+      }
+
+      .photo-card.full-result-image img {
+        height: auto;
+        max-height: none;
       }
 
       .store-inner {
@@ -1151,6 +1176,10 @@
       .photo-card img,
       .after-stack .photo-card img {
         height: 240px;
+      }
+
+      .photo-card.full-result-image img {
+        height: auto;
       }
 
     }
@@ -1339,8 +1368,8 @@
             <p>See the difference carbonated cleaning can make on spots, traffic lanes, and everyday buildup.</p>
           </div>
 
-          <figure class="photo-card process-photo">
-            <img src="images/same-area-different-results.jpeg" alt="Same room comparison showing steam cleaner result beside CarPET Friendly Solutions finished result">
+          <figure class="photo-card full-result-image mobile-result-image">
+            <img src="images/same-area-different-results-web.jpg" alt="Same room comparison showing steam cleaner result beside CarPET Friendly Solutions finished result" loading="lazy" decoding="async">
             <figcaption>
               <strong>Same area. Different results.</strong>
               <span>Room redone after steam cleaning</span>
@@ -1403,6 +1432,14 @@
               <img src="images/spot-cleaning-before-after-3.jpg" alt="Before and after carpet traffic lane cleaning result">
               <figcaption>
                 <span>Traffic lane and spot cleanup</span>
+              </figcaption>
+            </figure>
+
+            <figure class="photo-card full-result-image desktop-result-image">
+              <img src="images/same-area-different-results-web.jpg" alt="Same room comparison showing steam cleaner result beside CarPET Friendly Solutions finished result" loading="lazy" decoding="async">
+              <figcaption>
+                <strong>Same area. Different results.</strong>
+                <span>Note we also cleaned the corner chair!</span>
               </figcaption>
             </figure>
           </div>
