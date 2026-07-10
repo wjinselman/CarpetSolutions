@@ -635,6 +635,19 @@
       border-top: 1px solid rgba(255,255,255,.12);
       font-size: .78rem;
     }
+    .footer-credit {
+      display: block;
+      width: fit-content;
+      margin-top: 8px;
+      color: rgba(255,255,255,.42);
+      font-size: .72rem;
+      font-weight: 650;
+      transition: color .18s ease;
+    }
+    .footer-credit:hover,
+    .footer-credit:focus-visible {
+      color: rgba(255,255,255,.78);
+    }
 
     /* Desktop contact dialog */
     .contact-modal[hidden] { display: none; }
@@ -1069,7 +1082,10 @@
           <a href="sms:+15806680147">Text for Estimate</a>
         </div>
       </div>
-      <div class="footer-bottom">© 2026 CarPET Friendly Solutions. Serving Ardmore, Lone Grove, Dickson, Davis, Healdton, Wilson, Sulphur, and surrounding areas.</div>
+      <div class="footer-bottom">
+        <span>© 2026 CarPET Friendly Solutions. Serving Ardmore, Lone Grove, Dickson, Davis, Healdton, Wilson, Sulphur, and surrounding areas.</span>
+        <a class="footer-credit" href="https://inselmandigital.com" target="_blank" rel="noopener">Created &amp; maintained by Inselman Digital</a>
+      </div>
     </div>
   </footer>
 
