@@ -636,6 +636,125 @@
       font-size: .78rem;
     }
 
+    /* Desktop contact dialog */
+    .contact-modal[hidden] { display: none; }
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+    .contact-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 28, 23, .68);
+      backdrop-filter: blur(8px);
+    }
+    .contact-dialog {
+      position: relative;
+      width: min(100%, 520px);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.34);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: 0 34px 100px rgba(7, 28, 23, .34);
+    }
+    .contact-dialog-top {
+      padding: 32px 32px 24px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(47,125,87,.18), transparent 34%),
+        var(--mint-2);
+    }
+    .contact-dialog h2 {
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: clamp(1.8rem, 5vw, 2.55rem);
+      line-height: 1.04;
+      letter-spacing: -.04em;
+    }
+    .contact-dialog p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+    .contact-dialog-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255,255,255,.9);
+      color: var(--ink);
+      font: inherit;
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .contact-dialog-body { padding: 24px 32px 32px; }
+    .contact-number {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-number-main {
+      font-size: clamp(1.45rem, 6vw, 2rem);
+      font-weight: 950;
+      letter-spacing: -.025em;
+    }
+    .contact-number-copy {
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--mint);
+      color: var(--green-2);
+      font-size: .76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .contact-guidance {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+    .contact-guidance div {
+      padding: 13px 15px;
+      border-radius: 14px;
+      background: var(--mint-2);
+    }
+    .contact-guidance strong { display: block; color: var(--ink); }
+    .contact-guidance span { display: block; margin-top: 2px; color: var(--muted); font-size: .86rem; }
+    .contact-dialog-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .contact-dialog-actions .button { width: 100%; }
+    .copy-status {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: var(--green-2);
+      font-size: .84rem;
+      font-weight: 800;
+      text-align: center;
+    }
+    body.modal-open { overflow: hidden; }
+
     /* Mobile CTA */
     .mobile-cta {
       position: fixed;
@@ -954,6 +1073,33 @@
     </div>
   </footer>
 
+  <div class="contact-modal" id="desktop-contact-modal" hidden>
+    <div class="contact-modal-backdrop" data-contact-close></div>
+    <section class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-description">
+      <button class="contact-dialog-close" type="button" aria-label="Close contact window" data-contact-close>×</button>
+      <div class="contact-dialog-top">
+        <p class="eyebrow">Call or text</p>
+        <h2 id="contact-dialog-title">Contact CarPET Friendly Solutions</h2>
+        <p id="contact-dialog-description">Use your phone to call or text us. Texting photos is the fastest way to get an estimate.</p>
+      </div>
+      <div class="contact-dialog-body">
+        <button class="contact-number" type="button" data-copy-phone aria-label="Copy phone number 580-668-0147">
+          <span class="contact-number-main">580-668-0147</span>
+          <span class="contact-number-copy">Copy number</span>
+        </button>
+        <div class="contact-guidance">
+          <div><strong>Calling?</strong><span>We answer calls daily and schedule appointments throughout Southern Oklahoma.</span></div>
+          <div><strong>Texting photos?</strong><span>Include the rooms or furniture you need cleaned, your city, and any spots needing special attention.</span></div>
+        </div>
+        <div class="contact-dialog-actions">
+          <button class="button button-primary" type="button" data-copy-phone>Copy 580-668-0147</button>
+          <button class="button button-outline" type="button" data-contact-close>Close</button>
+        </div>
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </div>
+
   <div class="mobile-cta" aria-label="Quick contact">
     <a class="button button-light" href="tel:+15806680147">Call</a>
     <a class="button button-primary" href="sms:+15806680147">Text Photos</a>
@@ -969,6 +1115,97 @@
       }, { threshold: 0.15 });
       ctaObserver.observe(heroActions);
     }
+
+    const contactModal = document.querySelector('#desktop-contact-modal');
+    const contactDialog = contactModal?.querySelector('.contact-dialog');
+    const contactTitle = contactModal?.querySelector('#contact-dialog-title');
+    const contactDescription = contactModal?.querySelector('#contact-dialog-description');
+    const copyStatus = contactModal?.querySelector('#copy-status');
+    const phoneNumber = '580-668-0147';
+    let lastContactTrigger = null;
+
+    const isPhoneOrTablet = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+    function openContactModal(mode, trigger) {
+      if (!contactModal) return;
+      lastContactTrigger = trigger;
+
+      if (mode === 'text') {
+        contactTitle.textContent = 'Text photos for a fast estimate';
+        contactDescription.textContent = 'On your phone, text photos to 580-668-0147. Include your city, what needs cleaned, and any problem spots.';
+      } else {
+        contactTitle.textContent = 'Call CarPET Friendly Solutions';
+        contactDescription.textContent = 'Call 580-668-0147 from your phone. You can also text photos for a quick estimate.';
+      }
+
+      copyStatus.textContent = '';
+      contactModal.hidden = false;
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => contactDialog?.querySelector('[data-copy-phone]')?.focus());
+    }
+
+    function closeContactModal() {
+      if (!contactModal) return;
+      contactModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      lastContactTrigger?.focus();
+    }
+
+    async function copyPhoneNumber() {
+      try {
+        await navigator.clipboard.writeText(phoneNumber);
+        copyStatus.textContent = 'Phone number copied.';
+      } catch (error) {
+        const temporaryInput = document.createElement('input');
+        temporaryInput.value = phoneNumber;
+        temporaryInput.setAttribute('readonly', '');
+        temporaryInput.style.position = 'fixed';
+        temporaryInput.style.opacity = '0';
+        document.body.appendChild(temporaryInput);
+        temporaryInput.select();
+        document.execCommand('copy');
+        temporaryInput.remove();
+        copyStatus.textContent = 'Phone number copied.';
+      }
+    }
+
+    document.querySelectorAll('a[href^="tel:"], a[href^="sms:"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (isPhoneOrTablet()) return;
+        event.preventDefault();
+        const mode = link.getAttribute('href').startsWith('sms:') ? 'text' : 'call';
+        openContactModal(mode, link);
+      });
+    });
+
+    contactModal?.querySelectorAll('[data-contact-close]').forEach((button) => {
+      button.addEventListener('click', closeContactModal);
+    });
+
+    contactModal?.querySelectorAll('[data-copy-phone]').forEach((button) => {
+      button.addEventListener('click', copyPhoneNumber);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && contactModal && !contactModal.hidden) {
+        closeContactModal();
+      }
+
+      if (event.key === 'Tab' && contactModal && !contactModal.hidden && contactDialog) {
+        const focusable = [...contactDialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+          .filter((element) => !element.disabled);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
   </script>
 </body>
 </html>
