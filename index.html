@@ -238,7 +238,7 @@
     .hero-card {
       position: relative;
       overflow: hidden;
-      min-height: 620px;
+      min-height: 520px;
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       background: var(--cream);
@@ -249,7 +249,7 @@
       position: absolute;
       inset: 0 0 auto 0;
       width: 100%;
-      height: 320px;
+      height: 270px;
       object-fit: cover;
       object-position: 19% center;
       z-index: -2;
@@ -262,17 +262,17 @@
       background: linear-gradient(180deg, rgba(255,255,255,0) 18%, rgba(255,255,255,.72) 44%, #fff 62%);
     }
     .hero-content {
-      min-height: 620px;
+      min-height: 520px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 230px 22px 24px;
+      padding: 190px 22px 22px;
     }
     .hero h1 {
       max-width: 780px;
-      margin-bottom: 15px;
+      margin-bottom: 13px;
       color: var(--ink);
-      font-size: clamp(2.4rem, 11vw, 5.6rem);
+      font-size: clamp(2.15rem, 10vw, 5.6rem);
       line-height: .96;
       letter-spacing: -.055em;
     }
@@ -312,7 +312,7 @@
       gap: 10px;
     }
     .hero-note {
-      margin: 14px 0 0;
+      margin: 12px 0 0;
       color: var(--muted);
       font-size: .82rem;
       font-weight: 650;
@@ -357,10 +357,47 @@
       font-size: .78rem;
       font-weight: 700;
     }
+    .quick-proof {
+      padding: 0 0 38px;
+      background: var(--white);
+    }
+    .quick-proof-card {
+      display: grid;
+      gap: 14px;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--mint-2);
+      box-shadow: var(--shadow-sm);
+    }
+    .quick-proof-quote {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 750;
+      line-height: 1.55;
+    }
+    .quick-proof-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 16px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 750;
+    }
+    .quick-proof-meta .stars { font-size: .86rem; }
+    .quick-proof-link {
+      color: var(--green-2);
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
 
     /* Intro */
-    .intro { padding: 66px 0; }
-    .intro-grid { display: grid; gap: 28px; }
+    .intro { padding: 54px 0 66px; }
+    .intro-grid { display: grid; gap: 24px; }
     .intro-copy h2 {
       margin-bottom: 16px;
       color: var(--ink);
@@ -551,6 +588,7 @@
     }
     .results-grid { display: grid; gap: 12px; }
     .result-card {
+      position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -558,6 +596,24 @@
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    a.result-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 38px rgba(16,53,45,.12);
+    }
+    a.result-card::after {
+      content: "Tap to enlarge";
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(12,42,36,.84);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 850;
+      letter-spacing: .02em;
     }
     .result-card img {
       display: block;
@@ -836,6 +892,8 @@
       .trust-item:last-child { border-right: 0; }
 
       .intro, .services, .pricing, .process, .results, .reviews { padding-block: 94px; }
+      .quick-proof-card { grid-template-columns: 1fr auto; align-items: center; padding: 22px 28px; }
+      .quick-proof-meta { justify-content: flex-end; }
       .intro-grid { grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; }
       .service-grid { grid-template-columns: repeat(2, 1fr); }
       .pricing-card { display: grid; grid-template-columns: 1.25fr .75fr; }
@@ -898,12 +956,12 @@
         <a href="#process">Process</a>
         <a href="#results">Results</a>
         <a href="#reviews">Reviews</a>
-        <a href="order-cleaner.html">Order Cleaner</a>
-        <a class="button button-outline" href="tel:+15806680147">Call</a>
-        <a class="button button-primary" href="sms:+15806680147">Text Photos</a>
+        <a href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a>
+        <a class="button button-outline" href="tel:+15806680147" data-track="call">Call</a>
+        <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text Photos</a>
       </nav>
 
-      <a class="button button-primary header-call" href="tel:+15806680147" aria-label="Call CarPET Friendly Solutions">
+      <a class="button button-primary header-call" href="tel:+15806680147" data-track="call" aria-label="Call CarPET Friendly Solutions">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
       </a>
     </div>
@@ -915,21 +973,21 @@
         <div class="hero-card">
           <img class="hero-art" src="images/carpet-cleaning-technician.png" alt="Carpet cleaning technician using low-moisture equipment in a bright living room">
           <div class="hero-content">
-            <h1>Professional carpet cleaning without soaked carpets.</h1>
-            <p class="hero-lead">Advanced carbonated cleaning for carpet and upholstery with a fresh finish and typical dry times of just 3–4 hours.</p>
+            <h1>Carpet cleaning in Ardmore without soaked carpets.</h1>
+            <p class="hero-lead">Fast-drying carpet and upholstery cleaning that is safe for homes with children and pets.</p>
             <div class="hero-pills" aria-label="Key service benefits">
-              <span class="hero-pill">Family owned</span>
+              <span class="hero-pill">★★★★★ Local reviews</span>
+              <span class="hero-pill">3–4 hour typical dry time</span>
               <span class="hero-pill">Safe for people & pets</span>
-              <span class="hero-pill">Free estimates</span>
             </div>
             <div class="hero-actions">
-              <a class="button button-primary" href="sms:+15806680147">
+              <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V6a2 2 0 0 1 2-2Zm2.5 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
-                Text Photos for an Estimate
+                Text Photos — Get an Estimate
               </a>
-              <a class="button button-outline" href="tel:+15806680147">Call 580-668-0147</a>
+              <a class="button button-outline" href="tel:+15806680147" data-track="call">Call 580-668-0147</a>
             </div>
-            <p class="hero-note">Appointments available in Ardmore and surrounding Southern Oklahoma communities.</p>
+            <p class="hero-note">Serving Ardmore, Lone Grove, Dickson, Sulphur, Wilson, and nearby communities.</p>
           </div>
         </div>
       </div>
@@ -940,8 +998,36 @@
         <div class="trust-grid">
           <div class="trust-item"><strong>3–4 Hours</strong><span>Typical dry time</span></div>
           <div class="trust-item"><strong>$125</strong><span>Service minimum</span></div>
-          <div class="trust-item"><strong>30+ Years</strong><span>Local service history</span></div>
-          <div class="trust-item"><strong>★★★★★</strong><span>Top-rated local care</span></div>
+          <div class="trust-item"><strong>★★★★★</strong><span>Verified Google reviews</span></div>
+          <div class="trust-item"><strong>Family Owned</strong><span>Local, personal service</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-proof" aria-label="Featured customer review">
+      <div class="shell">
+        <div class="quick-proof-card">
+          <p class="quick-proof-quote">“Willy did a wonderful job and was very personable. I highly recommend them, especially if you have pets or young children.”</p>
+          <div class="quick-proof-meta">
+            <span><span class="stars">★★★★★</span> Debbie Conley</span>
+            <a class="quick-proof-link" href="https://g.page/r/CVPQdd3LZG2YEBM/review" data-track="reviews" target="_blank" rel="noopener">Read Google reviews</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results" id="results">
+      <div class="shell">
+        <div class="section-title">
+          <p class="eyebrow">Real local work</p>
+          <h2>See the difference before you book.</h2>
+          <p>Real carpet cleaning results from homes in our service area. Tap any image to enlarge it.</p>
+        </div>
+
+        <div class="results-grid">
+          <a class="result-card featured graphic" href="images/same-area-different-results-web.jpg" target="_blank" rel="noopener" aria-label="Enlarge carpet cleaning comparison image"><img src="images/same-area-different-results-web.jpg" alt="Comparison showing steam-cleaned carpet beside CarPET Friendly Solutions finished result" loading="eager"></a>
+          <a class="result-card graphic" href="images/spot-cleaning-before-after-1-final.png" target="_blank" rel="noopener" aria-label="Enlarge dark spot removal before and after image"><img src="images/spot-cleaning-before-after-1-final.png" alt="Dark spot removal before and after carpet cleaning result" loading="lazy"></a>
+          <a class="result-card graphic" href="images/spot-cleaning-before-after-2-final.png" target="_blank" rel="noopener" aria-label="Enlarge finished and refreshed before and after image"><img src="images/spot-cleaning-before-after-2-final.png" alt="Finished and refreshed carpet before and after cleaning near a fireplace" loading="lazy"></a>
         </div>
       </div>
     </section>
@@ -949,16 +1035,15 @@
     <section class="intro">
       <div class="shell intro-grid">
         <div class="intro-copy">
-          <p class="eyebrow">Why it feels different</p>
-          <h2>A cleaner process built for real homes.</h2>
-          <p>Our carbonated cleaning process uses millions of tiny bubbles to loosen dirt and everyday buildup from carpet fibers. Soil is lifted to the surface and removed using far less moisture than traditional steam cleaning.</p>
-          <p>No heavy soaps. No sticky residue. No waiting all day for soaked carpet to dry.</p>
+          <p class="eyebrow">Why homeowners choose us</p>
+          <h2>Clean carpet without the all-day wait.</h2>
+          <p>Our carbonated, low-moisture process loosens everyday soil using far less water than traditional steam cleaning—without heavy soaps or a sticky residue.</p>
         </div>
 
         <div class="feature-panel">
-          <div class="feature-row"><span class="feature-icon">01</span><div><strong>Low-moisture cleaning</strong><span>Less water and a faster return to normal.</span></div></div>
-          <div class="feature-row"><span class="feature-icon">02</span><div><strong>Family-friendly formula</strong><span>Water-based and designed for homes with children and pets.</span></div></div>
-          <div class="feature-row"><span class="feature-icon">03</span><div><strong>Clear communication</strong><span>Text photos, get guidance, and know what to expect.</span></div></div>
+          <div class="feature-row"><span class="feature-icon">01</span><div><strong>Fast drying</strong><span>Carpets typically dry in about 3–4 hours.</span></div></div>
+          <div class="feature-row"><span class="feature-icon">02</span><div><strong>No sticky soap residue</strong><span>A carbonated process designed to use less moisture.</span></div></div>
+          <div class="feature-row"><span class="feature-icon">03</span><div><strong>Safe for busy homes</strong><span>Family-friendly cleaning for homes with children and pets.</span></div></div>
         </div>
       </div>
     </section>
@@ -972,10 +1057,10 @@
         </div>
 
         <div class="service-grid">
-          <a class="service-card" href="carpet-cleaning-ardmore-ok.html"><div class="service-kicker">Primary service</div><h3>Carpet Cleaning</h3><p>Traffic lanes, spots, everyday soil, and routine maintenance cleaning.</p></a>
-          <a class="service-card" href="upholstery-cleaning-ardmore-ok.html"><div class="service-kicker">Furniture care</div><h3>Upholstery Cleaning</h3><p>Refresh sofas, chairs, cushions, and other fabric surfaces.</p></a>
-          <a class="service-card" href="pet-stain-odor-removal-ardmore-ok.html"><div class="service-kicker">Pet homes</div><h3>Pet Stain & Odor</h3><p>Targeted treatment for everyday pet spots, smells, and accidents.</p></a>
-          <a class="service-card" href="area-rug-cleaning-ardmore-ok.html"><div class="service-kicker">Specialty care</div><h3>Area Rug Cleaning</h3><p>Careful cleaning for rugs that need more than a quick vacuum.</p></a>
+          <a class="service-card" href="carpet-cleaning-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Primary service</div><h3>Carpet Cleaning</h3><p>Traffic lanes, spots, everyday soil, and routine maintenance cleaning.</p></a>
+          <a class="service-card" href="upholstery-cleaning-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Furniture care</div><h3>Upholstery Cleaning</h3><p>Refresh sofas, chairs, cushions, and other fabric surfaces.</p></a>
+          <a class="service-card" href="pet-stain-odor-removal-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Pet homes</div><h3>Pet Stain & Odor</h3><p>Targeted treatment for everyday pet spots, smells, and accidents.</p></a>
+          <a class="service-card" href="area-rug-cleaning-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Specialty care</div><h3>Area Rug Cleaning</h3><p>Careful cleaning for rugs that need more than a quick vacuum.</p></a>
         </div>
       </div>
     </section>
@@ -988,7 +1073,7 @@
             <h2>Know the starting point before we arrive.</h2>
             <div class="price-line"><strong>$125</strong><span>service minimum</span></div>
             <p>Most full residential appointments range from $150–$300. Text photos for a quick estimate based on your space and cleaning needs.</p>
-            <a class="button button-light" href="sms:+15806680147">Text Photos Now</a>
+            <a class="button button-light" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text Photos Now</a>
           </div>
           <div class="pricing-details">
             <div class="pricing-detail"><strong>Fast estimates</strong><span>Call or text photos before booking.</span></div>
@@ -1008,9 +1093,8 @@
           </div>
           <div class="steps">
             <div class="step"><div class="step-number">01</div><div><h3>Text photos or call</h3><p>Tell us what needs attention and get a clear estimate or next step.</p></div></div>
-            <div class="step"><div class="step-number">02</div><div><h3>Carbonated solution</h3><p>Our water-based formula helps release soil and buildup from carpet fibers.</p></div></div>
-            <div class="step"><div class="step-number">03</div><div><h3>Low-moisture extraction</h3><p>Professional equipment removes loosened soil without flooding the carpet.</p></div></div>
-            <div class="step"><div class="step-number">04</div><div><h3>Dry in about 3–4 hours</h3><p>Enjoy a fresh, clean finish and a faster return to your normal routine.</p></div></div>
+            <div class="step"><div class="step-number">02</div><div><h3>We clean with less moisture</h3><p>Our carbonated solution loosens soil, and professional equipment removes it without flooding the carpet.</p></div></div>
+            <div class="step"><div class="step-number">03</div><div><h3>Back to normal faster</h3><p>Enjoy a fresh finish with typical dry times of about 3–4 hours.</p></div></div>
           </div>
         </div>
 
@@ -1018,22 +1102,6 @@
           <img src="images/equipment-staged.jpg" alt="CarPET Friendly Solutions professional carpet cleaning equipment staged inside a home" loading="lazy">
           <figcaption><strong>Professional equipment</strong><span>Prepared for low-moisture cleaning</span></figcaption>
         </figure>
-      </div>
-    </section>
-
-    <section class="results" id="results">
-      <div class="shell">
-        <div class="section-title">
-          <p class="eyebrow">Real work</p>
-          <h2>Results customers can actually see.</h2>
-          <p>Real carpet and upholstery cleaning results from homes in our service area.</p>
-        </div>
-
-        <div class="results-grid">
-          <article class="result-card featured graphic"><img src="images/same-area-different-results-web.jpg" alt="Comparison showing steam-cleaned carpet beside CarPET Friendly Solutions finished result" loading="lazy"></article>
-          <article class="result-card graphic"><img src="images/spot-cleaning-before-after-1-final.png" alt="Dark spot removal before and after carpet cleaning result" loading="lazy"></article>
-          <article class="result-card graphic"><img src="images/spot-cleaning-before-after-2-final.png" alt="Finished and refreshed carpet before and after cleaning near a fireplace" loading="lazy"></article>
-        </div>
       </div>
     </section>
 
@@ -1050,7 +1118,7 @@
           <article class="review-card"><div class="stars">★★★★★</div><blockquote>“After years of high-traffic use, spills, and two dogs, our carpets looked hopeless. They’re true professionals who clearly take pride in their work. Worth every single penny.”</blockquote><div class="review-author"><strong>Zachariah Hammons</strong><span>Google review</span></div></article>
         </div>
 
-        <div class="review-cta"><a class="button button-outline" href="https://g.page/r/CVPQdd3LZG2YEBM/review" target="_blank" rel="noopener">Read or Leave a Google Review</a></div>
+        <div class="review-cta"><a class="button button-outline" href="https://g.page/r/CVPQdd3LZG2YEBM/review" data-track="reviews" target="_blank" rel="noopener">Read or Leave a Google Review</a></div>
       </div>
     </section>
 
@@ -1058,7 +1126,7 @@
       <div class="shell">
         <div class="product-card">
           <div><p class="eyebrow" style="color:#bfe7cd">Between professional cleanings</p><h2>Keep our spot cleaner within reach.</h2><p>Order the cleaning solution we recommend for everyday organic spots and routine cleanup. Shipping available across the United States.</p></div>
-          <div class="product-actions"><a class="button button-light" href="order-cleaner.html">Order Cleaner</a><a class="button button-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.28)" href="sms:+15806680147">Ask a Question</a></div>
+          <div class="product-actions"><a class="button button-light" href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a><a class="button button-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.28)" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Ask a Question</a></div>
         </div>
       </div>
     </section>
@@ -1072,14 +1140,14 @@
           <p>Locally family owned and operated carpet and upholstery cleaning serving Ardmore, Oklahoma and surrounding Southern Oklahoma communities.</p>
         </div>
         <div class="footer-links">
-          <a href="carpet-cleaning-ardmore-ok.html">Carpet Cleaning</a>
-          <a href="upholstery-cleaning-ardmore-ok.html">Upholstery</a>
-          <a href="pet-stain-odor-removal-ardmore-ok.html">Pet Odor</a>
-          <a href="area-rug-cleaning-ardmore-ok.html">Area Rugs</a>
+          <a href="carpet-cleaning-ardmore-ok.html" data-track="service_page">Carpet Cleaning</a>
+          <a href="upholstery-cleaning-ardmore-ok.html" data-track="service_page">Upholstery</a>
+          <a href="pet-stain-odor-removal-ardmore-ok.html" data-track="service_page">Pet Odor</a>
+          <a href="area-rug-cleaning-ardmore-ok.html" data-track="service_page">Area Rugs</a>
           <a href="commercial-carpet-cleaning-ardmore-ok.html">Commercial</a>
-          <a href="order-cleaner.html">Order Cleaner</a>
-          <a href="tel:+15806680147">580-668-0147</a>
-          <a href="sms:+15806680147">Text for Estimate</a>
+          <a href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a>
+          <a href="tel:+15806680147" data-track="call">580-668-0147</a>
+          <a href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text for Estimate</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1117,8 +1185,8 @@
   </div>
 
   <div class="mobile-cta" aria-label="Quick contact">
-    <a class="button button-light" href="tel:+15806680147">Call</a>
-    <a class="button button-primary" href="sms:+15806680147">Text Photos</a>
+    <a class="button button-light" href="tel:+15806680147" data-track="call">Call</a>
+    <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text Photos</a>
   </div>
 
   <script>
@@ -1131,6 +1199,29 @@
       }, { threshold: 0.15 });
       ctaObserver.observe(heroActions);
     }
+
+    function trackAction(actionName, details = {}) {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', actionName, details);
+      }
+    }
+
+    document.querySelectorAll('[data-track]').forEach((element) => {
+      element.addEventListener('click', () => {
+        const action = element.dataset.track;
+        const eventNames = {
+          call: 'click_call',
+          text_estimate: 'click_text_estimate',
+          reviews: 'click_reviews',
+          service_page: 'click_service_page',
+          order_cleaner: 'click_order_cleaner'
+        };
+        trackAction(eventNames[action] || action, {
+          link_url: element.getAttribute('href') || '',
+          link_text: (element.textContent || '').trim().slice(0, 100)
+        });
+      });
+    });
 
     const contactModal = document.querySelector('#desktop-contact-modal');
     const contactDialog = contactModal?.querySelector('.contact-dialog');
@@ -1171,6 +1262,7 @@
       try {
         await navigator.clipboard.writeText(phoneNumber);
         copyStatus.textContent = 'Phone number copied.';
+        trackAction('copy_phone_number');
       } catch (error) {
         const temporaryInput = document.createElement('input');
         temporaryInput.value = phoneNumber;
@@ -1182,6 +1274,7 @@
         document.execCommand('copy');
         temporaryInput.remove();
         copyStatus.textContent = 'Phone number copied.';
+        trackAction('copy_phone_number');
       }
     }
 
