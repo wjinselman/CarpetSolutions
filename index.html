@@ -854,6 +854,24 @@
     }
     .mobile-cta .button { min-height: 48px; padding: 12px 14px; font-size: .9rem; }
 
+
+    /* Keep mobile hero text completely below the technician photo */
+    @media (max-width: 759px) {
+      .hero-art {
+        position: relative;
+        inset: auto;
+        height: 250px;
+        z-index: auto;
+        object-position: 19% center;
+      }
+      .hero-card::after { display: none; }
+      .hero-content {
+        min-height: auto;
+        padding: 24px 22px 22px;
+        background: var(--white);
+      }
+    }
+
     @media (min-width: 560px) {
       .hero-actions { grid-template-columns: auto auto; justify-content: start; }
       .hero-note { text-align: left; }
