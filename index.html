@@ -705,6 +705,119 @@
       color: rgba(255,255,255,.78);
     }
 
+
+    .footer-policy-link {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,.58);
+      font: inherit;
+      font-size: .76rem;
+      font-weight: 750;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    .footer-policy-link:hover,
+    .footer-policy-link:focus-visible { color: rgba(255,255,255,.9); }
+
+    .policy-modal[hidden] { display: none; }
+    .policy-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 110;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+    .policy-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(7,28,23,.72);
+      backdrop-filter: blur(8px);
+    }
+    .policy-dialog {
+      position: relative;
+      width: min(100%, 680px);
+      max-height: min(86vh, 760px);
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 26px;
+      background: var(--white);
+      box-shadow: 0 34px 100px rgba(7,28,23,.38);
+    }
+    .policy-dialog-header {
+      padding: 28px 58px 20px 24px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(47,125,87,.18), transparent 34%),
+        var(--mint-2);
+    }
+    .policy-dialog-header h2 {
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: clamp(1.7rem, 6vw, 2.5rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+    .policy-dialog-header p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+    .policy-dialog-body { padding: 22px 24px 26px; }
+    .policy-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .policy-item:first-child { padding-top: 0; }
+    .policy-item:last-child { padding-bottom: 0; border-bottom: 0; }
+    .policy-item h3 {
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+    .policy-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+    .policy-dialog-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255,255,255,.94);
+      color: var(--ink);
+      font: inherit;
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    @media (max-width: 559px) {
+      .policy-modal { padding: 10px; }
+      .policy-dialog {
+        width: 100%;
+        max-height: calc(100vh - 20px);
+        border-radius: 20px;
+      }
+      .policy-dialog-header { padding: 24px 54px 18px 20px; }
+      .policy-dialog-body { padding: 18px 20px 22px; }
+      .footer-policy-link {
+        display: block;
+        width: fit-content;
+        margin-top: 10px;
+      }
+    }
+
     /* Desktop contact dialog */
     .contact-modal[hidden] { display: none; }
     .contact-modal {
@@ -1170,10 +1283,42 @@
       </div>
       <div class="footer-bottom">
         <span>© 2026 CarPET Friendly Solutions. Serving Ardmore, Lone Grove, Dickson, Davis, Healdton, Wilson, Sulphur, and surrounding areas.</span>
+        <button class="footer-policy-link" type="button" data-policy-open>Service Policies</button>
         <a class="footer-credit" href="https://inselmandigital.com" target="_blank" rel="noopener">Created &amp; maintained by Inselman Digital</a>
       </div>
     </div>
   </footer>
+
+
+  <div class="policy-modal" id="service-policy-modal" hidden>
+    <div class="policy-modal-backdrop" data-policy-close></div>
+    <section class="policy-dialog" role="dialog" aria-modal="true" aria-labelledby="policy-dialog-title">
+      <button class="policy-dialog-close" type="button" aria-label="Close service policies" data-policy-close>×</button>
+      <div class="policy-dialog-header">
+        <p class="eyebrow">Before service</p>
+        <h2 id="policy-dialog-title">Service Policies</h2>
+        <p>Clear expectations help us provide the best possible service.</p>
+      </div>
+      <div class="policy-dialog-body">
+        <div class="policy-item">
+          <h3>Cleaning results</h3>
+          <p>We provide the highest-quality cleaning reasonably possible based on the condition of the carpet, rug, upholstery, or fabric. Permanent stains, fiber wear, bleaching, dye loss, burns, pet damage, sun fading, prior chemical damage, backing deterioration, and other pre-existing damage may not improve through cleaning.</p>
+        </div>
+        <div class="policy-item">
+          <h3>Service concerns and refunds</h3>
+          <p>Charges for completed cleaning services are generally nonrefundable once the agreed service has been performed. If you have a concern, please contact us promptly so we can inspect the area and determine whether additional treatment is appropriate.</p>
+        </div>
+        <div class="policy-item">
+          <h3>Card processing fee</h3>
+          <p>A disclosed processing fee may apply to eligible credit-card payments. Fee-free payment options may include cash, check, debit card, or other stated methods.</p>
+        </div>
+        <div class="policy-item">
+          <h3>Travel outside Ardmore</h3>
+          <p>Appointments outside Ardmore may include a reasonable travel fee based on distance and service location. Any travel fee will be disclosed before the appointment is confirmed.</p>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <div class="contact-modal" id="desktop-contact-modal" hidden>
     <div class="contact-modal-backdrop" data-contact-close></div>
@@ -1239,6 +1384,34 @@
           link_text: (element.textContent || '').trim().slice(0, 100)
         });
       });
+    });
+
+
+    const policyModal = document.querySelector('#service-policy-modal');
+    const policyDialog = policyModal?.querySelector('.policy-dialog');
+    let lastPolicyTrigger = null;
+
+    function openPolicyModal(trigger) {
+      if (!policyModal) return;
+      lastPolicyTrigger = trigger;
+      policyModal.hidden = false;
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => policyDialog?.querySelector('[data-policy-close]')?.focus());
+    }
+
+    function closePolicyModal() {
+      if (!policyModal) return;
+      policyModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      lastPolicyTrigger?.focus();
+    }
+
+    document.querySelectorAll('[data-policy-open]').forEach((button) => {
+      button.addEventListener('click', () => openPolicyModal(button));
+    });
+
+    policyModal?.querySelectorAll('[data-policy-close]').forEach((button) => {
+      button.addEventListener('click', closePolicyModal);
     });
 
     const contactModal = document.querySelector('#desktop-contact-modal');
@@ -1314,6 +1487,11 @@
     });
 
     document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && policyModal && !policyModal.hidden) {
+        closePolicyModal();
+        return;
+      }
+
       if (event.key === 'Escape' && contactModal && !contactModal.hidden) {
         closeContactModal();
       }
