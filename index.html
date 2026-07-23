@@ -787,21 +787,26 @@
       line-height: 1.6;
     }
     .policy-dialog-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 42px;
-      height: 42px;
+      position: sticky;
+      top: 10px;
+      z-index: 5;
+      float: right;
+      margin: 10px 10px -54px 0;
+      width: 48px;
+      height: 48px;
       display: grid;
       place-items: center;
       border: 1px solid var(--line);
       border-radius: 50%;
-      background: rgba(255,255,255,.94);
+      background: rgba(255,255,255,.98);
       color: var(--ink);
+      box-shadow: 0 8px 22px rgba(7,28,23,.18);
       font: inherit;
-      font-size: 1.35rem;
+      font-size: 1.55rem;
+      font-weight: 800;
       line-height: 1;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     @media (max-width: 559px) {
@@ -813,6 +818,13 @@
       }
       .policy-dialog-header { padding: 24px 54px 18px 20px; }
       .policy-dialog-body { padding: 18px 20px 22px; }
+      .policy-dialog-close {
+        top: 8px;
+        margin: 8px 8px -56px 0;
+        width: 52px;
+        height: 52px;
+        font-size: 1.65rem;
+      }
       .footer-policy-link {
         display: block;
         width: fit-content;
@@ -1091,7 +1103,7 @@
         <a href="#reviews">Reviews</a>
         <a href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a>
         <a class="button button-outline" href="tel:+15806680147" data-track="call">Call</a>
-        <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text Photos</a>
+        <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text Photos</a>
       </nav>
 
       <a class="button button-primary header-call" href="tel:+15806680147" data-track="call" aria-label="Call CarPET Friendly Solutions">
@@ -1114,7 +1126,7 @@
               <span class="hero-pill">Safe for people & pets</span>
             </div>
             <div class="hero-actions">
-              <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">
+              <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V6a2 2 0 0 1 2-2Zm2.5 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
                 Text Photos — Get an Estimate
               </a>
@@ -1206,7 +1218,7 @@
             <h2>Know the starting point before we arrive.</h2>
             <div class="price-line"><strong>$125</strong><span>service minimum</span></div>
             <p>Most full residential appointments range from $150–$300. Text photos for a quick estimate based on your space and cleaning needs.</p>
-            <a class="button button-light" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text Photos Now</a>
+            <a class="button button-light" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text Photos Now</a>
           </div>
           <div class="pricing-details">
             <div class="pricing-detail"><strong>Fast estimates</strong><span>Call or text photos before booking.</span></div>
@@ -1259,7 +1271,7 @@
       <div class="shell">
         <div class="product-card">
           <div><p class="eyebrow" style="color:#bfe7cd">Between professional cleanings</p><h2>Keep our spot cleaner within reach.</h2><p>Order the cleaning solution we recommend for everyday organic spots and routine cleanup. Shipping available across the United States.</p></div>
-          <div class="product-actions"><a class="button button-light" href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a><a class="button button-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.28)" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Ask a Question</a></div>
+          <div class="product-actions"><a class="button button-light" href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a><a class="button button-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.28)" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Ask a Question</a></div>
         </div>
       </div>
     </section>
@@ -1280,7 +1292,7 @@
           <a href="commercial-carpet-cleaning-ardmore-ok.html">Commercial</a>
           <a href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a>
           <a href="tel:+15806680147" data-track="call">580-668-0147</a>
-          <a href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text for Estimate</a>
+          <a href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text for Estimate</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1351,7 +1363,7 @@
 
   <div class="mobile-cta" aria-label="Quick contact">
     <a class="button button-light" href="tel:+15806680147" data-track="call">Call</a>
-    <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20cleaning%20estimate.%20My%20city%20is%20____%20and%20I%20need%20____%20cleaned." data-track="text_estimate">Text Photos</a>
+    <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text Photos</a>
   </div>
 
   <script>
@@ -1392,10 +1404,12 @@
     const policyModal = document.querySelector('#service-policies');
     const policyDialog = policyModal?.querySelector('.policy-dialog');
     let lastPolicyTrigger = null;
+    let policyScrollPosition = 0;
 
     function openPolicyModal(trigger, updateHash = true) {
       if (!policyModal) return;
       lastPolicyTrigger = trigger || lastPolicyTrigger;
+      policyScrollPosition = window.scrollY;
       policyModal.hidden = false;
       document.body.classList.add('modal-open');
       if (updateHash && window.location.hash !== '#service-policies') {
@@ -1411,7 +1425,8 @@
       if (window.location.hash === '#service-policies') {
         history.replaceState(null, '', window.location.pathname + window.location.search);
       }
-      lastPolicyTrigger?.focus();
+      window.scrollTo(0, policyScrollPosition);
+      lastPolicyTrigger?.focus({ preventScroll: true });
     }
 
     document.querySelectorAll('[data-policy-open]').forEach((link) => {
