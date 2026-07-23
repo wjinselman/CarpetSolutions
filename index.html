@@ -8,6 +8,8 @@
   <title>Carpet & Upholstery Cleaning Ardmore OK | CarPET Friendly Solutions</title>
   <meta name="description" content="Professional low-moisture carpet and upholstery cleaning in Ardmore, Oklahoma and surrounding communities. Fast drying, family-owned service, and estimates by call or text.">
   <link rel="canonical" href="https://carpetfriendlysolutions.com/">
+  <link rel="icon" type="image/png" href="https://carpetfriendlysolutions.com/images/logo.png">
+  <link rel="apple-touch-icon" href="https://carpetfriendlysolutions.com/images/logo.png">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="CarPET Friendly Solutions | Carpet Cleaning in Ardmore, Oklahoma">
@@ -1283,14 +1285,14 @@
       </div>
       <div class="footer-bottom">
         <span>© 2026 CarPET Friendly Solutions. Serving Ardmore, Lone Grove, Dickson, Davis, Healdton, Wilson, Sulphur, and surrounding areas.</span>
-        <button class="footer-policy-link" type="button" data-policy-open>Service Policies</button>
+        <a class="footer-policy-link" href="#service-policies" data-policy-open>Service Policies</a>
         <a class="footer-credit" href="https://inselmandigital.com" target="_blank" rel="noopener">Created &amp; maintained by Inselman Digital</a>
       </div>
     </div>
   </footer>
 
 
-  <div class="policy-modal" id="service-policy-modal" hidden>
+  <div class="policy-modal" id="service-policies" hidden>
     <div class="policy-modal-backdrop" data-policy-close></div>
     <section class="policy-dialog" role="dialog" aria-modal="true" aria-labelledby="policy-dialog-title">
       <button class="policy-dialog-close" type="button" aria-label="Close service policies" data-policy-close>×</button>
@@ -1387,15 +1389,18 @@
     });
 
 
-    const policyModal = document.querySelector('#service-policy-modal');
+    const policyModal = document.querySelector('#service-policies');
     const policyDialog = policyModal?.querySelector('.policy-dialog');
     let lastPolicyTrigger = null;
 
-    function openPolicyModal(trigger) {
+    function openPolicyModal(trigger, updateHash = true) {
       if (!policyModal) return;
-      lastPolicyTrigger = trigger;
+      lastPolicyTrigger = trigger || lastPolicyTrigger;
       policyModal.hidden = false;
       document.body.classList.add('modal-open');
+      if (updateHash && window.location.hash !== '#service-policies') {
+        history.pushState(null, '', '#service-policies');
+      }
       requestAnimationFrame(() => policyDialog?.querySelector('[data-policy-close]')?.focus());
     }
 
@@ -1403,12 +1408,27 @@
       if (!policyModal) return;
       policyModal.hidden = true;
       document.body.classList.remove('modal-open');
+      if (window.location.hash === '#service-policies') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
       lastPolicyTrigger?.focus();
     }
 
-    document.querySelectorAll('[data-policy-open]').forEach((button) => {
-      button.addEventListener('click', () => openPolicyModal(button));
+    document.querySelectorAll('[data-policy-open]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        openPolicyModal(link);
+      });
     });
+
+    function openPolicyFromHash() {
+      if (window.location.hash === '#service-policies') {
+        openPolicyModal(null, false);
+      }
+    }
+
+    window.addEventListener('hashchange', openPolicyFromHash);
+    openPolicyFromHash();
 
     policyModal?.querySelectorAll('[data-policy-close]').forEach((button) => {
       button.addEventListener('click', closePolicyModal);
