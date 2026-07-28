@@ -175,7 +175,7 @@
       backdrop-filter: blur(18px);
     }
     .header-inner {
-      min-height: 68px;
+      min-height: 74px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -185,13 +185,16 @@
       min-width: 0;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .brand-mark {
-      width: 48px;
-      height: 42px;
+      width: 58px;
+      height: auto;
+      aspect-ratio: 439 / 349;
       object-fit: contain;
-      border-radius: 10px;
+      flex: 0 0 auto;
+      border-radius: 12px;
+      filter: drop-shadow(0 4px 10px rgba(16, 53, 45, .10));
     }
     .brand-copy { min-width: 0; line-height: 1; }
     .brand-name {
@@ -1028,8 +1031,8 @@
       .shell { width: min(var(--container), calc(100% - 48px)); }
       .desktop-nav { display: flex; }
       .header-call { display: none; }
-      .header-inner { min-height: 78px; }
-      .brand-mark { width: 58px; height: 50px; }
+      .header-inner { min-height: 84px; }
+      .brand-mark { width: 72px; height: auto; }
       .brand-name { font-size: 1.12rem; }
       .brand-service { font-size: .64rem; }
 
@@ -1108,7 +1111,7 @@
   <header class="site-header">
     <div class="shell header-inner">
       <a class="brand" href="#top" aria-label="CarPET Friendly Solutions home">
-        <img class="brand-mark" src="images/logo.png" alt="" width="58" height="50">
+        <img class="brand-mark" src="images/logo.png" alt="" width="394" height="317">
         <span class="brand-copy">
           <span class="brand-name">Car<span class="pet">PET</span> Friendly Solutions</span>
           <span class="brand-service">Carpet & upholstery cleaning</span>
