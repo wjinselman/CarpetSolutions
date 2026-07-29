@@ -771,46 +771,164 @@
       background: var(--cream);
       border-block: 1px solid var(--line);
     }
-    .results-grid { display: grid; gap: 12px; }
-    .result-card {
+    .results-grid { display: grid; gap: 16px; }
+    .comparison-card {
       position: relative;
       overflow: hidden;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(16,53,45,.14);
       border-radius: var(--radius);
-      background: var(--white);
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      transition: transform .18s ease, box-shadow .18s ease;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 16px 40px rgba(16,53,45,.10);
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      isolation: isolate;
     }
-    a.result-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 38px rgba(16,53,45,.12);
-    }
-    a.result-card::after {
-      content: "Tap to enlarge";
+    .comparison-card::before {
+      content: "";
       position: absolute;
-      right: 12px;
-      bottom: 12px;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 92% 4%, rgba(47,125,87,.12), transparent 28%);
+      pointer-events: none;
+    }
+    .comparison-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(47,125,87,.28);
+      box-shadow: 0 24px 58px rgba(16,53,45,.16);
+    }
+    .comparison-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px 13px;
+    }
+    .comparison-head strong {
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+    .comparison-badge {
+      flex: 0 0 auto;
       padding: 6px 9px;
+      border: 1px solid rgba(47,125,87,.18);
       border-radius: 999px;
-      background: rgba(12,42,36,.84);
-      color: #fff;
-      font-size: .68rem;
-      font-weight: 850;
-      letter-spacing: .02em;
+      background: var(--mint-2);
+      color: var(--green-2);
+      font-size: .65rem;
+      font-weight: 950;
+      letter-spacing: .055em;
+      text-transform: uppercase;
     }
-    .result-card img {
-      display: block;
+    .comparison-stage {
+      --position: 50%;
+      position: relative;
+      overflow: hidden;
       width: 100%;
-      height: auto;
-      aspect-ratio: auto;
-      object-fit: contain;
-      background: #ffffff;
+      aspect-ratio: 4 / 5;
+      background: #e9ece8;
+      touch-action: pan-y;
+      cursor: ew-resize;
     }
-    .result-copy { padding: 16px 18px 18px; }
-    .result-copy strong { display: block; color: var(--ink); font-size: 1rem; }
-    .result-copy span { display: block; margin-top: 4px; color: var(--muted); font-size: .83rem; }
+    .comparison-stage img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+    }
+    .comparison-after {
+      clip-path: inset(0 0 0 var(--position));
+      filter: saturate(1.02) contrast(1.01);
+    }
+    .comparison-range {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: ew-resize;
+    }
+    .comparison-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--position);
+      z-index: 4;
+      width: 3px;
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 0 0 1px rgba(16,53,45,.10), 0 0 22px rgba(12,42,36,.26);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .comparison-handle {
+      position: absolute;
+      left: var(--position);
+      top: 50%;
+      z-index: 4;
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border: 3px solid rgba(255,255,255,.98);
+      border-radius: 50%;
+      background: rgba(18,61,52,.92);
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(12,42,36,.30), inset 0 0 0 1px rgba(255,255,255,.18);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      backdrop-filter: blur(10px);
+    }
+    .comparison-handle::before { content: "‹"; margin-right: 11px; font-size: 1.55rem; line-height: 1; }
+    .comparison-handle::after { content: "›"; margin-left: 11px; font-size: 1.55rem; line-height: 1; }
+    .comparison-label {
+      position: absolute;
+      bottom: 12px;
+      z-index: 3;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 999px;
+      background: rgba(12,42,36,.82);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(12,42,36,.16);
+      font-size: .68rem;
+      font-weight: 950;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+    .comparison-label.before { left: 12px; }
+    .comparison-label.after { right: 12px; background: rgba(47,125,87,.90); }
+    .comparison-copy {
+      padding: 15px 18px 19px;
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.55;
+    }
+    .comparison-copy strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+      font-size: .92rem;
+    }
+    .comparison-instruction {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      color: var(--green-2);
+      font-size: .76rem;
+      font-weight: 900;
+    }
+    .comparison-instruction::before { content: "↔"; }
+    .comparison-range:focus-visible + .comparison-line,
+    .comparison-stage:focus-within .comparison-line {
+      box-shadow: 0 0 0 3px rgba(199,152,54,.42), 0 0 24px rgba(12,42,36,.28);
+    }
 
     /* Reviews */
     .reviews { padding: 66px 0; }
@@ -1251,7 +1369,6 @@
       .pricing-detail { display: flex; flex-direction: column; justify-content: center; padding: 28px 32px; }
       .process-grid { grid-template-columns: .88fr 1.12fr; gap: 68px; align-items: center; }
       .results-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
-      .result-card.featured { grid-row: auto; }
       .review-grid { grid-template-columns: repeat(3, 1fr); }
       .product-card { grid-template-columns: 1fr auto; align-items: center; padding: 42px 46px; }
       .product-actions { display: flex; }
@@ -1353,24 +1470,12 @@
     }
 
     .service-card,
-    .result-card,
+    .comparison-card,
     .review-card {
       transform-style: preserve-3d;
     }
-    .service-card::after,
-    a.result-card::after {
-      transition: transform .2s ease, background .2s ease;
-    }
+    .service-card::after { transition: transform .2s ease, background .2s ease; }
     .service-card:hover::after { transform: translateX(4px); }
-    a.result-card:hover::after { background: var(--green-2); }
-
-    .result-card img {
-      transition: transform .42s cubic-bezier(.2,.7,.2,1), filter .32s ease;
-    }
-    a.result-card:hover img {
-      transform: scale(1.018);
-      filter: saturate(1.04) contrast(1.015);
-    }
 
     .pricing-card {
       position: relative;
@@ -1430,7 +1535,6 @@
       .site-progress { height: 2px; }
       .hero-card::before { animation-duration: 11s; }
       .reveal-ready { transform: translateY(14px); transition-duration: .48s; }
-      .result-card img { transition-duration: .3s; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1552,13 +1656,45 @@
         <div class="section-title">
           <p class="eyebrow">Real local work</p>
           <h2>See the difference before you book.</h2>
-          <p>Real carpet cleaning results from homes in our service area. Tap any image to enlarge it.</p>
+          <p>Real carpet and upholstery results from local jobs. Drag each divider to reveal the transformation.</p>
         </div>
 
         <div class="results-grid">
-          <a class="result-card featured graphic" href="images/same-area-different-results-web.jpg" target="_blank" rel="noopener" aria-label="Enlarge carpet cleaning comparison image"><img src="images/same-area-different-results-web.jpg" alt="Comparison showing steam-cleaned carpet beside CarPET Friendly Solutions finished result" loading="eager"></a>
-          <a class="result-card graphic" href="images/spot-cleaning-before-after-1-final.png" target="_blank" rel="noopener" aria-label="Enlarge dark spot removal before and after image"><img src="images/spot-cleaning-before-after-1-final.png" alt="Dark spot removal before and after carpet cleaning result" loading="lazy"></a>
-          <a class="result-card graphic" href="images/spot-cleaning-before-after-2-final.png" target="_blank" rel="noopener" aria-label="Enlarge finished and refreshed before and after image"><img src="images/spot-cleaning-before-after-2-final.png" alt="Finished and refreshed carpet before and after cleaning near a fireplace" loading="lazy"></a>
+          <article class="comparison-card">
+            <div class="comparison-head"><strong>Carpet spot transformation</strong><span class="comparison-badge">Real result</span></div>
+            <div class="comparison-stage" data-comparison style="--position:50%">
+              <img src="images/result-carpet-spots-before.webp" alt="Carpet with numerous dark spots before professional cleaning" loading="eager">
+              <img class="comparison-after" src="images/result-carpet-spots-after.jpg" alt="The same living area after professional carpet cleaning" loading="eager">
+              <span class="comparison-label before">Before</span><span class="comparison-label after">After</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal before and after carpet spot cleaning result">
+              <span class="comparison-line" aria-hidden="true"></span><span class="comparison-handle" aria-hidden="true"></span>
+            </div>
+            <div class="comparison-copy"><strong>Heavy spot cleanup</strong>Drag the control to compare the original soiling with the finished room.<span class="comparison-instruction">Slide to compare</span></div>
+          </article>
+
+          <article class="comparison-card">
+            <div class="comparison-head"><strong>Upholstery detail refresh</strong><span class="comparison-badge">Real result</span></div>
+            <div class="comparison-stage" data-comparison style="--position:50%">
+              <img src="images/result-pillow-before.jpg" alt="Heavily soiled decorative pillow before upholstery cleaning" loading="lazy">
+              <img class="comparison-after" src="images/result-pillow-after.jpg" alt="Decorative floral pillow after upholstery cleaning" loading="lazy">
+              <span class="comparison-label before">Before</span><span class="comparison-label after">After</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal before and after decorative pillow cleaning result">
+              <span class="comparison-line" aria-hidden="true"></span><span class="comparison-handle" aria-hidden="true"></span>
+            </div>
+            <div class="comparison-copy"><strong>Color and pattern revived</strong>Swipe across the fabric to see the change from heavily soiled to bright and refreshed.<span class="comparison-instruction">Slide to compare</span></div>
+          </article>
+
+          <article class="comparison-card">
+            <div class="comparison-head"><strong>High-traffic carpet revival</strong><span class="comparison-badge">Real result</span></div>
+            <div class="comparison-stage" data-comparison style="--position:50%">
+              <img src="images/result-traffic-before.jpg" alt="Dark, heavily tracked carpet near a dining area before cleaning" loading="lazy">
+              <img class="comparison-after" src="images/result-traffic-after.jpg" alt="The hallway and dining area carpet after professional cleaning" loading="lazy">
+              <span class="comparison-label before">Before</span><span class="comparison-label after">After</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal before and after high-traffic carpet cleaning result">
+              <span class="comparison-line" aria-hidden="true"></span><span class="comparison-handle" aria-hidden="true"></span>
+            </div>
+            <div class="comparison-copy"><strong>Traffic lanes visibly improved</strong>Move the divider to compare the tracked dining-area carpet with the finished result.<span class="comparison-instruction">Slide to compare</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -1977,7 +2113,7 @@
 
     const revealGroups = [
       '.section-title', '.trust-grid', '.quick-proof-card', '.intro-copy', '.feature-panel',
-      '.pricing-card', '.process-grid', '.service-card', '.result-card', '.local-links-card',
+      '.pricing-card', '.process-grid', '.service-card', '.comparison-card', '.local-links-card',
       '.review-card', '.review-cta', '.product-card'
     ];
     const revealItems = [...document.querySelectorAll(revealGroups.join(','))];
@@ -1997,6 +2133,18 @@
     } else {
       revealItems.forEach((item) => item.classList.add('reveal-visible'));
     }
+
+    // Real before-and-after comparison controls: touch, mouse, and keyboard friendly.
+    document.querySelectorAll('[data-comparison]').forEach((comparison) => {
+      const range = comparison.querySelector('.comparison-range');
+      if (!range) return;
+      const updateComparison = () => comparison.style.setProperty('--position', `${range.value}%`);
+      range.addEventListener('input', updateComparison);
+      range.addEventListener('change', () => {
+        trackAction('use_before_after_slider', { comparison: range.getAttribute('aria-label') || '' });
+      });
+      updateComparison();
+    });
 
     // Very light desktop-only depth response on important cards.
     const tiltItems = document.querySelectorAll('.pricing-card, .local-links-card, .product-card');
