@@ -186,6 +186,24 @@
       text-align: center;
     }
     .announcement-dot { color: var(--gold); }
+    .award-badge {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 16px;
+      padding: 9px 12px;
+      border: 1px solid rgba(199,152,54,.32);
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      color: var(--ink);
+      box-shadow: 0 8px 24px rgba(16,53,45,.08);
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .award-badge svg { width: 17px; height: 17px; color: var(--gold); }
     .hero-content-inner { max-width: 660px; }
     .owner-note {
       margin-top: 24px;
@@ -976,6 +994,14 @@
 
     @media (max-width: 759px) {
       .announcement-inner { min-height: 30px; gap: 6px; font-size: .64rem; letter-spacing: .025em; }
+      .announcement-inner span:nth-child(4), .announcement-inner span:nth-child(5) { display:none; }
+      .award-badge { margin-bottom: 13px; padding: 8px 10px; font-size: .68rem; }
+      .hero-content-inner { max-width:none; }
+      .hero h1 { max-width: 12ch; }
+      .owner-note { padding: 16px 17px; font-size: .92rem; }
+      .section-title h2::after { margin-top:14px; }
+      .service-icon { width:42px; height:42px; margin-bottom:18px; }
+    }
 
     @media (max-width: 559px) {
       .policy-modal { padding: 10px; }
@@ -1272,7 +1298,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <div class="announcement-bar"><div class="shell announcement-inner"><span>Family owned &amp; operated</span><span class="announcement-dot">•</span><span>Text photos for an estimate</span></div></div>
+  <div class="announcement-bar"><div class="shell announcement-inner"><span>5-Star Rated</span><span class="announcement-dot">•</span><span>Family owned & operated</span><span class="announcement-dot">•</span><span>Text photos for an estimate</span></div></div>
 
   <header class="site-header">
     <div class="shell header-inner">
@@ -1307,6 +1333,7 @@
           <img class="hero-art" src="images/carpet-cleaning-technician.png" alt="Carpet cleaning technician using low-moisture equipment in a bright living room">
           <div class="hero-content">
             <div class="hero-content-inner">
+              <div class="award-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 2 2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 15.27 6.8 18l.99-5.79-4.21-4.1 5.82-.84L12 2Z"/></svg> 5-Star Rated</div>
             <h1>Carpet cleaning in Ardmore without soaked carpets.</h1>
             <p class="hero-lead">Fast-drying carpet and upholstery cleaning that is safe for homes with children and pets.</p>
             <div class="hero-pills" aria-label="Key service benefits">
