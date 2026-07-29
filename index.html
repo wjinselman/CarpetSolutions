@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#123d34">
 
-  <title>Carpet & Upholstery Cleaning Ardmore OK | CarPET Friendly Solutions</title>
-  <meta name="description" content="Professional low-moisture carpet and upholstery cleaning in Ardmore, Oklahoma and surrounding communities. Fast drying, family-owned service, and estimates by call or text.">
+  <title>Carpet Cleaning Ardmore OK | Fast-Drying Local Service</title>
+  <meta name="description" content="Need carpet cleaning in Ardmore, OK? CarPET Friendly Solutions provides fast-drying carpet, upholstery, rug, pet-odor, and commercial cleaning. Text photos for an estimate.">
   <link rel="canonical" href="https://carpetfriendlysolutions.com/">
   <link rel="icon" type="image/png" sizes="32x32" href="https://carpetfriendlysolutions.com/images/carpetfriendly-logo-transparent-2026.png?v=2">
   <link rel="shortcut icon" type="image/png" href="https://carpetfriendlysolutions.com/images/carpetfriendly-logo-transparent-2026.png?v=2">
   <link rel="apple-touch-icon" href="https://carpetfriendlysolutions.com/images/carpetfriendly-logo-transparent-2026.png?v=2">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="CarPET Friendly Solutions | Carpet Cleaning in Ardmore, Oklahoma">
-  <meta property="og:description" content="Professional carbonated carpet and upholstery cleaning with fast dry times. Call or text photos for an estimate.">
+  <meta property="og:title" content="Carpet Cleaning Ardmore OK | CarPET Friendly Solutions">
+  <meta property="og:description" content="Fast-drying carpet, upholstery, rug, pet-odor, and commercial cleaning in Ardmore and nearby Southern Oklahoma communities.">
   <meta property="og:url" content="https://carpetfriendlysolutions.com/">
   <meta property="og:image" content="https://carpetfriendlysolutions.com/og-image.png">
 
@@ -496,6 +496,51 @@
       color: var(--muted);
       font-size: .94rem;
     }
+
+    /* Local service links */
+    .local-links {
+      padding: 58px 0;
+      background: var(--white);
+    }
+    .local-links-card {
+      display: grid;
+      gap: 22px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--cream);
+      box-shadow: var(--shadow-sm);
+    }
+    .local-links-copy h2 {
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: clamp(1.8rem, 7vw, 3.4rem);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+    .local-links-copy p { margin-bottom: 0; color: var(--muted); }
+    .local-link-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+    .local-link-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 48px;
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: .86rem;
+      font-weight: 850;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .local-link-grid a::after { content: "→"; color: var(--green); }
+    .local-link-grid a:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 
     /* Pricing */
     .pricing { padding: 66px 0; }
@@ -1064,6 +1109,8 @@
       .quick-proof-meta { justify-content: flex-end; }
       .intro-grid { grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; }
       .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .local-links-card { grid-template-columns: .9fr 1.1fr; align-items: center; padding: 34px 38px; }
+      .local-link-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .pricing-card { display: grid; grid-template-columns: 1.25fr .75fr; }
       .pricing-main { padding: 54px; }
       .pricing-details { grid-template-rows: repeat(3, 1fr); }
@@ -1102,6 +1149,13 @@
     "description": "Professional low-moisture carpet and upholstery cleaning in Ardmore, Oklahoma and surrounding communities.",
     "areaServed": ["Ardmore", "Lone Grove", "Dickson", "Davis", "Healdton", "Wilson", "Sulphur"],
     "priceRange": "$125+",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ardmore",
+      "addressRegion": "OK",
+      "addressCountry": "US"
+    },
+    "serviceType": ["Carpet cleaning", "Upholstery cleaning", "Area rug cleaning", "Pet stain and odor treatment", "Commercial carpet cleaning"],
     "paymentAccepted": "Cash, Check, Credit Card, Debit Card, Apple Pay"
   }
   </script>
@@ -1229,6 +1283,29 @@
           <a class="service-card" href="upholstery-cleaning-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Furniture care</div><h3>Upholstery Cleaning</h3><p>Refresh sofas, chairs, cushions, and other fabric surfaces.</p></a>
           <a class="service-card" href="pet-stain-odor-removal-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Pet homes</div><h3>Pet Stain & Odor</h3><p>Targeted treatment for everyday pet spots, smells, and accidents.</p></a>
           <a class="service-card" href="area-rug-cleaning-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Specialty care</div><h3>Area Rug Cleaning</h3><p>Careful cleaning for rugs that need more than a quick vacuum.</p></a>
+          <a class="service-card" href="commercial-carpet-cleaning-ardmore-ok.html" data-track="service_page"><div class="service-kicker">Local businesses</div><h3>Commercial Carpet Cleaning</h3><p>Low-moisture cleaning for offices, churches, rentals, and other commercial spaces.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="local-links" aria-labelledby="local-service-title">
+      <div class="shell">
+        <div class="local-links-card">
+          <div class="local-links-copy">
+            <p class="eyebrow">Serving Southern Oklahoma</p>
+            <h2 id="local-service-title">Local carpet cleaning near Ardmore.</h2>
+            <p>Explore service information for your community, or text photos and your city for a quick estimate.</p>
+          </div>
+          <div class="local-link-grid" aria-label="Local carpet cleaning service areas">
+            <a href="carpet-cleaning-ardmore-ok.html" data-track="location_page">Ardmore</a>
+            <a href="carpet-cleaning-lone-grove-ok.html" data-track="location_page">Lone Grove</a>
+            <a href="carpet-cleaning-dickson-ok.html" data-track="location_page">Dickson</a>
+            <a href="carpet-cleaning-sulphur-ok.html" data-track="location_page">Sulphur</a>
+            <a href="carpet-cleaning-davis-ok.html" data-track="location_page">Davis</a>
+            <a href="carpet-cleaning-wilson-ok.html" data-track="location_page">Wilson</a>
+            <a href="carpet-cleaning-healdton-ok.html" data-track="location_page">Healdton</a>
+            <a href="carpet-cleaning-surrounding-areas-ok.html" data-track="location_page">All service areas</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1415,6 +1492,7 @@
           text_estimate: 'click_text_estimate',
           reviews: 'click_reviews',
           service_page: 'click_service_page',
+          location_page: 'click_location_page',
           order_cleaner: 'click_order_cleaner'
         };
         trackAction(eventNames[action] || action, {
