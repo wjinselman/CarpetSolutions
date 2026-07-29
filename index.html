@@ -1240,13 +1240,22 @@
 
     /* Keep mobile hero text completely below the technician photo */
     @media (max-width: 759px) {
+      .hero-card {
+        overflow: clip;
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+        transform: translateZ(0);
+      }
       .hero-art {
         position: relative;
         inset: auto;
         height: clamp(245px, 68vw, 320px);
         z-index: auto;
         object-position: 35% center;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        clip-path: inset(0 round var(--radius-lg) var(--radius-lg) 0 0);
+        -webkit-clip-path: inset(0 round var(--radius-lg) var(--radius-lg) 0 0);
       }
+      .hero-card::before { display: none; }
       .hero-card::after { display: none; }
       .hero-content {
         min-height: auto;
