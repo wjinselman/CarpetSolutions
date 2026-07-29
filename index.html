@@ -783,31 +783,93 @@
       flex-direction: column;
       transition: transform .18s ease, box-shadow .18s ease;
     }
-    a.result-card:hover {
+    .result-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 18px 38px rgba(16,53,45,.12);
     }
-    a.result-card::after {
-      content: "Tap to enlarge";
+    .comparison-slider {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #e7ebe8;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .comparison-layer {
       position: absolute;
-      right: 12px;
-      bottom: 12px;
-      padding: 6px 9px;
+      inset: 0;
+      overflow: hidden;
+    }
+    .comparison-layer img {
+      position: absolute;
+      top: 0;
+      width: 200%;
+      max-width: none;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .comparison-before img { left: 0; }
+    .comparison-after {
+      clip-path: inset(0 50% 0 0);
+    }
+    .comparison-after::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: var(--divider-right, 50%);
+      width: 2px;
+      background: rgba(255,255,255,.96);
+      box-shadow: 3px 0 12px rgba(0,0,0,.18);
+    }
+    .comparison-after img { left: -100%; }
+    .comparison-handle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 4;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: rgba(16,53,45,.94);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0,0,0,.26);
+      transform: translate(-50%, -50%);
+      font-size: 1rem;
+      font-weight: 950;
+      pointer-events: none;
+    }
+    .comparison-range {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: ew-resize;
+    }
+    .comparison-label {
+      position: absolute;
+      top: 12px;
+      z-index: 3;
+      padding: 6px 10px;
       border-radius: 999px;
       background: rgba(12,42,36,.84);
       color: #fff;
       font-size: .68rem;
-      font-weight: 850;
-      letter-spacing: .02em;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      pointer-events: none;
     }
-    .result-card img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: auto;
-      object-fit: contain;
-      background: #ffffff;
-    }
+    .comparison-label.before { left: 12px; }
+    .comparison-label.after { right: 12px; }
     .result-copy { padding: 16px 18px 18px; }
     .result-copy strong { display: block; color: var(--ink); font-size: 1rem; }
     .result-copy span { display: block; margin-top: 4px; color: var(--muted); font-size: .83rem; }
@@ -1210,7 +1272,7 @@
 
       .hero { padding: 32px 0 46px; }
       .hero-card { min-height: 650px; }
-      .hero-art { height: 100%; object-position: 34% center; }
+      .hero-art { height: 100%; object-position: 62% center; }
       .hero-card::after {
         background: linear-gradient(90deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.22) 54%, rgba(255,255,255,.90) 68%, #fff 100%);
       }
@@ -1559,9 +1621,36 @@
         </div>
 
         <div class="results-grid">
-          <a class="result-card featured graphic" href="images/same-area-different-results-web.jpg" target="_blank" rel="noopener" aria-label="Enlarge carpet cleaning comparison image"><img src="images/same-area-different-results-web.jpg" alt="Comparison showing steam-cleaned carpet beside CarPET Friendly Solutions finished result" loading="eager"></a>
-          <a class="result-card graphic" href="images/spot-cleaning-before-after-1-final.png" target="_blank" rel="noopener" aria-label="Enlarge dark spot removal before and after image"><img src="images/spot-cleaning-before-after-1-final.png" alt="Dark spot removal before and after carpet cleaning result" loading="lazy"></a>
-          <a class="result-card graphic" href="images/spot-cleaning-before-after-2-final.png" target="_blank" rel="noopener" aria-label="Enlarge finished and refreshed before and after image"><img src="images/spot-cleaning-before-after-2-final.png" alt="Finished and refreshed carpet before and after cleaning near a fireplace" loading="lazy"></a>
+          <article class="result-card">
+            <div class="comparison-slider" data-comparison>
+              <div class="comparison-layer comparison-before"><img src="images/same-area-different-results-web.jpg" alt="Same area, different result before view" loading="eager"></div>
+              <div class="comparison-layer comparison-after" data-after><img src="images/same-area-different-results-web.jpg" alt="Same area, different result after view" loading="eager"></div>
+              <span class="comparison-label before">Before</span><span class="comparison-label after">After</span>
+              <span class="comparison-handle" data-handle aria-hidden="true">↔</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare before and after: Same area, different result">
+            </div>
+            <div class="result-copy"><strong>Same area, different result</strong><span>Drag the slider to compare the two cleaning outcomes.</span></div>
+          </article>
+          <article class="result-card">
+            <div class="comparison-slider" data-comparison>
+              <div class="comparison-layer comparison-before"><img src="images/spot-cleaning-before-after-1-final.png" alt="Dark spot removal before view" loading="lazy"></div>
+              <div class="comparison-layer comparison-after" data-after><img src="images/spot-cleaning-before-after-1-final.png" alt="Dark spot removal after view" loading="lazy"></div>
+              <span class="comparison-label before">Before</span><span class="comparison-label after">After</span>
+              <span class="comparison-handle" data-handle aria-hidden="true">↔</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare before and after: Dark spot removal">
+            </div>
+            <div class="result-copy"><strong>Dark spot removal</strong><span>Targeted treatment for a visible trouble area.</span></div>
+          </article>
+          <article class="result-card">
+            <div class="comparison-slider" data-comparison>
+              <div class="comparison-layer comparison-before"><img src="images/spot-cleaning-before-after-2-final.png" alt="Finished and refreshed before view" loading="lazy"></div>
+              <div class="comparison-layer comparison-after" data-after><img src="images/spot-cleaning-before-after-2-final.png" alt="Finished and refreshed after view" loading="lazy"></div>
+              <span class="comparison-label before">Before</span><span class="comparison-label after">After</span>
+              <span class="comparison-handle" data-handle aria-hidden="true">↔</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare before and after: Finished and refreshed">
+            </div>
+            <div class="result-copy"><strong>Finished and refreshed</strong><span>Cleaner carpet without a soaked finish.</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -1961,6 +2050,20 @@
           first.focus();
         }
       }
+    });
+
+    document.querySelectorAll('[data-comparison]').forEach((slider) => {
+      const range = slider.querySelector('.comparison-range');
+      const after = slider.querySelector('[data-after]');
+      const handle = slider.querySelector('[data-handle]');
+      const updateComparison = () => {
+        const value = Number(range.value);
+        after.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+        after.style.setProperty('--divider-right', `${100 - value}%`);
+        handle.style.left = `${value}%`;
+      };
+      range.addEventListener('input', updateComparison);
+      updateComparison();
     });
 
     // Premium interaction layer: visual polish without changing the sales flow.
