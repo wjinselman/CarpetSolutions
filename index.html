@@ -812,137 +812,6 @@
     .result-copy strong { display: block; color: var(--ink); font-size: 1rem; }
     .result-copy span { display: block; margin-top: 4px; color: var(--muted); font-size: .83rem; }
 
-
-
-    /* Interactive before-and-after showcase */
-    .comparison-showcase {
-      position: relative;
-      margin-bottom: 18px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: #fff;
-      box-shadow: 0 24px 62px rgba(16,53,45,.14);
-    }
-    .comparison-stage {
-      --split: 50%;
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      aspect-ratio: 1.55 / 1;
-      background: #eef4ef;
-      touch-action: pan-y;
-      user-select: none;
-    }
-    .comparison-pane {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-    .comparison-pane img {
-      position: absolute;
-      top: 0;
-      width: 200%;
-      max-width: none;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-    .comparison-before img { left: 0; object-position: left center; }
-    .comparison-after {
-      clip-path: inset(0 0 0 var(--split));
-    }
-    .comparison-after img { right: 0; object-position: right center; }
-    .comparison-divider {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: var(--split);
-      z-index: 4;
-      width: 3px;
-      background: rgba(255,255,255,.96);
-      box-shadow: 0 0 0 1px rgba(16,53,45,.16), 0 0 24px rgba(16,53,45,.24);
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-    .comparison-handle {
-      position: absolute;
-      top: 50%;
-      left: var(--split);
-      z-index: 5;
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255,255,255,.86);
-      border-radius: 50%;
-      background: rgba(16,53,45,.91);
-      color: #fff;
-      box-shadow: 0 14px 36px rgba(16,53,45,.28);
-      transform: translate(-50%,-50%);
-      pointer-events: none;
-      backdrop-filter: blur(10px);
-    }
-    .comparison-handle::before { content: "‹  ›"; font-size: 1.45rem; font-weight: 900; letter-spacing: .08em; }
-    .comparison-range {
-      position: absolute;
-      inset: 0;
-      z-index: 6;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      opacity: 0;
-      cursor: ew-resize;
-    }
-    .comparison-label {
-      position: absolute;
-      top: 14px;
-      z-index: 7;
-      padding: 7px 10px;
-      border: 1px solid rgba(255,255,255,.32);
-      border-radius: 999px;
-      background: rgba(12,42,36,.82);
-      color: #fff;
-      font-size: .72rem;
-      font-weight: 950;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      pointer-events: none;
-      backdrop-filter: blur(8px);
-    }
-    .comparison-label-before { left: 14px; }
-    .comparison-label-after { right: 14px; }
-    .comparison-copy {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 17px 19px;
-    }
-    .comparison-copy strong { display: block; color: var(--ink); font-size: 1rem; }
-    .comparison-copy span { display: block; margin-top: 3px; color: var(--muted); font-size: .83rem; }
-    .comparison-tip {
-      flex: 0 0 auto;
-      color: var(--green-2);
-      font-size: .78rem;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-    .comparison-range:focus-visible + .comparison-focus-ring {
-      position: absolute;
-      inset: 8px;
-      z-index: 8;
-      border: 3px solid var(--gold);
-      border-radius: calc(var(--radius-lg) - 8px);
-      pointer-events: none;
-    }
-    @media (max-width: 559px) {
-      .comparison-stage { aspect-ratio: 1 / 1; }
-      .comparison-handle { width: 52px; height: 52px; }
-      .comparison-copy { align-items: flex-start; flex-direction: column; gap: 7px; }
-      .comparison-tip { white-space: normal; }
-    }
-
     /* Reviews */
     .reviews { padding: 66px 0; }
     .review-grid { display: grid; gap: 12px; }
@@ -1686,21 +1555,8 @@
           <p>Real carpet cleaning results from homes in our service area. Tap any image to enlarge it.</p>
         </div>
 
-        <div class="comparison-showcase reveal-ready" data-comparison>
-          <div class="comparison-stage">
-            <div class="comparison-pane comparison-before"><img src="images/same-area-different-results-web.jpg" alt="Carpet before comparison" loading="eager"></div>
-            <div class="comparison-pane comparison-after"><img src="images/same-area-different-results-web.jpg" alt="CarPET Friendly Solutions finished carpet result" loading="eager"></div>
-            <span class="comparison-label comparison-label-before">Before</span>
-            <span class="comparison-label comparison-label-after">After</span>
-            <div class="comparison-divider" aria-hidden="true"></div>
-            <div class="comparison-handle" aria-hidden="true"></div>
-            <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare the carpet before and after cleaning">
-            <span class="comparison-focus-ring" aria-hidden="true"></span>
-          </div>
-          <div class="comparison-copy"><div><strong>Drag to reveal the finished result</strong><span>A hands-on comparison of the same featured cleaning result.</span></div><span class="comparison-tip">Swipe or use arrow keys</span></div>
-        </div>
-
         <div class="results-grid">
+          <a class="result-card featured graphic" href="images/same-area-different-results-web.jpg" target="_blank" rel="noopener" aria-label="Enlarge carpet cleaning comparison image"><img src="images/same-area-different-results-web.jpg" alt="Comparison showing steam-cleaned carpet beside CarPET Friendly Solutions finished result" loading="eager"></a>
           <a class="result-card graphic" href="images/spot-cleaning-before-after-1-final.png" target="_blank" rel="noopener" aria-label="Enlarge dark spot removal before and after image"><img src="images/spot-cleaning-before-after-1-final.png" alt="Dark spot removal before and after carpet cleaning result" loading="lazy"></a>
           <a class="result-card graphic" href="images/spot-cleaning-before-after-2-final.png" target="_blank" rel="noopener" aria-label="Enlarge finished and refreshed before and after image"><img src="images/spot-cleaning-before-after-2-final.png" alt="Finished and refreshed carpet before and after cleaning near a fireplace" loading="lazy"></a>
         </div>
@@ -2156,21 +2012,6 @@
         item.addEventListener('pointerleave', () => { item.style.transform = ''; });
       });
     }
-
-
-    // Interactive before/after comparison. Uses the two halves of the existing comparison artwork.
-    document.querySelectorAll('[data-comparison]').forEach((comparison) => {
-      const stage = comparison.querySelector('.comparison-stage');
-      const range = comparison.querySelector('.comparison-range');
-      if (!stage || !range) return;
-      const setSplit = (value) => {
-        const safeValue = Math.max(0, Math.min(100, Number(value) || 0));
-        stage.style.setProperty('--split', `${safeValue}%`);
-        range.setAttribute('aria-valuenow', String(Math.round(safeValue)));
-      };
-      range.addEventListener('input', () => setSplit(range.value));
-      setSplit(range.value);
-    });
 
   </script>
 </body>
