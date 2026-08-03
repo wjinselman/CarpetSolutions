@@ -812,6 +812,104 @@
     .result-copy strong { display: block; color: var(--ink); font-size: 1rem; }
     .result-copy span { display: block; margin-top: 4px; color: var(--muted); font-size: .83rem; }
 
+    /* Real before/after sliders — uses the original customer photos */
+    .result-card.comparison-card { display: block; }
+    .comparison-card::after { display: none; }
+    .comparison-slider {
+      --position: 50%;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: #ddd8cc;
+      touch-action: pan-y;
+    }
+    .comparison-slider > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+    }
+    .comparison-slider .comparison-before { z-index: 1; }
+    .comparison-slider .comparison-after {
+      z-index: 2;
+      clip-path: inset(0 0 0 var(--position));
+    }
+    .comparison-slider .comparison-line {
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      bottom: 0;
+      left: var(--position);
+      width: 3px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 0 0 1px rgba(16,53,45,.16);
+      pointer-events: none;
+    }
+    .comparison-slider .comparison-handle {
+      position: absolute;
+      z-index: 5;
+      left: var(--position);
+      top: 50%;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(12,42,36,.28);
+      font-size: 1rem;
+      font-weight: 950;
+      letter-spacing: -.18em;
+      pointer-events: none;
+    }
+    .comparison-slider .comparison-label {
+      position: absolute;
+      z-index: 4;
+      top: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(12,42,36,.88);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .comparison-label.before { left: 12px; }
+    .comparison-label.after { right: 12px; }
+    .comparison-range {
+      position: absolute;
+      z-index: 6;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: ew-resize;
+      touch-action: pan-y;
+    }
+    .comparison-card .result-copy {
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+    .comparison-card .result-copy strong { font-size: 1.02rem; }
+    .comparison-card .result-copy span { line-height: 1.45; }
+
+    /* Individual framing so mismatched camera angles still read cleanly */
+    .comparison-organic .comparison-before { object-position: 52% 54%; }
+    .comparison-organic .comparison-after { object-position: 48% 52%; }
+    .comparison-spots .comparison-before { object-position: 61% 54%; }
+    .comparison-spots .comparison-after { object-position: 52% 52%; }
+
     /* Reviews */
     .reviews { padding: 66px 0; }
     .review-grid { display: grid; gap: 12px; }
@@ -1560,8 +1658,32 @@
 
         <div class="results-grid">
           <a class="result-card featured graphic" href="images/same-area-different-results-web.jpg" target="_blank" rel="noopener" aria-label="Enlarge carpet cleaning comparison image"><img src="images/same-area-different-results-web.jpg" alt="Comparison showing steam-cleaned carpet beside CarPET Friendly Solutions finished result" loading="eager"></a>
-          <a class="result-card graphic" href="images/heavy_organic_stain_removal_before_after.png" target="_blank" rel="noopener" aria-label="Enlarge heavy organic stain removal before and after image"><img src="images/heavy_organic_stain_removal_before_after.png" alt="Heavy organic stain removal before and after carpet cleaning result" loading="lazy"></a>
-          <a class="result-card graphic" href="images/severe_spot_and_traffic_area_cleaning_before_after.png" target="_blank" rel="noopener" aria-label="Enlarge severe spot and traffic-area cleaning before and after image"><img src="images/severe_spot_and_traffic_area_cleaning_before_after.png" alt="Severe spot and traffic-area carpet cleaning before and after result" loading="lazy"></a>
+
+          <article class="result-card comparison-card comparison-organic" aria-label="Interactive heavy organic stain removal before and after comparison">
+            <div class="comparison-slider" data-comparison>
+              <img class="comparison-before" src="images/organic-stain-before.jpeg" alt="Carpet before heavy organic stain treatment" loading="lazy">
+              <img class="comparison-after" src="images/organic-stain-after.jpeg" alt="Carpet after heavy organic stain treatment" loading="lazy">
+              <span class="comparison-label before">Before</span>
+              <span class="comparison-label after">After</span>
+              <span class="comparison-line" aria-hidden="true"></span>
+              <span class="comparison-handle" aria-hidden="true">◀▶</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare the heavy organic stain before and after photos">
+            </div>
+            <div class="result-copy"><strong>Heavy organic stain removal</strong><span>Drag the handle to compare the original photos.</span></div>
+          </article>
+
+          <article class="result-card comparison-card comparison-spots" aria-label="Interactive severe spot and traffic-area cleaning before and after comparison">
+            <div class="comparison-slider" data-comparison>
+              <img class="comparison-before" src="images/severe-spots-before.webp" alt="Carpet before severe spot and traffic-area cleaning" loading="lazy">
+              <img class="comparison-after" src="images/severe-spots-after.jpg" alt="Carpet after severe spot and traffic-area cleaning" loading="lazy">
+              <span class="comparison-label before">Before</span>
+              <span class="comparison-label after">After</span>
+              <span class="comparison-line" aria-hidden="true"></span>
+              <span class="comparison-handle" aria-hidden="true">◀▶</span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare the severe spot cleaning before and after photos">
+            </div>
+            <div class="result-copy"><strong>Severe spot and traffic-area cleaning</strong><span>Drag the handle to compare the original photos.</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -1961,6 +2083,16 @@
           first.focus();
         }
       }
+    });
+
+    // Real before/after comparison sliders.
+    document.querySelectorAll('[data-comparison]').forEach((slider) => {
+      const range = slider.querySelector('.comparison-range');
+      if (!range) return;
+      const updateComparison = () => slider.style.setProperty('--position', `${range.value}%`);
+      range.addEventListener('input', updateComparison);
+      range.addEventListener('change', updateComparison);
+      updateComparison();
     });
 
     // Premium interaction layer: visual polish without changing the sales flow.
