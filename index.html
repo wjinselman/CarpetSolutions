@@ -812,103 +812,124 @@
     .result-copy strong { display: block; color: var(--ink); font-size: 1rem; }
     .result-copy span { display: block; margin-top: 4px; color: var(--muted); font-size: .83rem; }
 
-    /* Real before/after sliders — uses the original customer photos */
-    .result-card.comparison-card { display: block; }
-    .comparison-card::after { display: none; }
-    .comparison-slider {
-      --position: 50%;
+
+    /* Working before/after sliders */
+    .slider-card { overflow: hidden; }
+    .ba-slider {
+      --split: 50%;
       position: relative;
-      overflow: hidden;
+      width: 100%;
       aspect-ratio: 4 / 5;
-      background: #ddd8cc;
-      touch-action: pan-y;
+      overflow: hidden;
+      background: #eef3ef;
+      border-bottom: 1px solid var(--line);
+      isolation: isolate;
     }
-    .comparison-slider > img {
+    .ba-image {
       position: absolute;
       inset: 0;
+      display: block;
       width: 100%;
       height: 100%;
       max-width: none;
       object-fit: cover;
-      user-select: none;
       pointer-events: none;
+      user-select: none;
     }
-    .comparison-slider .comparison-before { z-index: 1; }
-    .comparison-slider .comparison-after {
+    .ba-after { z-index: 1; }
+    .ba-before {
       z-index: 2;
-      clip-path: inset(0 0 0 var(--position));
+      clip-path: inset(0 calc(100% - var(--split)) 0 0);
     }
-    .comparison-slider .comparison-line {
+    .ba-slider--split .ba-image {
+      width: 200%;
+      object-fit: cover;
+    }
+    .ba-slider--split .ba-before { left: 0; object-position: left center; }
+    .ba-slider--split .ba-after { left: -100%; object-position: right center; }
+    .ba-divider {
       position: absolute;
-      z-index: 4;
+      z-index: 3;
       top: 0;
       bottom: 0;
-      left: var(--position);
+      left: var(--split);
       width: 3px;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,.96);
-      box-shadow: 0 0 0 1px rgba(16,53,45,.16);
+      transform: translateX(-1.5px);
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 0 0 1px rgba(16,53,45,.12);
       pointer-events: none;
     }
-    .comparison-slider .comparison-handle {
-      position: absolute;
-      z-index: 5;
-      left: var(--position);
-      top: 50%;
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      transform: translate(-50%, -50%);
-      border: 3px solid #fff;
-      border-radius: 50%;
-      background: var(--ink);
-      color: #fff;
-      box-shadow: 0 8px 22px rgba(12,42,36,.28);
-      font-size: 1rem;
-      font-weight: 950;
-      letter-spacing: -.18em;
-      pointer-events: none;
-    }
-    .comparison-slider .comparison-label {
+    .ba-label {
       position: absolute;
       z-index: 4;
-      top: 12px;
-      padding: 6px 10px;
+      top: 14px;
+      padding: 7px 11px;
       border-radius: 999px;
-      background: rgba(12,42,36,.88);
       color: #fff;
       font-size: .72rem;
       font-weight: 900;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+      letter-spacing: .02em;
+      box-shadow: 0 8px 20px rgba(16,53,45,.16);
       pointer-events: none;
     }
-    .comparison-label.before { left: 12px; }
-    .comparison-label.after { right: 12px; }
-    .comparison-range {
+    .ba-label-before { left: 14px; background: rgba(16,53,45,.92); }
+    .ba-label-after { right: 14px; background: rgba(47,125,87,.94); }
+    .ba-range {
       position: absolute;
-      z-index: 6;
+      z-index: 5;
       inset: 0;
       width: 100%;
       height: 100%;
       margin: 0;
-      opacity: 0;
+      padding: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
       cursor: ew-resize;
       touch-action: pan-y;
     }
-    .comparison-card .result-copy {
-      border-top: 1px solid var(--line);
+    .ba-range::-webkit-slider-runnable-track { width: 100%; height: 100%; background: transparent; border: 0; }
+    .ba-range::-moz-range-track { width: 100%; height: 100%; background: transparent; border: 0; }
+    .ba-range::-webkit-slider-thumb {
+      width: 52px;
+      height: 52px;
+      margin-top: calc((100% - 52px) / 2);
+      appearance: none;
+      -webkit-appearance: none;
+      border: 1px solid rgba(16,53,45,.14);
+      border-radius: 50%;
       background: #fff;
+      box-shadow: 0 10px 28px rgba(16,53,45,.22);
     }
-    .comparison-card .result-copy strong { font-size: 1.02rem; }
-    .comparison-card .result-copy span { line-height: 1.45; }
-
-    /* Individual framing so mismatched camera angles still read cleanly */
-    .comparison-organic .comparison-before { object-position: 52% 54%; }
-    .comparison-organic .comparison-after { object-position: 48% 52%; }
-    .comparison-spots .comparison-before { object-position: 61% 54%; }
-    .comparison-spots .comparison-after { object-position: 52% 52%; }
+    .ba-range::-moz-range-thumb {
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(16,53,45,.14);
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(16,53,45,.22);
+    }
+    .ba-range:focus-visible { outline: 3px solid rgba(47,125,87,.34); outline-offset: -3px; }
+    .ba-slider::after {
+      content: "↔";
+      position: absolute;
+      z-index: 6;
+      top: 50%;
+      left: var(--split);
+      transform: translate(-50%, -50%);
+      color: var(--ink);
+      font-size: 1.05rem;
+      font-weight: 950;
+      line-height: 1;
+      pointer-events: none;
+    }
+    @media (max-width: 759px) {
+      .ba-label { top: 10px; padding: 6px 9px; font-size: .66rem; }
+      .ba-label-before { left: 10px; }
+      .ba-label-after { right: 10px; }
+      .ba-range::-webkit-slider-thumb { width: 46px; height: 46px; margin-top: calc((100% - 46px) / 2); }
+      .ba-range::-moz-range-thumb { width: 46px; height: 46px; }
+    }
 
     /* Reviews */
     .reviews { padding: 66px 0; }
@@ -1657,32 +1678,40 @@
         </div>
 
         <div class="results-grid">
-          <a class="result-card featured graphic" href="images/same-area-different-results-web.jpg" target="_blank" rel="noopener" aria-label="Enlarge carpet cleaning comparison image"><img src="images/same-area-different-results-web.jpg" alt="Comparison showing steam-cleaned carpet beside CarPET Friendly Solutions finished result" loading="eager"></a>
-
-          <article class="result-card comparison-card comparison-organic" aria-label="Interactive heavy organic stain removal before and after comparison">
-            <div class="comparison-slider" data-comparison>
-              <img class="comparison-before" src="images/organic-stain-before.jpeg" alt="Carpet before heavy organic stain treatment" loading="lazy">
-              <img class="comparison-after" src="images/organic-stain-after.jpeg" alt="Carpet after heavy organic stain treatment" loading="lazy">
-              <span class="comparison-label before">Before</span>
-              <span class="comparison-label after">After</span>
-              <span class="comparison-line" aria-hidden="true"></span>
-              <span class="comparison-handle" aria-hidden="true">◀▶</span>
-              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare the heavy organic stain before and after photos">
+          <article class="result-card slider-card featured">
+            <div class="ba-slider ba-slider--split" style="--split:50%">
+              <img class="ba-image ba-after" src="images/same-area-different-results-web.jpg" alt="CarPET Friendly Solutions finished result" loading="eager">
+              <img class="ba-image ba-before" src="images/same-area-different-results-web.jpg" alt="Typical comparison result" loading="eager">
+              <div class="ba-divider" aria-hidden="true"></div>
+              <span class="ba-label ba-label-before">Before</span>
+              <span class="ba-label ba-label-after">After</span>
+              <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare before and after for same area different result">
             </div>
-            <div class="result-copy"><strong>Heavy organic stain removal</strong><span>Drag the handle to compare the original photos.</span></div>
+            <div class="result-copy"><strong>Same area. Different result.</strong><span>Drag the handle to compare the two results.</span></div>
           </article>
 
-          <article class="result-card comparison-card comparison-spots" aria-label="Interactive severe spot and traffic-area cleaning before and after comparison">
-            <div class="comparison-slider" data-comparison>
-              <img class="comparison-before" src="images/severe-spots-before.webp" alt="Carpet before severe spot and traffic-area cleaning" loading="lazy">
-              <img class="comparison-after" src="images/severe-spots-after.jpg" alt="Carpet after severe spot and traffic-area cleaning" loading="lazy">
-              <span class="comparison-label before">Before</span>
-              <span class="comparison-label after">After</span>
-              <span class="comparison-line" aria-hidden="true"></span>
-              <span class="comparison-handle" aria-hidden="true">◀▶</span>
-              <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare the severe spot cleaning before and after photos">
+          <article class="result-card slider-card">
+            <div class="ba-slider" style="--split:52%">
+              <img class="ba-image ba-after" src="images/heavy-stain-after.jpg" alt="Carpet after heavy organic stain treatment" loading="lazy">
+              <img class="ba-image ba-before" src="images/heavy-stain-before.jpg" alt="Carpet before heavy organic stain treatment" loading="lazy">
+              <div class="ba-divider" aria-hidden="true"></div>
+              <span class="ba-label ba-label-before">Before</span>
+              <span class="ba-label ba-label-after">After</span>
+              <input class="ba-range" type="range" min="0" max="100" value="52" aria-label="Slide to compare heavy organic stain removal before and after">
             </div>
-            <div class="result-copy"><strong>Severe spot and traffic-area cleaning</strong><span>Drag the handle to compare the original photos.</span></div>
+            <div class="result-copy"><strong>Heavy organic stain removal</strong><span>Difficult staining reduced for a cleaner, refreshed finish.</span></div>
+          </article>
+
+          <article class="result-card slider-card">
+            <div class="ba-slider" style="--split:52%">
+              <img class="ba-image ba-after" src="images/severe-spots-after.jpg" alt="Carpet after severe spot and traffic-area cleaning" loading="lazy">
+              <img class="ba-image ba-before" src="images/severe-spots-before.jpg" alt="Carpet before severe spot and traffic-area cleaning" loading="lazy">
+              <div class="ba-divider" aria-hidden="true"></div>
+              <span class="ba-label ba-label-before">Before</span>
+              <span class="ba-label ba-label-after">After</span>
+              <input class="ba-range" type="range" min="0" max="100" value="52" aria-label="Slide to compare severe spot and traffic-area cleaning before and after">
+            </div>
+            <div class="result-copy"><strong>Severe spot and traffic-area cleaning</strong><span>Heavy staining removed across the room for a cleaner, refreshed finish.</span></div>
           </article>
         </div>
       </div>
@@ -2085,14 +2114,14 @@
       }
     });
 
-    // Real before/after comparison sliders.
-    document.querySelectorAll('[data-comparison]').forEach((slider) => {
-      const range = slider.querySelector('.comparison-range');
+
+    document.querySelectorAll('.ba-slider').forEach((slider) => {
+      const range = slider.querySelector('.ba-range');
       if (!range) return;
-      const updateComparison = () => slider.style.setProperty('--position', `${range.value}%`);
-      range.addEventListener('input', updateComparison);
-      range.addEventListener('change', updateComparison);
-      updateComparison();
+      const update = () => slider.style.setProperty('--split', `${range.value}%`);
+      range.addEventListener('input', update);
+      range.addEventListener('change', update);
+      update();
     });
 
     // Premium interaction layer: visual polish without changing the sales flow.
