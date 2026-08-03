@@ -838,17 +838,6 @@
     }
     .ba-after { z-index: 1; }
 
-    /* Top slider: overscan both photos vertically to hide any white
-       pixels baked into the source image and eliminate subpixel seams. */
-    .slider-card.featured .ba-image {
-      top: -6px;
-      bottom: auto;
-      height: calc(100% + 12px);
-    }
-    .slider-card.featured .ba-after {
-      object-position: center top;
-    }
-
     .ba-before {
       z-index: 2;
       clip-path: inset(0 calc(100% - var(--split)) 0 0);
@@ -1683,8 +1672,8 @@
         <div class="results-grid">
           <article class="result-card slider-card featured">
             <div class="ba-slider" style="--split:52%">
-              <img class="ba-image ba-after" src="images/featured-spots-after.jpg" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
-              <img class="ba-image ba-before" src="images/featured-spots-before.jpg" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-after" src="images/featured-spots-after.jpg?v=20260803" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-before" src="images/featured-spots-before.jpg?v=20260803" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
               <div class="ba-divider" aria-hidden="true"></div>
               <span class="ba-label ba-label-before">Before</span>
               <span class="ba-label ba-label-after">After</span>
