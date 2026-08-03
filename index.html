@@ -837,6 +837,15 @@
       user-select: none;
     }
     .ba-after { z-index: 1; }
+
+    /* Top slider: crop the After photo slightly tighter so it fills
+       the full frame and no white strip can show along the bottom. */
+    .slider-card.featured .ba-after {
+      transform: scale(1.10);
+      transform-origin: center top;
+      object-position: center top;
+    }
+
     .ba-before {
       z-index: 2;
       clip-path: inset(0 calc(100% - var(--split)) 0 0);
