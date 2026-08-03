@@ -822,7 +822,7 @@
       aspect-ratio: 4 / 5;
       overflow: hidden;
       background: #eef3ef;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 0;
       isolation: isolate;
     }
     .ba-image {
@@ -838,11 +838,14 @@
     }
     .ba-after { z-index: 1; }
 
-    /* Top slider: crop the After photo slightly tighter so it fills
-       the full frame and no white strip can show along the bottom. */
+    /* Top slider: overscan both photos vertically to hide any white
+       pixels baked into the source image and eliminate subpixel seams. */
+    .slider-card.featured .ba-image {
+      top: -6px;
+      bottom: auto;
+      height: calc(100% + 12px);
+    }
     .slider-card.featured .ba-after {
-      transform: scale(1.10);
-      transform-origin: center top;
       object-position: center top;
     }
 
