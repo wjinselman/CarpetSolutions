@@ -2225,8 +2225,8 @@
 
         <div class="estimate-step" data-estimate-step="3" hidden>
           <p class="estimate-step-label">Step 3 of 3</p>
-          <h3>Add photos and send.</h3>
-          <p class="estimate-help">Choose photos now. On supported phones, the share sheet can pass them directly to your messaging app.</p>
+          <h3>Add photos and text us.</h3>
+          <p class="estimate-help">Choose the photos you plan to send. We’ll open a text directly to 580-668-0147 with your estimate details filled in.</p>
           <label class="photo-drop" for="estimate-photos">
             <strong>Tap to choose carpet or furniture photos</strong>
             <span>Up to 6 images. Nothing uploads to this website.</span>
@@ -2235,13 +2235,13 @@
           <div class="photo-preview" id="estimate-photo-preview" aria-live="polite"></div>
           <div class="estimate-summary" id="estimate-summary" hidden></div>
           <div class="estimate-review" id="estimate-review" aria-live="polite"></div>
-          <p class="estimate-privacy">If direct photo sharing is unavailable, we’ll open a normal prefilled text. Attach the selected photos from your phone before sending.</p>
+          <p class="estimate-privacy">For privacy, photos never upload to this website. When the text opens, attach the selected photos from your phone before sending.</p>
         </div>
 
         <div class="estimate-actions">
           <button class="button button-outline" id="estimate-back" type="button" hidden>Back</button>
           <button class="button button-primary estimate-next" id="estimate-next" type="button">Next</button>
-          <button class="button button-primary estimate-next" id="estimate-send" type="button" hidden>Share Photos & Text</button>
+          <button class="button button-primary estimate-next" id="estimate-send" type="button" hidden>Text 580-668-0147</button>
         </div>
         <p class="estimate-status" id="estimate-status" role="status" aria-live="polite"></p>
       </div>
@@ -2605,26 +2605,24 @@
       renderEstimateReview();
     });
 
-    estimateSend?.addEventListener('click', async () => {
+    function buildEstimateSmsLink(message) {
+      const separator = /iPhone|iPad|iPod/i.test(navigator.userAgent) ? '&' : '?';
+      return `sms:+15806680147${separator}body=${encodeURIComponent(message)}`;
+    }
+
+    estimateSend?.addEventListener('click', () => {
       const message = buildEstimateMessage();
-      const shareData = { title: 'CarPET Friendly estimate request', text: message };
-      if (estimateState.files.length && navigator.canShare?.({ files: estimateState.files })) {
-        shareData.files = estimateState.files;
-      }
-      try {
-        if (navigator.share && (!shareData.files || navigator.canShare?.(shareData))) {
-          await navigator.share(shareData);
-          trackAction('share_estimate_request', { photo_count: estimateState.files.length });
-          try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
-          updateEstimateButtonLabels();
-          closeEstimateWizard();
-          return;
-        }
-      } catch (error) {
-        if (error?.name === 'AbortError') return;
-      }
       trackAction('open_prefilled_estimate_text', { photo_count: estimateState.files.length });
-      window.location.href = `sms:+15806680147?body=${encodeURIComponent(message)}`;
+
+      if (isPhoneOrTablet()) {
+        try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
+        updateEstimateButtonLabels();
+        window.location.href = buildEstimateSmsLink(message);
+        return;
+      }
+
+      closeEstimateWizard();
+      openContactModal('estimate', lastEstimateTrigger);
     });
 
     estimateModal?.querySelectorAll('[data-estimate-close]').forEach((button) => button.addEventListener('click', closeEstimateWizard));
@@ -2643,9 +2641,12 @@
       if (!contactModal) return;
       lastContactTrigger = trigger;
 
-      if (mode === 'text') {
+      if (mode === 'estimate') {
+        contactTitle.textContent = 'Text your estimate to us';
+        contactDescription.textContent = 'Use your phone to text your photos and estimate details directly to 580-668-0147. Click the number below to copy it.';
+      } else if (mode === 'text') {
         contactTitle.textContent = 'Text photos for a fast estimate';
-        contactDescription.textContent = 'On your phone, text photos to 580-668-0147. Include your city, what needs cleaned, and any problem spots.';
+        contactDescription.textContent = 'On your phone, text photos directly to 580-668-0147. Include your city, what needs cleaned, and any problem spots.';
       } else {
         contactTitle.textContent = 'Call CarPET Friendly Solutions';
         contactDescription.textContent = 'Call 580-668-0147 from your phone. You can also text photos for a quick estimate.';
