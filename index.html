@@ -1554,6 +1554,199 @@
       .site-progress { display: none; }
     }
 
+
+    /* Smart estimate wizard — layered over the existing page without changing layout */
+    .estimate-modal[hidden] { display: none; }
+    .estimate-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 130;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+    }
+    .estimate-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(7,28,23,.76);
+      backdrop-filter: blur(10px);
+    }
+    .estimate-dialog {
+      position: relative;
+      width: min(100%, 650px);
+      max-height: min(92vh, 820px);
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.30);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: 0 38px 110px rgba(7,28,23,.42);
+    }
+    .estimate-close {
+      position: absolute;
+      top: 13px;
+      right: 13px;
+      z-index: 4;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255,255,255,.96);
+      color: var(--ink);
+      font: inherit;
+      font-size: 1.45rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    .estimate-head {
+      padding: 27px 64px 20px 24px;
+      background:
+        linear-gradient(rgba(47,125,87,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,125,87,.045) 1px, transparent 1px),
+        radial-gradient(circle at 92% 0%, rgba(47,125,87,.20), transparent 34%),
+        var(--mint-2);
+      background-size: 22px 22px, 22px 22px, auto, auto;
+      border-bottom: 1px solid var(--line);
+    }
+    .estimate-head h2 {
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-size: clamp(1.8rem, 7vw, 2.65rem);
+      line-height: 1.03;
+      letter-spacing: -.04em;
+    }
+    .estimate-head p { margin: 0; color: var(--muted); font-size: .93rem; }
+    .estimate-progress {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-top: 18px;
+    }
+    .estimate-progress span {
+      height: 5px;
+      border-radius: 99px;
+      background: rgba(16,53,45,.12);
+      transition: background .2s ease, box-shadow .2s ease;
+    }
+    .estimate-progress span.is-active {
+      background: linear-gradient(90deg, var(--gold), var(--green));
+      box-shadow: 0 0 14px rgba(47,125,87,.24);
+    }
+    .estimate-body { padding: 24px; }
+    .estimate-step[hidden] { display: none; }
+    .estimate-step-label {
+      margin-bottom: 5px;
+      color: var(--green-2);
+      font-size: .75rem;
+      font-weight: 950;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+    }
+    .estimate-step h3 {
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+    .estimate-help { margin-bottom: 18px; color: var(--muted); font-size: .9rem; }
+    .estimate-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .estimate-option {
+      min-height: 76px;
+      padding: 13px 12px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .estimate-option:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .estimate-option.is-selected {
+      border-color: rgba(47,125,87,.54);
+      background: var(--mint);
+      box-shadow: inset 0 0 0 1px rgba(47,125,87,.16), 0 10px 24px rgba(47,125,87,.10);
+    }
+    .estimate-fields { display: grid; gap: 12px; }
+    .estimate-field label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: .82rem;
+      font-weight: 900;
+    }
+    .estimate-field input,
+    .estimate-field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: .95rem;
+      outline: none;
+    }
+    .estimate-field textarea { min-height: 88px; resize: vertical; }
+    .estimate-field input:focus,
+    .estimate-field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(47,125,87,.13); }
+    .photo-drop {
+      display: grid;
+      place-items: center;
+      gap: 7px;
+      min-height: 132px;
+      padding: 18px;
+      border: 1.5px dashed rgba(47,125,87,.40);
+      border-radius: 18px;
+      background: var(--mint-2);
+      text-align: center;
+      cursor: pointer;
+    }
+    .photo-drop strong { color: var(--ink); }
+    .photo-drop span { color: var(--muted); font-size: .82rem; }
+    .photo-input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .photo-preview { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 11px; }
+    .photo-preview img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 11px; border: 1px solid var(--line); }
+    .estimate-summary {
+      margin-top: 15px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--cream);
+      color: var(--text);
+      font-size: .88rem;
+      white-space: pre-line;
+    }
+    .estimate-privacy { margin: 11px 0 0; color: var(--muted); font-size: .76rem; line-height: 1.45; }
+    .estimate-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .estimate-actions .button { min-width: 120px; }
+    .estimate-next { margin-left: auto; }
+    .estimate-status { min-height: 20px; margin: 10px 0 0; color: var(--green-2); font-size: .82rem; font-weight: 800; text-align: center; }
+    @media (max-width: 559px) {
+      .estimate-modal { padding: 7px; align-items: end; }
+      .estimate-dialog { width: 100%; max-height: calc(100vh - 14px); border-radius: 24px 24px 18px 18px; }
+      .estimate-head { padding: 23px 58px 17px 19px; }
+      .estimate-body { padding: 19px; }
+      .estimate-options { grid-template-columns: 1fr 1fr; }
+      .estimate-option { min-height: 68px; padding: 11px 8px; font-size: .84rem; }
+      .estimate-actions .button { min-width: 0; flex: 1; padding-inline: 13px; }
+      .photo-preview { grid-template-columns: repeat(3, 1fr); }
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -1892,6 +2085,70 @@
     </section>
   </div>
 
+
+  <div class="estimate-modal" id="estimate-wizard" hidden>
+    <div class="estimate-backdrop" data-estimate-close></div>
+    <section class="estimate-dialog" role="dialog" aria-modal="true" aria-labelledby="estimate-title">
+      <button class="estimate-close" type="button" aria-label="Close fast estimate" data-estimate-close>×</button>
+      <div class="estimate-head">
+        <p class="eyebrow">Smart photo estimate</p>
+        <h2 id="estimate-title">Build your text in three quick steps.</h2>
+        <p>No account, no long form, and no information is sent until you choose to send it.</p>
+        <div class="estimate-progress" aria-label="Estimate progress"><span class="is-active"></span><span></span><span></span></div>
+      </div>
+      <div class="estimate-body">
+        <div class="estimate-step" data-estimate-step="1">
+          <p class="estimate-step-label">Step 1 of 3</p>
+          <h3>What needs cleaned?</h3>
+          <p class="estimate-help">Choose the closest match. You can add extra details next.</p>
+          <div class="estimate-options" data-estimate-group="service">
+            <button class="estimate-option" type="button" data-value="Carpet cleaning">Carpet</button>
+            <button class="estimate-option" type="button" data-value="Upholstery cleaning">Upholstery</button>
+            <button class="estimate-option" type="button" data-value="Area rug cleaning">Area rug</button>
+            <button class="estimate-option" type="button" data-value="Pet stain or odor treatment">Pet odor / stains</button>
+          </div>
+        </div>
+
+        <div class="estimate-step" data-estimate-step="2" hidden>
+          <p class="estimate-step-label">Step 2 of 3</p>
+          <h3>How much and where?</h3>
+          <p class="estimate-help">This gives William and Rebecca enough context to estimate faster.</p>
+          <div class="estimate-options" data-estimate-group="size">
+            <button class="estimate-option" type="button" data-value="1 room or small item">1 room / small item</button>
+            <button class="estimate-option" type="button" data-value="2–3 rooms or medium item">2–3 rooms / medium</button>
+            <button class="estimate-option" type="button" data-value="4 or more rooms / whole home">Whole home / large</button>
+            <button class="estimate-option" type="button" data-value="I need help measuring the job">Not sure yet</button>
+          </div>
+          <div class="estimate-fields" style="margin-top:14px">
+            <div class="estimate-field"><label for="estimate-city">City</label><input id="estimate-city" type="text" autocomplete="address-level2" placeholder="Ardmore, Lone Grove, Marietta…"></div>
+            <div class="estimate-field"><label for="estimate-details">Problem spots or details</label><textarea id="estimate-details" placeholder="Pet odor, traffic lanes, sofa size, stairs, mystery stain…"></textarea></div>
+          </div>
+        </div>
+
+        <div class="estimate-step" data-estimate-step="3" hidden>
+          <p class="estimate-step-label">Step 3 of 3</p>
+          <h3>Add photos and send.</h3>
+          <p class="estimate-help">Choose photos now. On supported phones, the share sheet can pass them directly to your messaging app.</p>
+          <label class="photo-drop" for="estimate-photos">
+            <strong>Tap to choose carpet or furniture photos</strong>
+            <span>Up to 6 images. Nothing uploads to this website.</span>
+          </label>
+          <input class="photo-input" id="estimate-photos" type="file" accept="image/*" multiple>
+          <div class="photo-preview" id="estimate-photo-preview" aria-live="polite"></div>
+          <div class="estimate-summary" id="estimate-summary"></div>
+          <p class="estimate-privacy">If direct photo sharing is unavailable, we’ll open a normal prefilled text. Attach the selected photos from your phone before sending.</p>
+        </div>
+
+        <div class="estimate-actions">
+          <button class="button button-outline" id="estimate-back" type="button" hidden>Back</button>
+          <button class="button button-primary estimate-next" id="estimate-next" type="button">Next</button>
+          <button class="button button-primary estimate-next" id="estimate-send" type="button" hidden>Share Photos & Text</button>
+        </div>
+        <p class="estimate-status" id="estimate-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </div>
+
   <div class="contact-modal" id="desktop-contact-modal" hidden>
     <div class="contact-modal-backdrop" data-contact-close></div>
     <section class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-description">
@@ -2008,6 +2265,135 @@
       button.addEventListener('click', closePolicyModal);
     });
 
+
+    // Three-step photo estimate wizard. It lives in a modal, so the existing page layout stays untouched.
+    const estimateModal = document.querySelector('#estimate-wizard');
+    const estimateDialog = estimateModal?.querySelector('.estimate-dialog');
+    const estimateSteps = [...document.querySelectorAll('[data-estimate-step]')];
+    const estimateProgress = [...document.querySelectorAll('.estimate-progress span')];
+    const estimateBack = document.querySelector('#estimate-back');
+    const estimateNext = document.querySelector('#estimate-next');
+    const estimateSend = document.querySelector('#estimate-send');
+    const estimateCity = document.querySelector('#estimate-city');
+    const estimateDetails = document.querySelector('#estimate-details');
+    const estimatePhotos = document.querySelector('#estimate-photos');
+    const estimatePreview = document.querySelector('#estimate-photo-preview');
+    const estimateSummary = document.querySelector('#estimate-summary');
+    const estimateStatus = document.querySelector('#estimate-status');
+    const estimateState = { step: 1, service: '', size: '', files: [] };
+    let lastEstimateTrigger = null;
+
+    function buildEstimateMessage() {
+      const city = estimateCity?.value.trim();
+      const details = estimateDetails?.value.trim();
+      return [
+        'Hi! I’d like an estimate from CarPET Friendly Solutions.',
+        `Service: ${estimateState.service || 'Not selected'}`,
+        `Size: ${estimateState.size || 'Not selected'}`,
+        city ? `City: ${city}` : '',
+        details ? `Details: ${details}` : '',
+        estimateState.files.length ? `Photos selected: ${estimateState.files.length}` : 'I will attach photos to this message.'
+      ].filter(Boolean).join('\n');
+    }
+
+    function updateEstimateUi() {
+      estimateSteps.forEach((panel) => { panel.hidden = Number(panel.dataset.estimateStep) !== estimateState.step; });
+      estimateProgress.forEach((bar, index) => bar.classList.toggle('is-active', index < estimateState.step));
+      estimateBack.hidden = estimateState.step === 1;
+      estimateNext.hidden = estimateState.step === 3;
+      estimateSend.hidden = estimateState.step !== 3;
+      estimateStatus.textContent = '';
+      if (estimateState.step === 3) estimateSummary.textContent = buildEstimateMessage();
+      requestAnimationFrame(() => estimateDialog?.querySelector('[data-estimate-step]:not([hidden]) button, [data-estimate-step]:not([hidden]) input')?.focus());
+    }
+
+    function openEstimateWizard(trigger) {
+      if (!estimateModal) return;
+      lastEstimateTrigger = trigger;
+      estimateModal.hidden = false;
+      document.body.classList.add('modal-open');
+      estimateState.step = 1;
+      updateEstimateUi();
+      trackAction('open_estimate_wizard');
+    }
+
+    function closeEstimateWizard() {
+      if (!estimateModal) return;
+      estimateModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      lastEstimateTrigger?.focus({ preventScroll: true });
+    }
+
+    document.querySelectorAll('a[data-track="text_estimate"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        openEstimateWizard(link);
+      });
+    });
+
+    document.querySelectorAll('[data-estimate-group]').forEach((group) => {
+      group.addEventListener('click', (event) => {
+        const option = event.target.closest('.estimate-option');
+        if (!option) return;
+        group.querySelectorAll('.estimate-option').forEach((button) => button.classList.remove('is-selected'));
+        option.classList.add('is-selected');
+        estimateState[group.dataset.estimateGroup] = option.dataset.value;
+      });
+    });
+
+    estimateNext?.addEventListener('click', () => {
+      if (estimateState.step === 1 && !estimateState.service) {
+        estimateStatus.textContent = 'Choose what needs cleaned first.';
+        return;
+      }
+      if (estimateState.step === 2 && !estimateState.size) {
+        estimateStatus.textContent = 'Choose the closest job size first.';
+        return;
+      }
+      estimateState.step = Math.min(3, estimateState.step + 1);
+      updateEstimateUi();
+    });
+
+    estimateBack?.addEventListener('click', () => {
+      estimateState.step = Math.max(1, estimateState.step - 1);
+      updateEstimateUi();
+    });
+
+    estimatePhotos?.addEventListener('change', () => {
+      estimateState.files = [...estimatePhotos.files].filter((file) => file.type.startsWith('image/')).slice(0, 6);
+      estimatePreview.innerHTML = '';
+      estimateState.files.forEach((file) => {
+        const img = document.createElement('img');
+        img.alt = 'Selected estimate photo';
+        img.src = URL.createObjectURL(file);
+        img.addEventListener('load', () => URL.revokeObjectURL(img.src), { once: true });
+        estimatePreview.appendChild(img);
+      });
+      estimateSummary.textContent = buildEstimateMessage();
+    });
+
+    estimateSend?.addEventListener('click', async () => {
+      const message = buildEstimateMessage();
+      const shareData = { title: 'CarPET Friendly estimate request', text: message };
+      if (estimateState.files.length && navigator.canShare?.({ files: estimateState.files })) {
+        shareData.files = estimateState.files;
+      }
+      try {
+        if (navigator.share && (!shareData.files || navigator.canShare?.(shareData))) {
+          await navigator.share(shareData);
+          trackAction('share_estimate_request', { photo_count: estimateState.files.length });
+          closeEstimateWizard();
+          return;
+        }
+      } catch (error) {
+        if (error?.name === 'AbortError') return;
+      }
+      trackAction('open_prefilled_estimate_text', { photo_count: estimateState.files.length });
+      window.location.href = `sms:+15806680147?body=${encodeURIComponent(message)}`;
+    });
+
+    estimateModal?.querySelectorAll('[data-estimate-close]').forEach((button) => button.addEventListener('click', closeEstimateWizard));
+
     const contactModal = document.querySelector('#desktop-contact-modal');
     const contactDialog = contactModal?.querySelector('.contact-dialog');
     const contactTitle = contactModal?.querySelector('#contact-dialog-title');
@@ -2063,7 +2449,7 @@
       }
     }
 
-    document.querySelectorAll('a[href^="tel:"], a[href^="sms:"]').forEach((link) => {
+    document.querySelectorAll('a[href^="tel:"], a[href^="sms:"]:not([data-track="text_estimate"])').forEach((link) => {
       link.addEventListener('click', (event) => {
         if (isPhoneOrTablet()) return;
         event.preventDefault();
@@ -2086,8 +2472,24 @@
         return;
       }
 
+      if (event.key === 'Escape' && estimateModal && !estimateModal.hidden) {
+        closeEstimateWizard();
+        return;
+      }
+
       if (event.key === 'Escape' && contactModal && !contactModal.hidden) {
         closeContactModal();
+      }
+
+      if (event.key === 'Tab' && estimateModal && !estimateModal.hidden && estimateDialog) {
+        const focusable = [...estimateDialog.querySelectorAll('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])')]
+          .filter((element) => !element.disabled && !element.closest('[hidden]'));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        return;
       }
 
       if (event.key === 'Tab' && contactModal && !contactModal.hidden && contactDialog) {
