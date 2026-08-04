@@ -1751,9 +1751,29 @@
     .estimate-next { margin-left: auto; }
     .estimate-status { min-height: 20px; margin: 10px 0 0; color: var(--green-2); font-size: .82rem; font-weight: 800; text-align: center; }
     @media (max-width: 559px) {
-      .estimate-modal { padding: 7px; align-items: end; }
-      .estimate-dialog { width: 100%; max-height: calc(100vh - 14px); border-radius: 24px 24px 18px 18px; }
-      .estimate-head { padding: 23px 58px 17px 19px; }
+      .estimate-modal {
+        padding: max(7px, env(safe-area-inset-top)) 7px max(7px, env(safe-area-inset-bottom));
+        align-items: end;
+        overscroll-behavior: contain;
+      }
+      .estimate-dialog {
+        width: 100%;
+        max-height: calc(100dvh - max(14px, env(safe-area-inset-top)) - max(14px, env(safe-area-inset-bottom)));
+        border-radius: 24px 24px 18px 18px;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+      .estimate-close {
+        position: sticky;
+        top: 8px;
+        float: right;
+        width: 52px;
+        height: 52px;
+        margin: 8px 8px -60px 0;
+        z-index: 12;
+        touch-action: manipulation;
+      }
+      .estimate-head { padding: 23px 66px 17px 19px; }
       .estimate-body { padding: 19px; }
       .estimate-options { grid-template-columns: 1fr 1fr; }
       .estimate-option { min-height: 68px; padding: 11px 8px; font-size: .84rem; }
@@ -2475,11 +2495,33 @@
       requestAnimationFrame(() => estimateDialog?.querySelector('[data-estimate-step]:not([hidden]) button, [data-estimate-step]:not([hidden]) input')?.focus());
     }
 
+    let estimateScrollY = 0;
+
+    function lockEstimatePageScroll() {
+      estimateScrollY = window.scrollY || window.pageYOffset || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${estimateScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+      document.body.classList.add('modal-open');
+    }
+
+    function unlockEstimatePageScroll() {
+      document.body.classList.remove('modal-open');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, estimateScrollY);
+    }
+
     function openEstimateWizard(trigger) {
       if (!estimateModal) return;
       lastEstimateTrigger = trigger;
+      lockEstimatePageScroll();
       estimateModal.hidden = false;
-      document.body.classList.add('modal-open');
       const resumed = loadEstimateDraft();
       estimateState.step = 1;
       if (estimateResumeNote) estimateResumeNote.hidden = !resumed;
@@ -2491,7 +2533,7 @@
     function closeEstimateWizard() {
       if (!estimateModal) return;
       estimateModal.hidden = true;
-      document.body.classList.remove('modal-open');
+      unlockEstimatePageScroll();
       lastEstimateTrigger?.focus({ preventScroll: true });
     }
 
