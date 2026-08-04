@@ -1288,18 +1288,43 @@
 
     /* Keep mobile hero text completely below the technician photo */
     @media (max-width: 759px) {
+      .hero-card {
+        background: linear-gradient(180deg, #f7fbf8 0%, #ffffff 100%);
+      }
       .hero-art {
         position: relative;
         inset: auto;
+        display: block;
+        width: calc(100% - 20px);
         height: clamp(245px, 68vw, 320px);
+        margin: 10px auto 0;
         z-index: auto;
-        object-position: 35% center;
+        object-position: 38% center;
+        border-radius: 26px;
+        box-shadow: 0 18px 42px rgba(16,53,45,.12);
       }
       .hero-card::after { display: none; }
       .hero-content {
+        position: relative;
         min-height: auto;
-        padding: 24px 22px 22px;
-        background: var(--white);
+        margin-top: -14px;
+        padding: 34px 22px 22px;
+        background: transparent;
+      }
+      .hero-content::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        top: 0;
+        height: 42px;
+        border-radius: 24px 24px 0 0;
+        background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.94) 58%, #fff 100%);
+        pointer-events: none;
+      }
+      .hero-content-inner {
+        position: relative;
+        z-index: 1;
       }
     }
 
