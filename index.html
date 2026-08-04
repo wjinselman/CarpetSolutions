@@ -2162,7 +2162,7 @@
         <div class="estimate-step" data-estimate-step="1">
           <p class="estimate-step-label">Step 1 of 3</p>
           <h3>What needs cleaned?</h3>
-          <p class="estimate-help">Choose the closest match. You can add extra details next.</p>
+          <p class="estimate-help">Choose everything that applies. Tap a selection again to remove it.</p>
           <div class="estimate-options" data-estimate-group="service">
             <button class="estimate-option" type="button" data-value="Carpet cleaning">Carpet</button>
             <button class="estimate-option" type="button" data-value="Upholstery cleaning">Upholstery</button>
@@ -2349,7 +2349,7 @@
     const estimateResumeNote = document.querySelector('#estimate-resume-note');
     const estimateStatus = document.querySelector('#estimate-status');
     const estimateStorageKey = 'carpetFriendlyEstimateDraft';
-    const estimateState = { step: 1, service: '', size: '', files: [] };
+    const estimateState = { step: 1, services: [], size: '', files: [] };
     let lastEstimateTrigger = null;
 
     const serviceRecommendations = {
@@ -2362,7 +2362,7 @@
     function saveEstimateDraft() {
       try {
         sessionStorage.setItem(estimateStorageKey, JSON.stringify({
-          service: estimateState.service,
+          services: estimateState.services,
           size: estimateState.size,
           city: estimateCity?.value || '',
           details: estimateDetails?.value || ''
@@ -2375,16 +2375,21 @@
       try {
         const draft = JSON.parse(sessionStorage.getItem(estimateStorageKey) || 'null');
         if (!draft) return false;
-        estimateState.service = draft.service || '';
+        estimateState.services = Array.isArray(draft.services) ? draft.services : (draft.service ? [draft.service] : []);
         estimateState.size = draft.size || '';
         if (estimateCity) estimateCity.value = draft.city || '';
         if (estimateDetails) estimateDetails.value = draft.details || '';
         document.querySelectorAll('[data-estimate-group]').forEach((group) => {
           group.querySelectorAll('.estimate-option').forEach((button) => {
-            button.classList.toggle('is-selected', button.dataset.value === estimateState[group.dataset.estimateGroup]);
+            const key = group.dataset.estimateGroup;
+            const selected = key === 'service'
+              ? estimateState.services.includes(button.dataset.value)
+              : button.dataset.value === estimateState[key];
+            button.classList.toggle('is-selected', selected);
+            button.setAttribute('aria-pressed', selected ? 'true' : 'false');
           });
         });
-        return Boolean(estimateState.service || estimateState.size || draft.city || draft.details);
+        return Boolean(estimateState.services.length || estimateState.size || draft.city || draft.details);
       } catch (error) { return false; }
     }
 
@@ -2399,12 +2404,16 @@
     }
 
     function updateServiceRecommendation() {
-      const recommendation = serviceRecommendations[estimateState.service];
-      if (!estimateRecommendation || !recommendation) {
+      if (!estimateRecommendation || !estimateState.services.length) {
         if (estimateRecommendation) estimateRecommendation.hidden = true;
         return;
       }
-      estimateRecommendation.innerHTML = `<strong>${recommendation[0]}</strong>${recommendation[1]}`;
+      const recommendations = estimateState.services
+        .map((service) => serviceRecommendations[service])
+        .filter(Boolean);
+      const heading = estimateState.services.length > 1 ? 'Recommended combination' : recommendations[0][0];
+      const body = recommendations.map((item) => item[1]).join(' ');
+      estimateRecommendation.innerHTML = `<strong>${heading}</strong>${body}`;
       estimateRecommendation.hidden = false;
     }
 
@@ -2416,7 +2425,7 @@
       estimateReview.innerHTML = `
         <div class="estimate-review-head"><strong>Your request is ready</strong><span class="estimate-review-badge">Review</span></div>
         <div class="estimate-review-grid">
-          <div class="estimate-review-item"><span>Service</span><strong>${estimateState.service || 'Not selected'}</strong></div>
+          <div class="estimate-review-item"><span>Services</span><strong>${estimateState.services.length ? estimateState.services.join(', ') : 'Not selected'}</strong></div>
           <div class="estimate-review-item"><span>Job size</span><strong>${estimateState.size || 'Not selected'}</strong></div>
           <div class="estimate-review-item"><span>City</span><strong>${city}</strong></div>
           <div class="estimate-review-item"><span>Photos</span><strong>${photoText}</strong></div>
@@ -2430,7 +2439,7 @@
       const details = estimateDetails?.value.trim();
       return [
         'Hi! I’d like an estimate from CarPET Friendly Solutions.',
-        `Service: ${estimateState.service || 'Not selected'}`,
+        `Services: ${estimateState.services.length ? estimateState.services.join(', ') : 'Not selected'}`,
         `Size: ${estimateState.size || 'Not selected'}`,
         city ? `City: ${city}` : '',
         details ? `Details: ${details}` : '',
@@ -2483,16 +2492,31 @@
       group.addEventListener('click', (event) => {
         const option = event.target.closest('.estimate-option');
         if (!option) return;
-        group.querySelectorAll('.estimate-option').forEach((button) => button.classList.remove('is-selected'));
-        option.classList.add('is-selected');
-        estimateState[group.dataset.estimateGroup] = option.dataset.value;
-        if (group.dataset.estimateGroup === 'service') updateServiceRecommendation();
+        const key = group.dataset.estimateGroup;
+        if (key === 'service') {
+          const value = option.dataset.value;
+          const selected = estimateState.services.includes(value);
+          estimateState.services = selected
+            ? estimateState.services.filter((service) => service !== value)
+            : [...estimateState.services, value];
+          option.classList.toggle('is-selected', !selected);
+          option.setAttribute('aria-pressed', selected ? 'false' : 'true');
+          updateServiceRecommendation();
+        } else {
+          group.querySelectorAll('.estimate-option').forEach((button) => {
+            button.classList.remove('is-selected');
+            button.setAttribute('aria-pressed', 'false');
+          });
+          option.classList.add('is-selected');
+          option.setAttribute('aria-pressed', 'true');
+          estimateState[key] = option.dataset.value;
+        }
         saveEstimateDraft();
       });
     });
 
     estimateNext?.addEventListener('click', () => {
-      if (estimateState.step === 1 && !estimateState.service) {
+      if (estimateState.step === 1 && !estimateState.services.length) {
         estimateStatus.textContent = 'Choose what needs cleaned first.';
         return;
       }
