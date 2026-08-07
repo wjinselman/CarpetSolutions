@@ -825,27 +825,19 @@
       border-bottom: 0;
       isolation: isolate;
     }
-    .ba-image {
+    .ba-slider .ba-image {
       position: absolute;
       inset: 0;
       display: block;
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       max-width: none;
-      object-fit: cover;
+      object-fit: cover !important;
+      background: transparent !important;
       pointer-events: none;
       user-select: none;
     }
     .ba-after { z-index: 1; }
-
-    /* First slider: crop the supplied after photo's white bottom canvas out of view. */
-    .result-card.featured .ba-after {
-      top: 0;
-      bottom: auto;
-      height: 134%;
-      object-fit: cover;
-      object-position: center top;
-    }
 
     .ba-before {
       z-index: 2;
@@ -1969,8 +1961,8 @@
         <div class="results-grid">
           <article class="result-card slider-card featured">
             <div class="ba-slider" style="--split:52%">
-              <img class="ba-image ba-after" src="images/featured-spots-after.jpg?v=20260803" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
-              <img class="ba-image ba-before" src="images/featured-spots-before.jpg?v=20260803" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-after" src="images/featured-spots-after.jpg?v=20260807b" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-before" src="images/featured-spots-before.jpg?v=20260807b" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
               <div class="ba-divider" aria-hidden="true"></div>
               <span class="ba-label ba-label-before">Before</span>
               <span class="ba-label ba-label-after">After</span>
@@ -1982,14 +1974,14 @@
 
           <article class="result-card slider-card">
             <div class="ba-slider" style="--split:52%">
-              <img class="ba-image ba-after" src="images/heavy-stain-after.jpg" alt="Carpet after heavy organic stain treatment" loading="lazy">
-              <img class="ba-image ba-before" src="images/heavy-stain-before.jpg" alt="Carpet before heavy organic stain treatment" loading="lazy">
+              <img class="ba-image ba-after" src="images/commercial-room-after-20260807-final.jpg" alt="Large room carpet after commercial spot and traffic-area cleaning" loading="lazy">
+              <img class="ba-image ba-before" src="images/commercial-room-before-20260807-final.jpg" alt="Large room carpet before commercial spot and traffic-area cleaning" loading="lazy">
               <div class="ba-divider" aria-hidden="true"></div>
               <span class="ba-label ba-label-before">Before</span>
               <span class="ba-label ba-label-after">After</span>
-              <input class="ba-range" type="range" min="0" max="100" value="52" aria-label="Slide to compare heavy organic stain removal before and after">
+              <input class="ba-range" type="range" min="0" max="100" value="52" aria-label="Slide to compare commercial room carpet cleaning before and after">
             </div>
-            <div class="result-copy"><strong>Heavy organic stain removal</strong><span>Difficult staining reduced for a cleaner, refreshed finish.</span></div>
+            <div class="result-copy"><strong>Commercial room carpet refresh</strong><span>Dark spots and tracked-in soil reduced across a large room for a cleaner, brighter finish.</span></div>
           </article>
 
           <article class="result-card slider-card">
