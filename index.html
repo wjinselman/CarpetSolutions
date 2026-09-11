@@ -2259,8 +2259,7 @@
           <div class="estimate-review" id="estimate-review" aria-live="polite"></div>
           <p class="estimate-privacy">For privacy, photos never upload to this website. If you text us, attach the selected photos from your phone before sending.</p>
           <div class="estimate-delivery-choice" id="estimate-delivery-choice">
-            <button class="button button-primary" id="estimate-send" type="button">Text Photos</button>
-            <button class="button button-outline" id="estimate-online-toggle" type="button" aria-expanded="false" aria-controls="online-estimate-panel">Send Online Instead</button>
+            <button class="button button-primary" id="estimate-send" type="button">Send Estimate Request</button>
           </div>
           <div class="online-estimate-panel" id="online-estimate-panel" hidden>
             <h4>Send your estimate request online</h4>
@@ -2679,8 +2678,9 @@
         return;
       }
 
-      closeEstimateWizard();
-      openContactModal('estimate', lastEstimateTrigger);
+      if (onlineEstimatePanel) onlineEstimatePanel.hidden = false;
+      trackAction('open_online_estimate_form');
+      requestAnimationFrame(() => onlineEstimateName?.focus());
     });
 
     estimateOnlineToggle?.addEventListener('click', () => {
