@@ -432,6 +432,9 @@
       grid-template-columns: 1fr;
       gap: 10px;
     }
+    .desktop-email-estimate, .desktop-email-only { display: none; }
+    .mobile-text-only { display: inline-flex; }
+    .mobile-call-estimate { display: inline-flex; }
     .hero-note {
       margin: 12px 0 0;
       color: var(--muted);
@@ -1356,7 +1359,10 @@
       }
       .hero h1 { font-size: clamp(3rem, 4.7vw, 4.65rem); }
       .hero-pills { max-width: 620px; }
-      .hero-actions { display: flex; }
+      .hero-actions { display: flex; flex-wrap: wrap; }
+      .desktop-email-estimate, .desktop-email-only { display: inline-flex; }
+      .mobile-text-only { display: none !important; }
+      .mobile-call-estimate { display: none; }
 
       .trust-grid { grid-template-columns: repeat(4, 1fr); }
       .trust-item { border-bottom: 0; }
@@ -1883,7 +1889,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <div class="announcement-bar"><div class="shell announcement-inner"><span>5-Star Rated</span><span class="announcement-dot">•</span><span>Family owned & operated</span><span class="announcement-dot">•</span><span>Text photos for an estimate</span></div></div>
+  <div class="announcement-bar"><div class="shell announcement-inner"><span>5-Star Rated</span><span class="announcement-dot">•</span><span>Family owned & operated</span><span class="announcement-dot">•</span><span>Fast, easy estimates</span></div></div>
 
   <header class="site-header">
     <div class="shell header-inner">
@@ -1902,7 +1908,7 @@
         <a href="#reviews">Reviews</a>
         <a href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a>
         <a class="button button-outline" href="tel:+15806680147" data-track="call">Call</a>
-        <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text Photos</a>
+        <button class="button button-primary desktop-email-only" type="button" data-email-estimate data-track="email_estimate">Email Estimate</button>
       </nav>
 
       <a class="button button-primary header-call" href="tel:+15806680147" data-track="call" aria-label="Call CarPET Friendly Solutions">
@@ -1927,11 +1933,12 @@
               <span class="hero-pill">Safe for people & pets</span>
             </div>
             <div class="hero-actions">
-              <a class="button button-primary" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">
+              <a class="button button-primary mobile-text-only" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V6a2 2 0 0 1 2-2Zm2.5 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
                 Text Photos — Get an Estimate
               </a>
-              <a class="button button-outline" href="tel:+15806680147" data-track="call">Call 580-668-0147</a>
+              <button class="button button-primary desktop-email-estimate" id="hero-email-estimate" type="button" data-email-estimate data-track="email_estimate">Email Estimate</button>
+              <a class="button button-outline mobile-call-estimate" href="tel:+15806680147" data-track="call">Call 580-668-0147</a>
             </div>
             <p class="hero-note">Serving Ardmore, Lone Grove, Dickson, Sulphur, Wilson, Marietta, and nearby communities.</p>
             </div>
@@ -2037,7 +2044,8 @@
             <h2>Know the starting point before we arrive.</h2>
             <div class="price-line"><strong>$125</strong><span>service minimum</span></div>
             <p>Most full residential appointments range from $150–$300. Text photos for a quick estimate based on your space and cleaning needs.</p>
-            <a class="button button-light" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text Photos Now</a>
+            <a class="button button-light mobile-text-only" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text Photos Now</a>
+            <button class="button button-light desktop-email-only" type="button" data-email-estimate data-track="email_estimate">Email for an Estimate</button>
             <p class="pricing-policy-notice">Please <a href="#service-policies" data-policy-open>review our Service Policies</a> for payment terms, cleaning-result limitations, travel fees, and service concerns.</p>
           </div>
           <div class="pricing-details">
@@ -2239,8 +2247,8 @@
 
         <div class="estimate-step" data-estimate-step="3" hidden>
           <p class="estimate-step-label">Step 3 of 3</p>
-          <h3>Add photos and text us.</h3>
-          <p class="estimate-help">Choose the photos you plan to send. We’ll open a text directly to 580-668-0147 with your estimate details filled in.</p>
+          <h3>Review your estimate request.</h3>
+          <p class="estimate-help">Choose photos if you plan to text them, or send the estimate request online without leaving the website.</p>
           <label class="photo-drop" for="estimate-photos">
             <strong>Tap to choose carpet or furniture photos</strong>
             <span>Up to 6 images. Nothing uploads to this website.</span>
@@ -2331,6 +2339,7 @@
         const eventNames = {
           call: 'click_call',
           text_estimate: 'click_text_estimate',
+          email_estimate: 'click_email_estimate',
           reviews: 'click_reviews',
           service_page: 'click_service_page',
           location_page: 'click_location_page',
@@ -2464,7 +2473,17 @@
     function updateEstimateButtonLabels() {
       let hasDraft = false;
       try { hasDraft = Boolean(sessionStorage.getItem(estimateStorageKey)); } catch (error) {}
-      document.querySelectorAll('a[data-track="text_estimate"]').forEach((link) => {
+      const heroEmailEstimate = document.querySelector('#hero-email-estimate');
+    let estimatePreferredDelivery = 'text';
+
+    document.querySelectorAll('[data-email-estimate]').forEach((button) => {
+      button.addEventListener('click', () => {
+        estimatePreferredDelivery = 'online';
+        openEstimateWizard(button);
+      });
+    });
+
+    document.querySelectorAll('a[data-track="text_estimate"]').forEach((link) => {
         if (!link.dataset.originalText) link.dataset.originalText = link.textContent.trim();
         if (hasDraft && !link.closest('.product-actions')) link.textContent = 'Continue Your Estimate';
         else link.textContent = link.dataset.originalText;
@@ -2524,6 +2543,11 @@
       if (estimateState.step === 3) {
         estimateSummary.textContent = buildEstimateMessage();
         renderEstimateReview();
+        if (estimatePreferredDelivery === 'online' && onlineEstimatePanel && estimateOnlineToggle) {
+          onlineEstimatePanel.hidden = false;
+          estimateOnlineToggle.setAttribute('aria-expanded', 'true');
+          estimateOnlineToggle.textContent = 'Hide Online Form';
+        }
       }
       requestAnimationFrame(() => estimateDialog?.querySelector('[data-estimate-step]:not([hidden]) button, [data-estimate-step]:not([hidden]) input')?.focus());
     }
@@ -2573,6 +2597,7 @@
     document.querySelectorAll('a[data-track="text_estimate"]').forEach((link) => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
+        estimatePreferredDelivery = 'text';
         openEstimateWizard(link);
       });
     });
