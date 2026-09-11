@@ -1843,6 +1843,19 @@
       .slider-coach { bottom:12px; font-size:.66rem; }
     }
 
+    /* Alternate online estimate submission */
+    .estimate-delivery-choice { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:16px; }
+    .estimate-delivery-choice .button { width:100%; }
+    .online-estimate-panel { margin-top:14px; padding:16px; border:1px solid var(--line); border-radius:16px; background:var(--mint-2); }
+    .online-estimate-panel[hidden] { display:none; }
+    .online-estimate-panel h4 { margin:0 0 4px; color:var(--ink); font-size:1rem; }
+    .online-estimate-panel > p { margin:0 0 12px; color:var(--muted); font-size:.8rem; }
+    .online-estimate-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .online-estimate-grid .estimate-field:last-child { grid-column:1 / -1; }
+    .online-estimate-panel .button { width:100%; margin-top:12px; }
+    .online-estimate-note { margin:9px 0 0; color:var(--muted); font-size:.75rem; line-height:1.45; }
+    @media (max-width:559px) { .estimate-delivery-choice, .online-estimate-grid { grid-template-columns:1fr; } .online-estimate-grid .estimate-field:last-child { grid-column:auto; } }
+
   </style>
 
   <script type="application/ld+json">
@@ -2236,13 +2249,27 @@
           <div class="photo-preview" id="estimate-photo-preview" aria-live="polite"></div>
           <div class="estimate-summary" id="estimate-summary" hidden></div>
           <div class="estimate-review" id="estimate-review" aria-live="polite"></div>
-          <p class="estimate-privacy">For privacy, photos never upload to this website. When the text opens, attach the selected photos from your phone before sending.</p>
+          <p class="estimate-privacy">For privacy, photos never upload to this website. If you text us, attach the selected photos from your phone before sending.</p>
+          <div class="estimate-delivery-choice" id="estimate-delivery-choice">
+            <button class="button button-primary" id="estimate-send" type="button">Text Photos</button>
+            <button class="button button-outline" id="estimate-online-toggle" type="button" aria-expanded="false" aria-controls="online-estimate-panel">Send Online Instead</button>
+          </div>
+          <div class="online-estimate-panel" id="online-estimate-panel" hidden>
+            <h4>Send your estimate request online</h4>
+            <p>No email app opens. Your request comes straight to CarPET Friendly Solutions.</p>
+            <div class="online-estimate-grid">
+              <div class="estimate-field"><label for="online-estimate-name">Name</label><input id="online-estimate-name" type="text" autocomplete="name" placeholder="Your name"></div>
+              <div class="estimate-field"><label for="online-estimate-phone">Phone</label><input id="online-estimate-phone" type="tel" autocomplete="tel" placeholder="580-555-1234"></div>
+              <div class="estimate-field"><label for="online-estimate-email">Email <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input id="online-estimate-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+            </div>
+            <button class="button button-primary" id="estimate-online-send" type="button">Send Estimate Request</button>
+            <p class="online-estimate-note">Want to include photos? Text them to 580-668-0147 after submitting and include your name.</p>
+          </div>
         </div>
 
         <div class="estimate-actions">
           <button class="button button-outline" id="estimate-back" type="button" hidden>Back</button>
           <button class="button button-primary estimate-next" id="estimate-next" type="button">Next</button>
-          <button class="button button-primary estimate-next" id="estimate-send" type="button" hidden>Text 580-668-0147</button>
         </div>
         <p class="estimate-status" id="estimate-status" role="status" aria-live="polite"></p>
       </div>
@@ -2374,6 +2401,12 @@
     const estimateBack = document.querySelector('#estimate-back');
     const estimateNext = document.querySelector('#estimate-next');
     const estimateSend = document.querySelector('#estimate-send');
+    const estimateOnlineToggle = document.querySelector('#estimate-online-toggle');
+    const onlineEstimatePanel = document.querySelector('#online-estimate-panel');
+    const estimateOnlineSend = document.querySelector('#estimate-online-send');
+    const onlineEstimateName = document.querySelector('#online-estimate-name');
+    const onlineEstimatePhone = document.querySelector('#online-estimate-phone');
+    const onlineEstimateEmail = document.querySelector('#online-estimate-email');
     const estimateCity = document.querySelector('#estimate-city');
     const estimateDetails = document.querySelector('#estimate-details');
     const estimatePhotos = document.querySelector('#estimate-photos');
@@ -2487,7 +2520,6 @@
       estimateProgress.forEach((bar, index) => bar.classList.toggle('is-active', index < estimateState.step));
       estimateBack.hidden = estimateState.step === 1;
       estimateNext.hidden = estimateState.step === 3;
-      estimateSend.hidden = estimateState.step !== 3;
       estimateStatus.textContent = '';
       if (estimateState.step === 3) {
         estimateSummary.textContent = buildEstimateMessage();
@@ -2624,6 +2656,53 @@
 
       closeEstimateWizard();
       openContactModal('estimate', lastEstimateTrigger);
+    });
+
+    estimateOnlineToggle?.addEventListener('click', () => {
+      const willOpen = onlineEstimatePanel?.hidden !== false;
+      if (onlineEstimatePanel) onlineEstimatePanel.hidden = !willOpen;
+      estimateOnlineToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      estimateOnlineToggle.textContent = willOpen ? 'Hide Online Form' : 'Send Online Instead';
+      if (willOpen) { trackAction('open_online_estimate_form'); requestAnimationFrame(() => onlineEstimateName?.focus()); }
+    });
+
+    estimateOnlineSend?.addEventListener('click', async () => {
+      const name = onlineEstimateName?.value.trim() || '';
+      const phone = onlineEstimatePhone?.value.trim() || '';
+      const email = onlineEstimateEmail?.value.trim() || '';
+      if (!name || !phone) { estimateStatus.textContent = 'Add your name and phone number so we can get back to you.'; return; }
+      const originalLabel = estimateOnlineSend.textContent;
+      estimateOnlineSend.disabled = true;
+      estimateOnlineSend.textContent = 'Sending…';
+      estimateStatus.textContent = '';
+      const payload = {
+        name, phone, email,
+        service: estimateState.services.length ? estimateState.services.join(', ') : 'Not selected',
+        job_size: estimateState.size || 'Not selected',
+        city: estimateCity?.value.trim() || 'Not entered',
+        details: estimateDetails?.value.trim() || 'None entered',
+        photos: estimateState.files.length ? `${estimateState.files.length} selected locally; customer instructed to text them separately` : 'None selected',
+        _subject: `NEW CarPET Friendly Estimate Request — ${name}`,
+        _template: 'table',
+        _captcha: 'false'
+      };
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/CarpetFriendlySolutions@gmail.com', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload)
+        });
+        if (!response.ok) throw new Error('Submission failed');
+        estimateStatus.textContent = 'Got it — your request was sent. We’ll get back to you soon.';
+        estimateOnlineSend.textContent = 'Request Sent ✓';
+        trackAction('submit_online_estimate', { service_count: estimateState.services.length });
+        try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
+        updateEstimateButtonLabels();
+        [onlineEstimateName, onlineEstimatePhone, onlineEstimateEmail].forEach((field) => { if (field) field.value = ''; });
+        setTimeout(() => { estimateOnlineSend.textContent = originalLabel; estimateOnlineSend.disabled = false; }, 3500);
+      } catch (error) {
+        estimateStatus.textContent = 'That didn’t send. Please text or call 580-668-0147 instead.';
+        estimateOnlineSend.textContent = originalLabel;
+        estimateOnlineSend.disabled = false;
+      }
     });
 
     estimateModal?.querySelectorAll('[data-estimate-close]').forEach((button) => button.addEventListener('click', closeEstimateWizard));
