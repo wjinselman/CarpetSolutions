@@ -2257,6 +2257,10 @@
           <div class="photo-preview" id="estimate-photo-preview" aria-live="polite"></div>
           <div class="estimate-summary" id="estimate-summary" hidden></div>
           <div class="estimate-review" id="estimate-review" aria-live="polite"></div>
+          <div class="estimate-field mobile-text-only" id="mobile-estimate-name-wrap" style="margin-top:14px">
+            <label for="mobile-estimate-name">Your name</label>
+            <input id="mobile-estimate-name" type="text" autocomplete="name" placeholder="First and last name">
+          </div>
           <p class="estimate-privacy">For privacy, photos never upload to this website. If you text us, attach the selected photos from your phone before sending.</p>
           <div class="estimate-delivery-choice" id="estimate-delivery-choice">
             <button class="button button-primary" id="estimate-send" type="button">Send Estimate Request</button>
@@ -2412,6 +2416,7 @@
     const estimateOnlineToggle = document.querySelector('#estimate-online-toggle');
     const onlineEstimatePanel = document.querySelector('#online-estimate-panel');
     const estimateOnlineSend = document.querySelector('#estimate-online-send');
+    const mobileEstimateName = document.querySelector('#mobile-estimate-name');
     const onlineEstimateName = document.querySelector('#online-estimate-name');
     const onlineEstimatePhone = document.querySelector('#online-estimate-phone');
     const onlineEstimateEmail = document.querySelector('#online-estimate-email');
@@ -2523,8 +2528,10 @@
     function buildEstimateMessage() {
       const city = estimateCity?.value.trim();
       const details = estimateDetails?.value.trim();
+      const mobileName = mobileEstimateName?.value.trim();
       return [
         'Hi! I’d like an estimate from CarPET Friendly Solutions.',
+        mobileName ? `Name: ${mobileName}` : '',
         `Services: ${estimateState.services.length ? estimateState.services.join(', ') : 'Not selected'}`,
         `Size: ${estimateState.size || 'Not selected'}`,
         city ? `City: ${city}` : '',
@@ -2647,6 +2654,10 @@
     });
 
     [estimateCity, estimateDetails].forEach((field) => field?.addEventListener('input', saveEstimateDraft));
+    mobileEstimateName?.addEventListener('input', () => {
+      estimateSummary.textContent = buildEstimateMessage();
+      renderEstimateReview();
+    });
 
     estimatePhotos?.addEventListener('change', () => {
       estimateState.files = [...estimatePhotos.files].filter((file) => file.type.startsWith('image/')).slice(0, 6);
@@ -2672,9 +2683,15 @@
       trackAction('open_prefilled_estimate_text', { photo_count: estimateState.files.length });
 
       if (isPhoneOrTablet()) {
+        const mobileName = mobileEstimateName?.value.trim() || '';
+        if (!mobileName) {
+          estimateStatus.textContent = 'Add your name before opening the text message.';
+          mobileEstimateName?.focus();
+          return;
+        }
         try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
         updateEstimateButtonLabels();
-        window.location.href = buildEstimateSmsLink(message);
+        window.location.href = buildEstimateSmsLink(buildEstimateMessage());
         return;
       }
 
