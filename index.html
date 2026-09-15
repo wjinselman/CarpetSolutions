@@ -1921,7 +1921,7 @@
     <section class="hero" id="top">
       <div class="shell">
         <div class="hero-card">
-          <img class="hero-art" src="images/william-rebecca-owner-team.png" alt="William and Rebecca Inselman, owner-operators of CarPET Friendly Solutions, standing together in a bright carpeted living room">
+          <img class="hero-art" src="images/william-rebecca-owner-team-optimized.webp" alt="William and Rebecca Inselman, owner-operators of CarPET Friendly Solutions, standing together in a bright carpeted living room">
           <div class="hero-content">
             <div class="hero-content-inner">
               <div class="award-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 2 2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 15.27 6.8 18l.99-5.79-4.21-4.1 5.82-.84L12 2Z"/></svg> 5-Star Rated</div>
@@ -1981,8 +1981,8 @@
         <div class="results-grid">
           <article class="result-card slider-card featured">
             <div class="ba-slider" style="--split:50%">
-              <img class="ba-image ba-after" src="images/featured-spots-after.jpg?v=20260807b" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
-              <img class="ba-image ba-before" src="images/featured-spots-before.jpg?v=20260807b" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-after" src="images/featured-spots-after-optimized.webp?v=20260807b" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-before" src="images/featured-spots-before-optimized.webp?v=20260807b" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
               <div class="ba-divider" aria-hidden="true"></div>
               <span class="ba-label ba-label-before">Before</span>
               <span class="ba-label ba-label-after">After</span>
@@ -1994,8 +1994,8 @@
 
           <article class="result-card slider-card">
             <div class="ba-slider" style="--split:50%">
-              <img class="ba-image ba-after" src="images/commercial-room-after-20260807-final.jpg" alt="Large room carpet after commercial spot and traffic-area cleaning" loading="lazy">
-              <img class="ba-image ba-before" src="images/commercial-room-before-20260807-final.jpg" alt="Large room carpet before commercial spot and traffic-area cleaning" loading="lazy">
+              <img class="ba-image ba-after" src="images/commercial-room-after-20260807-final-optimized.webp" alt="Large room carpet after commercial spot and traffic-area cleaning" loading="lazy">
+              <img class="ba-image ba-before" src="images/commercial-room-before-20260807-final-optimized.webp" alt="Large room carpet before commercial spot and traffic-area cleaning" loading="lazy">
               <div class="ba-divider" aria-hidden="true"></div>
               <span class="ba-label ba-label-before">Before</span>
               <span class="ba-label ba-label-after">After</span>
@@ -2072,7 +2072,7 @@
         </div>
 
         <figure class="process-photo">
-          <img src="images/equipment-staged.jpg" alt="CarPET Friendly Solutions professional carpet cleaning equipment staged inside a home" loading="lazy">
+          <img src="images/equipment-staged-optimized.webp" alt="CarPET Friendly Solutions professional carpet cleaning equipment staged inside a home" loading="lazy">
           <figcaption><strong>Professional equipment</strong><span>Prepared for low-moisture cleaning</span></figcaption>
         </figure>
       </div>
@@ -2248,20 +2248,14 @@
         <div class="estimate-step" data-estimate-step="3" hidden>
           <p class="estimate-step-label">Step 3 of 3</p>
           <h3>Review your estimate request.</h3>
-          <p class="estimate-help">Choose photos if you plan to text them, or send the estimate request online without leaving the website.</p>
-          <label class="photo-drop" for="estimate-photos">
-            <strong>Tap to choose carpet or furniture photos</strong>
-            <span>Up to 6 images. Nothing uploads to this website.</span>
-          </label>
-          <input class="photo-input" id="estimate-photos" type="file" accept="image/*" multiple>
-          <div class="photo-preview" id="estimate-photo-preview" aria-live="polite"></div>
+          <p class="estimate-help">Text your request and attach photos in your messaging app, or send your details online.</p>
           <div class="estimate-summary" id="estimate-summary" hidden></div>
           <div class="estimate-review" id="estimate-review" aria-live="polite"></div>
           <div class="estimate-field mobile-text-only" id="mobile-estimate-name-wrap" style="margin-top:14px">
             <label for="mobile-estimate-name">Your name</label>
             <input id="mobile-estimate-name" type="text" autocomplete="name" placeholder="First and last name">
           </div>
-          <p class="estimate-privacy">For privacy, photos never upload to this website. If you text us, attach the selected photos from your phone before sending.</p>
+          <p class="estimate-privacy">When your text message opens, attach your photos there before sending. Online requests include your details only; photos can be texted separately.</p>
           <div class="estimate-delivery-choice" id="estimate-delivery-choice">
             <button class="button button-primary" id="estimate-send" type="button">Send Estimate Request</button>
           </div>
@@ -2422,15 +2416,14 @@
     const onlineEstimateEmail = document.querySelector('#online-estimate-email');
     const estimateCity = document.querySelector('#estimate-city');
     const estimateDetails = document.querySelector('#estimate-details');
-    const estimatePhotos = document.querySelector('#estimate-photos');
-    const estimatePreview = document.querySelector('#estimate-photo-preview');
     const estimateSummary = document.querySelector('#estimate-summary');
     const estimateReview = document.querySelector('#estimate-review');
     const estimateRecommendation = document.querySelector('#estimate-recommendation');
     const estimateResumeNote = document.querySelector('#estimate-resume-note');
     const estimateStatus = document.querySelector('#estimate-status');
     const estimateStorageKey = 'carpetFriendlyEstimateDraft';
-    const estimateState = { step: 1, services: [], size: '', files: [] };
+    const estimateState = { step: 1, services: [], size: '' };
+    let estimateSubmissionPending = false;
     let lastEstimateTrigger = null;
 
     const serviceRecommendations = {
@@ -2512,7 +2505,7 @@
       if (!estimateReview) return;
       const city = estimateCity?.value.trim() || 'Not entered';
       const details = estimateDetails?.value.trim();
-      const photoText = estimateState.files.length ? `${estimateState.files.length} selected` : 'Attach in text';
+      const photoText = 'Attach in text';
       estimateReview.innerHTML = `
         <div class="estimate-review-head"><strong>Your request is ready</strong><span class="estimate-review-badge">Review</span></div>
         <div class="estimate-review-grid">
@@ -2536,7 +2529,7 @@
         `Size: ${estimateState.size || 'Not selected'}`,
         city ? `City: ${city}` : '',
         details ? `Details: ${details}` : '',
-        estimateState.files.length ? `Photos selected: ${estimateState.files.length}` : 'I will attach photos to this message.'
+        'I will attach photos to this message.'
       ].filter(Boolean).join('\n');
     }
 
@@ -2659,19 +2652,6 @@
       renderEstimateReview();
     });
 
-    estimatePhotos?.addEventListener('change', () => {
-      estimateState.files = [...estimatePhotos.files].filter((file) => file.type.startsWith('image/')).slice(0, 6);
-      estimatePreview.innerHTML = '';
-      estimateState.files.forEach((file) => {
-        const img = document.createElement('img');
-        img.alt = 'Selected estimate photo';
-        img.src = URL.createObjectURL(file);
-        img.addEventListener('load', () => URL.revokeObjectURL(img.src), { once: true });
-        estimatePreview.appendChild(img);
-      });
-      estimateSummary.textContent = buildEstimateMessage();
-      renderEstimateReview();
-    });
 
     function buildEstimateSmsLink(message) {
       const separator = /iPhone|iPad|iPod/i.test(navigator.userAgent) ? '&' : '?';
@@ -2680,7 +2660,7 @@
 
     estimateSend?.addEventListener('click', () => {
       const message = buildEstimateMessage();
-      trackAction('open_prefilled_estimate_text', { photo_count: estimateState.files.length });
+      trackAction('open_prefilled_estimate_text');
 
       if (isPhoneOrTablet()) {
         const mobileName = mobileEstimateName?.value.trim() || '';
@@ -2709,10 +2689,14 @@
     });
 
     estimateOnlineSend?.addEventListener('click', async () => {
+      if (estimateSubmissionPending) return;
       const name = onlineEstimateName?.value.trim() || '';
       const phone = onlineEstimatePhone?.value.trim() || '';
       const email = onlineEstimateEmail?.value.trim() || '';
       if (!name || !phone) { estimateStatus.textContent = 'Add your name and phone number so we can get back to you.'; return; }
+      if (phone.replace(/\D/g, '').length < 7) { estimateStatus.textContent = 'Please enter a valid phone number.'; onlineEstimatePhone.focus(); return; }
+      if (email && !onlineEstimateEmail.checkValidity()) { estimateStatus.textContent = 'Please check your email address.'; onlineEstimateEmail.focus(); return; }
+      estimateSubmissionPending = true;
       const originalLabel = estimateOnlineSend.textContent;
       estimateOnlineSend.disabled = true;
       estimateOnlineSend.textContent = 'Sending…';
@@ -2723,27 +2707,30 @@
         job_size: estimateState.size || 'Not selected',
         city: estimateCity?.value.trim() || 'Not entered',
         details: estimateDetails?.value.trim() || 'None entered',
-        photos: estimateState.files.length ? `${estimateState.files.length} selected locally; customer instructed to text them separately` : 'None selected',
+        photos: 'Photos are not included in this online request; customer may text them separately.',
         _subject: `NEW CarPET Friendly Estimate Request — ${name}`,
         _template: 'table',
         _captcha: 'false'
       };
       try {
         const response = await fetch('https://formsubmit.co/ajax/CarpetFriendlySolutions@gmail.com', {
-          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload)
+          signal: AbortSignal.timeout(20000), method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload)
         });
         if (!response.ok) throw new Error('Submission failed');
-        estimateStatus.textContent = 'Got it — your request was sent. We’ll get back to you soon.';
+        const result = await response.json();
+        if (result.success !== true && result.success !== 'true') throw new Error('Request not accepted');
+        estimateStatus.textContent = 'Your request was accepted. We’ll get back to you soon.';
         estimateOnlineSend.textContent = 'Request Sent ✓';
         trackAction('submit_online_estimate', { service_count: estimateState.services.length });
         try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
         updateEstimateButtonLabels();
         [onlineEstimateName, onlineEstimatePhone, onlineEstimateEmail].forEach((field) => { if (field) field.value = ''; });
-        setTimeout(() => { estimateOnlineSend.textContent = originalLabel; estimateOnlineSend.disabled = false; }, 3500);
+        setTimeout(() => { estimateOnlineSend.textContent = originalLabel; estimateOnlineSend.disabled = false; estimateSubmissionPending = false; }, 3500);
       } catch (error) {
-        estimateStatus.textContent = 'That didn’t send. Please text or call 580-668-0147 instead.';
+        estimateStatus.textContent = 'We couldn’t confirm your request. Please text or call 580-668-0147 for help.';
         estimateOnlineSend.textContent = originalLabel;
         estimateOnlineSend.disabled = false;
+        estimateSubmissionPending = false;
       }
     });
 

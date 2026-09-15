@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wjinselman.github.io/CarpetSolutions/sitemap.xml
+Sitemap: https://carpetfriendlysolutions.com/sitemap.xml
