@@ -1885,7 +1885,13 @@
     "paymentAccepted": "Cash, Check, Credit Card, Debit Card, Apple Pay"
   }
   </script>
-</head>
+<style>
+.result-photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#eef2ef;padding:8px}
+.result-photo-pair figure{margin:0;min-width:0}.result-photo-pair img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain}.result-photo-pair figcaption{text-align:center;font-weight:700;padding:8px}
+#estimate-wizard [hidden]{display:none!important}.estimate-photo-field{margin:18px 0}.estimate-photo-field input[type=file]{width:100%;max-width:100%;padding:12px;border:1px solid #b9c8bf;border-radius:8px;background:white}
+#estimate-photo-status{overflow-wrap:anywhere;font-size:14px}.estimate-no-photos{display:flex!important;gap:10px;align-items:flex-start;font-size:14px!important;margin-top:14px}.estimate-no-photos input{width:auto!important;flex:none;margin-top:4px}
+.estimate-delivery-choice{display:flex;gap:10px;flex-wrap:wrap}
+</style></head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
@@ -1921,7 +1927,7 @@
     <section class="hero" id="top">
       <div class="shell">
         <div class="hero-card">
-          <img class="hero-art" src="william-rebecca-owner-team-optimized.webp" alt="William and Rebecca Inselman, owner-operators of CarPET Friendly Solutions, standing together in a bright carpeted living room">
+          <img class="hero-art" src="images/william-rebecca-owner-team-optimized.webp" alt="William and Rebecca Inselman, owner-operators of CarPET Friendly Solutions, standing together in a bright carpeted living room">
           <div class="hero-content">
             <div class="hero-content-inner">
               <div class="award-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 2 2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 15.27 6.8 18l.99-5.79-4.21-4.1 5.82-.84L12 2Z"/></svg> 5-Star Rated</div>
@@ -1975,14 +1981,14 @@
         <div class="section-title">
           <p class="eyebrow">Real local work</p>
           <h2>See the difference before you book.</h2>
-          <p>Drag each slider left and right to compare the before-and-after results from real homes in our service area.</p>
+          <p>Slide to compare the carpet results, or view the cushion photos side by side. Real work from our service area.</p>
         </div>
 
         <div class="results-grid">
           <article class="result-card slider-card featured">
             <div class="ba-slider" style="--split:50%">
-              <img class="ba-image ba-after" src="featured-spots-after-optimized.webp?v=20260807b" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
-              <img class="ba-image ba-before" src="featured-spots-before-optimized.webp?v=20260807b" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-after" src="images/featured-spots-after-optimized.webp?v=20260807b" alt="Carpet after severe spot and traffic-area cleaning" loading="eager">
+              <img class="ba-image ba-before" src="images/featured-spots-before-optimized.webp?v=20260807b" alt="Carpet before severe spot and traffic-area cleaning" loading="eager">
               <div class="ba-divider" aria-hidden="true"></div>
               <span class="ba-label ba-label-before">Before</span>
               <span class="ba-label ba-label-after">After</span>
@@ -1994,8 +2000,8 @@
 
           <article class="result-card slider-card">
             <div class="ba-slider" style="--split:50%">
-              <img class="ba-image ba-after" src="commercial-room-after-20260807-final-optimized.webp" alt="Large room carpet after commercial spot and traffic-area cleaning" loading="lazy">
-              <img class="ba-image ba-before" src="commercial-room-before-20260807-final-optimized.webp" alt="Large room carpet before commercial spot and traffic-area cleaning" loading="lazy">
+              <img class="ba-image ba-after" src="images/commercial-room-after-20260807-final-optimized.webp" alt="Large room carpet after commercial spot and traffic-area cleaning" loading="lazy">
+              <img class="ba-image ba-before" src="images/commercial-room-before-20260807-final-optimized.webp" alt="Large room carpet before commercial spot and traffic-area cleaning" loading="lazy">
               <div class="ba-divider" aria-hidden="true"></div>
               <span class="ba-label ba-label-before">Before</span>
               <span class="ba-label ba-label-after">After</span>
@@ -2004,16 +2010,12 @@
             <div class="result-copy"><strong>Commercial room carpet refresh</strong><span>Dark spots and tracked-in soil reduced across a large room for a cleaner, brighter finish.</span></div>
           </article>
 
-          <article class="result-card slider-card">
-            <div class="ba-slider" style="--split:50%">
-              <img class="ba-image ba-after" src="images/upholstery-after.jpg" alt="Upholstery cushion after cleaning" loading="lazy">
-              <img class="ba-image ba-before" src="images/upholstery-before.jpg" alt="Upholstery cushion before cleaning" loading="lazy">
-              <div class="ba-divider" aria-hidden="true"></div>
-              <span class="ba-label ba-label-before">Before</span>
-              <span class="ba-label ba-label-after">After</span>
-              <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare upholstery cushion cleaning before and after">
+          <article class="result-card">
+            <div class="result-photo-pair">
+              <figure><img src="images/upholstery-before-20260917-optimized.webp" alt="Patterned cushion before cleaning" width="480" height="640" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
+              <figure><img src="images/upholstery-after-20260917-optimized.webp" alt="Patterned cushion after cleaning" width="480" height="640" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
             </div>
-            <div class="result-copy"><strong>Upholstery cushion refresh</strong><span>Built-up soil reduced to brighten the fabric and reveal the pattern.</span></div>
+            <div class="result-copy"><strong>Upholstery cushion refresh</strong><span>Built-up soil reduced to reveal the pattern. Photos taken from different angles.</span></div>
           </article>
         </div>
       </div>
@@ -2072,7 +2074,7 @@
         </div>
 
         <figure class="process-photo">
-          <img src="equipment-staged-optimized.webp" alt="CarPET Friendly Solutions professional carpet cleaning equipment staged inside a home" loading="lazy">
+          <img src="images/equipment-staged-optimized.webp" alt="CarPET Friendly Solutions professional carpet cleaning equipment staged inside a home" loading="lazy">
           <figcaption><strong>Professional equipment</strong><span>Prepared for low-moisture cleaning</span></figcaption>
         </figure>
       </div>
@@ -2210,7 +2212,7 @@
       <button class="estimate-close" type="button" aria-label="Close fast estimate" data-estimate-close>×</button>
       <div class="estimate-head">
         <p class="eyebrow">Smart photo estimate</p>
-        <h2 id="estimate-title">Build your text in three quick steps.</h2>
+        <h2 id="estimate-title">Get an estimate in three quick steps.</h2>
         <p>No account, no long form, and no information is sent until you choose to send it.</p>
         <div class="estimate-progress" aria-label="Estimate progress"><span class="is-active"></span><span></span><span></span></div>
       </div>
@@ -2248,27 +2250,35 @@
         <div class="estimate-step" data-estimate-step="3" hidden>
           <p class="estimate-step-label">Step 3 of 3</p>
           <h3>Review your estimate request.</h3>
-          <p class="estimate-help">Text your request and attach photos in your messaging app, or send your details online.</p>
+          <p class="estimate-help">Send details and photos together online, or open Messages and attach photos before sending your text.</p>
           <div class="estimate-summary" id="estimate-summary" hidden></div>
           <div class="estimate-review" id="estimate-review" aria-live="polite"></div>
           <div class="estimate-field mobile-text-only" id="mobile-estimate-name-wrap" style="margin-top:14px">
             <label for="mobile-estimate-name">Your name</label>
             <input id="mobile-estimate-name" type="text" autocomplete="name" placeholder="First and last name">
           </div>
-          <p class="estimate-privacy">When your text message opens, attach your photos there before sending. Online requests include your details only; photos can be texted separately.</p>
+          <p class="estimate-privacy">Nothing has been sent yet. For a text request, add photos in Messages before tapping Send. To upload photos here, choose Send Online with Photos.</p>
           <div class="estimate-delivery-choice" id="estimate-delivery-choice">
-            <button class="button button-primary" id="estimate-send" type="button">Send Estimate Request</button>
-          </div>
+            <button class="button button-primary" id="estimate-send" type="button">Open Messages &amp; Add Photos</button>
+          <button class="button button-outline" id="estimate-online-toggle" type="button" aria-controls="online-estimate-panel" aria-expanded="false">Send Online with Photos</button></div>
           <div class="online-estimate-panel" id="online-estimate-panel" hidden>
             <h4>Send your estimate request online</h4>
-            <p>No email app opens. Your request comes straight to CarPET Friendly Solutions.</p>
+            <p>Add your contact details and photos below. They’ll be sent together with this request.</p>
             <div class="online-estimate-grid">
               <div class="estimate-field"><label for="online-estimate-name">Name</label><input id="online-estimate-name" type="text" autocomplete="name" placeholder="Your name"></div>
               <div class="estimate-field"><label for="online-estimate-phone">Phone</label><input id="online-estimate-phone" type="tel" autocomplete="tel" placeholder="580-555-1234"></div>
               <div class="estimate-field"><label for="online-estimate-email">Email <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input id="online-estimate-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
             </div>
+            <div class="estimate-field estimate-photo-field">
+              <label for="estimate-photos">Photos of the rooms or furniture</label>
+              <input id="estimate-photos" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-describedby="estimate-photo-help estimate-photo-status">
+              <p id="estimate-photo-help" class="estimate-help">Choose up to 3 JPG, PNG or WebP photos, 8 MB total. Include a wide view and any problem spots. Photos are sent only when you submit.</p>
+              <p id="estimate-photo-status" role="status">No photos selected.</p>
+              <button id="estimate-photos-clear" class="button button-outline" type="button" hidden>Remove selected photos</button>
+              <label class="estimate-no-photos"><input id="estimate-no-photos" type="checkbox"> I don’t have photos right now. Please contact me to discuss the job.</label>
+            </div>
             <button class="button button-primary" id="estimate-online-send" type="button">Send Estimate Request</button>
-            <p class="online-estimate-note">Want to include photos? Text them to 580-668-0147 after submitting and include your name.</p>
+            <p class="online-estimate-note">Your request goes to William and Rebecca. If photos aren’t available, we may need more details before quoting.</p>
           </div>
         </div>
 
@@ -2467,19 +2477,38 @@
       } catch (error) { return false; }
     }
 
+    let estimatePreferredDelivery = 'text';
+    document.querySelectorAll('[data-email-estimate]').forEach(button => {
+      button.addEventListener('click', () => { estimatePreferredDelivery='online'; openEstimateWizard(button); });
+    });
+    const estimatePhotos = document.querySelector('#estimate-photos');
+    const noPhotos = document.querySelector('#estimate-no-photos');
+    const photoStatus = document.querySelector('#estimate-photo-status');
+    const clearPhotos = document.querySelector('#estimate-photos-clear');
+    function photoError(files) {
+      if(files.length>3)return 'Choose no more than 3 photos.';
+      if(files.some(file=>!['image/jpeg','image/png','image/webp'].includes(file.type)))return 'Use JPG, PNG or WebP photos. For HEIC photos, export as JPG or use the text option.';
+      if(files.reduce((sum,file)=>sum+file.size,0)>8000000)return 'These photos exceed 8 MB. Choose fewer or smaller photos.';
+      if(files.some(file=>file.size===0))return 'One photo is empty. Choose it again.';
+      return '';
+    }
+    function updatePhotos(){
+      const files=[...estimatePhotos.files];
+      const error=photoError(files);
+      photoStatus.textContent=error || (files.length ? files.length+' photo(s) selected: '+files.map(f=>f.name).join(', ') : 'No photos selected.');
+      clearPhotos.hidden=!files.length;
+      if(files.length)noPhotos.checked=false;
+      noPhotos.disabled=Boolean(files.length);
+      renderEstimateReview();
+    }
+    estimatePhotos.addEventListener('change',updatePhotos);
+    clearPhotos.addEventListener('click',()=>{estimatePhotos.value='';updatePhotos();});
+    noPhotos.addEventListener('change',renderEstimateReview);
+    const escapeEstimate=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
     function updateEstimateButtonLabels() {
       let hasDraft = false;
       try { hasDraft = Boolean(sessionStorage.getItem(estimateStorageKey)); } catch (error) {}
-      const heroEmailEstimate = document.querySelector('#hero-email-estimate');
-    let estimatePreferredDelivery = 'text';
-
-    document.querySelectorAll('[data-email-estimate]').forEach((button) => {
-      button.addEventListener('click', () => {
-        estimatePreferredDelivery = 'online';
-        openEstimateWizard(button);
-      });
-    });
-
     document.querySelectorAll('a[data-track="text_estimate"]').forEach((link) => {
         if (!link.dataset.originalText) link.dataset.originalText = link.textContent.trim();
         if (hasDraft && !link.closest('.product-actions')) link.textContent = 'Continue Your Estimate';
@@ -2503,18 +2532,18 @@
 
     function renderEstimateReview() {
       if (!estimateReview) return;
-      const city = estimateCity?.value.trim() || 'Not entered';
+      const city = escapeEstimate(estimateCity?.value.trim() || 'Not entered');
       const details = estimateDetails?.value.trim();
-      const photoText = 'Attach in text';
+      const photoText = estimatePreferredDelivery==='online' ? (estimatePhotos.files.length ? (photoError([...estimatePhotos.files]) ? 'Photo selection needs attention' : estimatePhotos.files.length+' selected for upload') : noPhotos.checked ? 'No photos — follow-up requested' : 'Choose photos below') : 'Add in Messages before sending';
       estimateReview.innerHTML = `
         <div class="estimate-review-head"><strong>Your request is ready</strong><span class="estimate-review-badge">Review</span></div>
         <div class="estimate-review-grid">
-          <div class="estimate-review-item"><span>Services</span><strong>${estimateState.services.length ? estimateState.services.join(', ') : 'Not selected'}</strong></div>
-          <div class="estimate-review-item"><span>Job size</span><strong>${estimateState.size || 'Not selected'}</strong></div>
+          <div class="estimate-review-item"><span>Services</span><strong>${escapeEstimate(estimateState.services.length ? estimateState.services.join(', ') : 'Not selected')}</strong></div>
+          <div class="estimate-review-item"><span>Job size</span><strong>${escapeEstimate(estimateState.size || 'Not selected')}</strong></div>
           <div class="estimate-review-item"><span>City</span><strong>${city}</strong></div>
           <div class="estimate-review-item"><span>Photos</span><strong>${photoText}</strong></div>
         </div>
-        ${details ? `<p class="estimate-review-note"><strong>Details:</strong> ${details.replace(/[<>]/g, '')}</p>` : ''}
+        ${details ? `<p class="estimate-review-note"><strong>Details:</strong> ${escapeEstimate(details)}</p>` : ''}
         <p class="estimate-review-note">Most residential appointments fall around $150–$300; William or Rebecca will confirm the exact estimate.</p>`;
     }
 
@@ -2529,7 +2558,7 @@
         `Size: ${estimateState.size || 'Not selected'}`,
         city ? `City: ${city}` : '',
         details ? `Details: ${details}` : '',
-        'I will attach photos to this message.'
+        'Photos: please attach room and problem-area photos before sending.'
       ].filter(Boolean).join('\n');
     }
 
@@ -2542,11 +2571,16 @@
       if (estimateState.step === 3) {
         estimateSummary.textContent = buildEstimateMessage();
         renderEstimateReview();
-        if (estimatePreferredDelivery === 'online' && onlineEstimatePanel && estimateOnlineToggle) {
-          onlineEstimatePanel.hidden = false;
-          estimateOnlineToggle.setAttribute('aria-expanded', 'true');
-          estimateOnlineToggle.textContent = 'Hide Online Form';
-        }
+        const online=estimatePreferredDelivery==='online' || !isPhoneOrTablet();
+        if (online) estimatePreferredDelivery='online';
+        estimateOnlineToggle.hidden=!isPhoneOrTablet();
+        document.querySelector('.estimate-privacy').hidden=online;
+        onlineEstimatePanel.hidden=!online;
+        estimateOnlineToggle.setAttribute('aria-expanded',String(online));
+        estimateOnlineToggle.textContent=online ? 'Hide Online Form' : 'Send Online with Photos';
+        document.querySelector('#mobile-estimate-name-wrap').hidden=online;
+        estimateSend.hidden=online || !isPhoneOrTablet();
+        renderEstimateReview();
       }
       requestAnimationFrame(() => estimateDialog?.querySelector('[data-estimate-step]:not([hidden]) button, [data-estimate-step]:not([hidden]) input')?.focus());
     }
@@ -2669,8 +2703,7 @@
           mobileEstimateName?.focus();
           return;
         }
-        try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
-        updateEstimateButtonLabels();
+        estimateStatus.textContent='Messages will open with your details. Attach photos there, then tap Send. Your draft is kept here until you finish.';
         window.location.href = buildEstimateSmsLink(buildEstimateMessage());
         return;
       }
@@ -2684,7 +2717,12 @@
       const willOpen = onlineEstimatePanel?.hidden !== false;
       if (onlineEstimatePanel) onlineEstimatePanel.hidden = !willOpen;
       estimateOnlineToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-      estimateOnlineToggle.textContent = willOpen ? 'Hide Online Form' : 'Send Online Instead';
+      estimateOnlineToggle.textContent = willOpen ? 'Hide Online Form' : 'Send Online with Photos';
+      estimatePreferredDelivery=willOpen?'online':'text';
+      document.querySelector('.estimate-privacy').hidden=willOpen;
+      document.querySelector('#mobile-estimate-name-wrap').hidden=willOpen;
+      estimateSend.hidden=willOpen;
+      renderEstimateReview();
       if (willOpen) { trackAction('open_online_estimate_form'); requestAnimationFrame(() => onlineEstimateName?.focus()); }
     });
 
@@ -2696,6 +2734,10 @@
       if (!name || !phone) { estimateStatus.textContent = 'Add your name and phone number so we can get back to you.'; return; }
       if (phone.replace(/\D/g, '').length < 7) { estimateStatus.textContent = 'Please enter a valid phone number.'; onlineEstimatePhone.focus(); return; }
       if (email && !onlineEstimateEmail.checkValidity()) { estimateStatus.textContent = 'Please check your email address.'; onlineEstimateEmail.focus(); return; }
+      const files=[...estimatePhotos.files];
+      const issue=photoError(files);
+      if(issue){estimateStatus.textContent=issue;estimatePhotos.focus();return;}
+      if(!files.length && !noPhotos.checked){estimateStatus.textContent='Add photos, or check the box to request a follow-up without photos.';estimatePhotos.focus();return;}
       estimateSubmissionPending = true;
       const originalLabel = estimateOnlineSend.textContent;
       estimateOnlineSend.disabled = true;
@@ -2707,19 +2749,23 @@
         job_size: estimateState.size || 'Not selected',
         city: estimateCity?.value.trim() || 'Not entered',
         details: estimateDetails?.value.trim() || 'None entered',
-        photos: 'Photos are not included in this online request; customer may text them separately.',
+        photos: files.length ? files.length+' photo(s) attached to this request.' : 'No photos available. Customer requests a follow-up before quoting.',
         _subject: `NEW CarPET Friendly Estimate Request — ${name}`,
         _template: 'table',
         _captcha: 'false'
       };
+      const formData = new FormData();
+      Object.entries(payload).forEach(([key,value])=>formData.append(key,value));
+      files.forEach((file,index)=>formData.append(index===0?'attachment':'attachment'+(index+1),file,file.name));
       try {
         const response = await fetch('https://formsubmit.co/ajax/CarpetFriendlySolutions@gmail.com', {
-          signal: AbortSignal.timeout(20000), method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload)
+          signal: AbortSignal.timeout(60000), method: 'POST', headers: { 'Accept': 'application/json' }, body: formData
         });
         if (!response.ok) throw new Error('Submission failed');
         const result = await response.json();
         if (result.success !== true && result.success !== 'true') throw new Error('Request not accepted');
-        estimateStatus.textContent = 'Your request was accepted. We’ll get back to you soon.';
+        estimateStatus.textContent = files.length ? 'Your request and '+files.length+' photo(s) were accepted. We’ll get back to you soon.' : 'Your request was accepted without photos. We’ll contact you to discuss the job.';
+        estimatePhotos.value=''; noPhotos.checked=false; updatePhotos();
         estimateOnlineSend.textContent = 'Request Sent ✓';
         trackAction('submit_online_estimate', { service_count: estimateState.services.length });
         try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
@@ -2727,7 +2773,7 @@
         [onlineEstimateName, onlineEstimatePhone, onlineEstimateEmail].forEach((field) => { if (field) field.value = ''; });
         setTimeout(() => { estimateOnlineSend.textContent = originalLabel; estimateOnlineSend.disabled = false; estimateSubmissionPending = false; }, 3500);
       } catch (error) {
-        estimateStatus.textContent = 'We couldn’t confirm your request. Please text or call 580-668-0147 for help.';
+        estimateStatus.textContent = 'We couldn’t confirm delivery. Your details and selected photos are still here. Please call or text 580-668-0147 to check before retrying.';
         estimateOnlineSend.textContent = originalLabel;
         estimateOnlineSend.disabled = false;
         estimateSubmissionPending = false;
