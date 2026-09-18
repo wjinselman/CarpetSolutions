@@ -1886,8 +1886,6 @@
   }
   </script>
 <style>
-.result-photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#eef2ef;padding:8px}
-.result-photo-pair figure{margin:0;min-width:0}.result-photo-pair img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain}.result-photo-pair figcaption{text-align:center;font-weight:700;padding:8px}
 #estimate-wizard [hidden]{display:none!important}.estimate-photo-field{margin:18px 0}.estimate-photo-field input[type=file]{width:100%;max-width:100%;padding:12px;border:1px solid #b9c8bf;border-radius:8px;background:white}
 #estimate-photo-status{overflow-wrap:anywhere;font-size:14px}.estimate-no-photos{display:flex!important;gap:10px;align-items:flex-start;font-size:14px!important;margin-top:14px}.estimate-no-photos input{width:auto!important;flex:none;margin-top:4px}
 .estimate-delivery-choice{display:flex;gap:10px;flex-wrap:wrap}
@@ -1981,7 +1979,7 @@
         <div class="section-title">
           <p class="eyebrow">Real local work</p>
           <h2>See the difference before you book.</h2>
-          <p>Slide to compare the carpet results, or view the cushion photos side by side. Real work from our service area.</p>
+          <p>Slide to compare the before-and-after results. Real work from our service area.</p>
         </div>
 
         <div class="results-grid">
@@ -2010,10 +2008,14 @@
             <div class="result-copy"><strong>Commercial room carpet refresh</strong><span>Dark spots and tracked-in soil reduced across a large room for a cleaner, brighter finish.</span></div>
           </article>
 
-          <article class="result-card">
-            <div class="result-photo-pair">
-              <figure><img src="images/upholstery-before-20260917-optimized.webp" alt="Patterned cushion before cleaning" width="480" height="640" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
-              <figure><img src="images/upholstery-after-20260917-optimized.webp" alt="Patterned cushion after cleaning" width="480" height="640" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
+          <article class="result-card slider-card">
+            <div class="ba-slider" style="--split:50%">
+              <img class="ba-image ba-after" src="images/upholstery-after-20260917-optimized.webp" alt="Patterned cushion after cleaning" width="480" height="640" loading="lazy" decoding="async">
+              <img class="ba-image ba-before" src="images/upholstery-before-20260917-optimized.webp" alt="Patterned cushion before cleaning" width="480" height="640" loading="lazy" decoding="async">
+              <div class="ba-divider" aria-hidden="true"></div>
+              <span class="ba-label ba-label-before">Before</span>
+              <span class="ba-label ba-label-after">After</span>
+              <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare upholstery cushion cleaning before and after">
             </div>
             <div class="result-copy"><strong>Upholstery cushion refresh</strong><span>Built-up soil reduced to reveal the pattern. Photos taken from different angles.</span></div>
           </article>
