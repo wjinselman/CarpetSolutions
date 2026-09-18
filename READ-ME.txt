@@ -1,0 +1,6 @@
+24 oz cleaner image and copy update
+
+Not deployed. Copy order-cleaner.html and images/cleaner-bottle-24oz-new-label.png into the existing site, preserving the images folder.
+Updated size, directions, bottle-label mockup, and displayed local pickup price to $20. Shipped prices remain $39.99 for two bottles and $24 for one bottle. Existing Square links are preserved.
+BEFORE PUBLISHING: Update the linked local Square item to $20 and 24 ounces. Square itself has not been changed; its local checkout was last verified at $15 and 20 ounces.
+Bottle image is an AI-edited mockup based on the existing product photo; it is not a new photograph. The QR appearance in the mockup is illustrative; use the printable label PDF for the real QR.
