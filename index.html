@@ -328,6 +328,18 @@
       border-radius: 50%;
     }
 
+    @media (max-width: 759px) {
+      .header-inner { gap: 10px; }
+      .header-inner .brand { gap: 8px; }
+      .header-inner .brand-mark { width: 48px; }
+      .header-inner .brand-name, .header-inner .brand-service {
+        display: block;
+        white-space: normal;
+        line-height: 1.2;
+      }
+      .header-call { flex: 0 0 44px; }
+    }
+
     /* Hero */
     .hero {
       position: relative;
@@ -1872,25 +1884,7 @@
 .estimate-delivery-choice{display:flex;gap:10px;flex-wrap:wrap}
 </style>
 
-<!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7HY8069S02"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-  window.gtag('js', new Date());
-  window.gtag('config', 'G-7HY8069S02');
-</script>
-
-<!-- Microsoft Clarity -->
-<script>
-  window.clarity = window.clarity || function(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
-  (function(){
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.clarity.ms/tag/x1evotdyk2';
-    document.head.appendChild(script);
-  })();
-</script>
+<script src="cfs-analytics.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -1939,9 +1933,9 @@
               <span class="hero-pill">Safe for people & pets</span>
             </div>
             <div class="hero-actions">
-              <a class="button button-primary mobile-text-only" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">
+              <a class="button button-primary mobile-text-only" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate" data-estimate-open>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V6a2 2 0 0 1 2-2Zm2.5 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
-                Text Photos — Get an Estimate
+                Get a Quote
               </a>
               <button class="button button-primary desktop-email-estimate" id="hero-email-estimate" type="button" data-email-estimate data-track="email_estimate">Email Estimate</button>
               <a class="button button-outline mobile-call-estimate" href="tel:+15806680147" data-track="call">Call 580-668-0147</a>
@@ -2050,7 +2044,7 @@
             <h2>Know the starting point before we arrive.</h2>
             <div class="price-line"><strong>$125</strong><span>service minimum</span></div>
             <p>Most full residential appointments range from $150–$300. Text photos for a quick estimate based on your space and cleaning needs.</p>
-            <a class="button button-light mobile-text-only" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text Photos Now</a>
+            <a class="button button-light mobile-text-only" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate" data-estimate-open>Get a Quote</a>
             <button class="button button-light desktop-email-only" type="button" data-email-estimate data-track="email_estimate">Email for an Estimate</button>
             <p class="pricing-policy-notice">Please <a href="#service-policies" data-policy-open>review our Service Policies</a> for payment terms, cleaning-result limitations, travel fees, and service concerns.</p>
           </div>
@@ -2146,7 +2140,7 @@
       <div class="shell">
         <div class="product-card">
           <div><p class="eyebrow" style="color:#bfe7cd">Between professional cleanings</p><h2>Keep our spot cleaner within reach.</h2><p>Order the cleaning solution we recommend for everyday organic spots and routine cleanup. Shipping available across the United States.</p></div>
-          <div class="product-actions"><a class="button button-light" href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a><a class="button button-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.28)" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Ask a Question</a></div>
+          <div class="product-actions"><a class="button button-light" href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a><a class="button button-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.28)" href="sms:+15806680147?body=Hi%2C%20I%20have%20a%20question%20about%20your%20spot%20cleaner." data-track="text_estimate">Ask a Question</a></div>
         </div>
       </div>
     </section>
@@ -2167,7 +2161,7 @@
           <a href="commercial-carpet-cleaning-ardmore-ok.html">Commercial</a>
           <a href="order-cleaner.html" data-track="order_cleaner">Order Cleaner</a>
           <a href="tel:+15806680147" data-track="call">580-668-0147</a>
-          <a href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate">Text for Estimate</a>
+          <a href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate." data-track="text_estimate" data-estimate-open>Get a Quote</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -2246,8 +2240,8 @@
             <button class="estimate-option" type="button" data-value="I need help measuring the job">Not sure yet</button>
           </div>
           <div class="estimate-fields" style="margin-top:14px">
-            <div class="estimate-field"><label for="estimate-city">City</label><input id="estimate-city" type="text" autocomplete="address-level2" placeholder="Ardmore, Lone Grove, Marietta…"></div>
-            <div class="estimate-field"><label for="estimate-details">Problem spots or details</label><textarea id="estimate-details" placeholder="Pet odor, traffic lanes, sofa size, stairs, mystery stain…"></textarea></div>
+            <div class="estimate-field"><label for="estimate-city">City</label><input id="estimate-city" maxlength="120" type="text" autocomplete="address-level2" placeholder="Ardmore, Lone Grove, Marietta…"></div>
+            <div class="estimate-field"><label for="estimate-details">Problem spots or details</label><textarea id="estimate-details" maxlength="3000" placeholder="Pet odor, traffic lanes, sofa size, stairs, mystery stain…"></textarea></div>
           </div>
         </div>
 
@@ -2255,11 +2249,11 @@
           <p class="estimate-step-label">Step 3 of 3</p>
           <h3>Review your estimate request.</h3>
           <p class="estimate-help">Send details and photos together online, or open Messages and attach photos before sending your text.</p>
-          <div class="estimate-summary" id="estimate-summary" hidden></div>
-          <div class="estimate-review" id="estimate-review" aria-live="polite"></div>
-          <div class="estimate-field mobile-text-only" id="mobile-estimate-name-wrap" style="margin-top:14px">
+          <div class="estimate-summary" id="estimate-summary" data-clarity-mask="true" hidden></div>
+          <div class="estimate-review" id="estimate-review" data-clarity-mask="true" aria-live="polite"></div>
+          <div class="estimate-field" id="mobile-estimate-name-wrap" style="margin-top:14px">
             <label for="mobile-estimate-name">Your name</label>
-            <input id="mobile-estimate-name" type="text" autocomplete="name" placeholder="First and last name">
+            <input id="mobile-estimate-name" maxlength="120" type="text" autocomplete="name" placeholder="First and last name">
           </div>
           <p class="estimate-privacy">Nothing has been sent yet. For a text request, add photos in Messages before tapping Send. To upload photos here, choose Send Online with Photos.</p>
           <div class="estimate-delivery-choice" id="estimate-delivery-choice">
@@ -2269,15 +2263,15 @@
             <h4>Send your estimate request online</h4>
             <p>Add your contact details and photos below. They’ll be sent together with this request.</p>
             <div class="online-estimate-grid">
-              <div class="estimate-field"><label for="online-estimate-name">Name</label><input id="online-estimate-name" type="text" autocomplete="name" placeholder="Your name"></div>
-              <div class="estimate-field"><label for="online-estimate-phone">Phone</label><input id="online-estimate-phone" type="tel" autocomplete="tel" placeholder="580-555-1234"></div>
-              <div class="estimate-field"><label for="online-estimate-email">Email <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input id="online-estimate-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+              <div class="estimate-field"><label for="online-estimate-name">Name</label><input id="online-estimate-name" maxlength="120" type="text" autocomplete="name" placeholder="Your name"></div>
+              <div class="estimate-field"><label for="online-estimate-phone">Phone</label><input id="online-estimate-phone" maxlength="30" type="tel" autocomplete="tel" placeholder="580-555-1234"></div>
+              <div class="estimate-field"><label for="online-estimate-email">Email <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input id="online-estimate-email" maxlength="254" type="email" autocomplete="email" placeholder="you@example.com"></div>
             </div>
             <div class="estimate-field estimate-photo-field">
               <label for="estimate-photos">Photos of the rooms or furniture</label>
               <input id="estimate-photos" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-describedby="estimate-photo-help estimate-photo-status">
               <p id="estimate-photo-help" class="estimate-help">Choose up to 3 JPG, PNG or WebP photos, 8 MB total. Include a wide view and any problem spots. Photos are sent only when you submit.</p>
-              <p id="estimate-photo-status" role="status">No photos selected.</p>
+              <p id="estimate-photo-status" data-clarity-mask="true" role="status">No photos selected.</p>
               <button id="estimate-photos-clear" class="button button-outline" type="button" hidden>Remove selected photos</button>
               <label class="estimate-no-photos"><input id="estimate-no-photos" type="checkbox"> I don’t have photos right now. Please contact me to discuss the job.</label>
             </div>
@@ -2338,31 +2332,7 @@
       ctaObserver.observe(heroActions);
     }
 
-    function trackAction(actionName, details = {}) {
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', actionName, details);
-      }
-    }
-
-    document.querySelectorAll('[data-track]').forEach((element) => {
-      element.addEventListener('click', () => {
-        const action = element.dataset.track;
-        const eventNames = {
-          call: 'click_call',
-          text_estimate: 'click_text_estimate',
-          email_estimate: 'click_email_estimate',
-          reviews: 'click_reviews',
-          service_page: 'click_service_page',
-          location_page: 'click_location_page',
-          order_cleaner: 'click_order_cleaner'
-        };
-        trackAction(eventNames[action] || action, {
-          link_url: element.getAttribute('href') || '',
-          link_text: (element.textContent || '').trim().slice(0, 100)
-        });
-      });
-    });
-
+    function trackAction(name, details = {}) { window.CFSAnalytics?.track(name, details); }
 
     const policyModal = document.querySelector('#service-policies');
     const policyDialog = policyModal?.querySelector('.policy-dialog');
@@ -2401,8 +2371,8 @@
 
     function openPolicyFromHash() {
       if (window.location.hash === '#service-policies') {
-        openPolicyModal(null, false);
-      }
+        if (policyModal.hidden) openPolicyModal(null, false);
+      } else if (!policyModal.hidden) closePolicyModal();
     }
 
     window.addEventListener('hashchange', openPolicyFromHash);
@@ -2463,8 +2433,8 @@
       try {
         const draft = JSON.parse(sessionStorage.getItem(estimateStorageKey) || 'null');
         if (!draft) return false;
-        estimateState.services = Array.isArray(draft.services) ? draft.services : (draft.service ? [draft.service] : []);
-        estimateState.size = draft.size || '';
+        estimateState.services = (Array.isArray(draft.services) ? draft.services : (draft.service ? [draft.service] : [])).filter(service => Object.prototype.hasOwnProperty.call(serviceRecommendations, service));
+        estimateState.size = [...document.querySelectorAll('[data-estimate-group="size"] [data-value]')].some(button => button.dataset.value === draft.size) ? draft.size : '';
         if (estimateCity) estimateCity.value = draft.city || '';
         if (estimateDetails) estimateDetails.value = draft.details || '';
         document.querySelectorAll('[data-estimate-group]').forEach((group) => {
@@ -2513,7 +2483,7 @@
     function updateEstimateButtonLabels() {
       let hasDraft = false;
       try { hasDraft = Boolean(sessionStorage.getItem(estimateStorageKey)); } catch (error) {}
-    document.querySelectorAll('a[data-track="text_estimate"]').forEach((link) => {
+    document.querySelectorAll('a[data-estimate-open]').forEach((link) => {
         if (!link.dataset.originalText) link.dataset.originalText = link.textContent.trim();
         if (hasDraft && !link.closest('.product-actions')) link.textContent = 'Continue Your Estimate';
         else link.textContent = link.dataset.originalText;
@@ -2621,7 +2591,7 @@
       if (estimateResumeNote) estimateResumeNote.hidden = !resumed;
       updateServiceRecommendation();
       updateEstimateUi();
-      trackAction('open_estimate_wizard');
+      trackAction('open_estimate_wizard', {contact_method: estimatePreferredDelivery});
     }
 
     function closeEstimateWizard() {
@@ -2631,7 +2601,7 @@
       lastEstimateTrigger?.focus({ preventScroll: true });
     }
 
-    document.querySelectorAll('a[data-track="text_estimate"]').forEach((link) => {
+    document.querySelectorAll('a[data-estimate-open]').forEach((link) => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
         estimatePreferredDelivery = 'text';
@@ -2692,13 +2662,12 @@
 
 
     function buildEstimateSmsLink(message) {
-      const separator = /iPhone|iPad|iPod/i.test(navigator.userAgent) ? '&' : '?';
+      const separator = (/iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) ? '&' : '?';
       return `sms:+15806680147${separator}body=${encodeURIComponent(message)}`;
     }
 
     estimateSend?.addEventListener('click', () => {
-      const message = buildEstimateMessage();
-      trackAction('open_prefilled_estimate_text');
+
 
       if (isPhoneOrTablet()) {
         const mobileName = mobileEstimateName?.value.trim() || '';
@@ -2708,6 +2677,7 @@
           return;
         }
         estimateStatus.textContent='Messages will open with your details. Attach photos there, then tap Send. Your draft is kept here until you finish.';
+        trackAction('click_text', {contact_method:'sms', placement:'quote'});
         window.location.href = buildEstimateSmsLink(buildEstimateMessage());
         return;
       }
@@ -2747,6 +2717,9 @@
       estimateOnlineSend.disabled = true;
       estimateOnlineSend.textContent = 'Sending…';
       estimateStatus.textContent = '';
+      const pendingControls = [...estimateDialog.querySelectorAll('input, textarea, button:not([data-estimate-close]):not(#estimate-online-send)')]
+        .map(control => ({control, disabled:control.disabled}));
+      pendingControls.forEach(({control}) => { control.disabled = true; });
       const payload = {
         name, phone, email,
         service: estimateState.services.length ? estimateState.services.join(', ') : 'Not selected',
@@ -2761,9 +2734,11 @@
       const formData = new FormData();
       Object.entries(payload).forEach(([key,value])=>formData.append(key,value));
       files.forEach((file,index)=>formData.append(index===0?'attachment':'attachment'+(index+1),file,file.name));
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 60000);
       try {
         const response = await fetch('https://formsubmit.co/ajax/CarpetFriendlySolutions@gmail.com', {
-          signal: AbortSignal.timeout(60000), method: 'POST', headers: { 'Accept': 'application/json' }, body: formData
+          signal: controller.signal, method: 'POST', headers: { 'Accept': 'application/json' }, body: formData
         });
         if (!response.ok) throw new Error('Submission failed');
         const result = await response.json();
@@ -2771,16 +2746,21 @@
         estimateStatus.textContent = files.length ? 'Your request and '+files.length+' photo(s) were accepted. We’ll get back to you soon.' : 'Your request was accepted without photos. We’ll contact you to discuss the job.';
         estimatePhotos.value=''; noPhotos.checked=false; updatePhotos();
         estimateOnlineSend.textContent = 'Request Sent ✓';
-        trackAction('submit_online_estimate', { service_count: estimateState.services.length });
+        trackAction('generate_lead', { contact_method:'online', service_count: estimateState.services.length, photo_count: files.length });
         try { sessionStorage.removeItem(estimateStorageKey); } catch (error) {}
         updateEstimateButtonLabels();
         [onlineEstimateName, onlineEstimatePhone, onlineEstimateEmail].forEach((field) => { if (field) field.value = ''; });
         setTimeout(() => { estimateOnlineSend.textContent = originalLabel; estimateOnlineSend.disabled = false; estimateSubmissionPending = false; }, 3500);
       } catch (error) {
+        trackAction('quote_submit_error', {failure_type:error.name==='AbortError' ? 'timeout' : 'unconfirmed'});
         estimateStatus.textContent = 'We couldn’t confirm delivery. Your details and selected photos are still here. Please call or text 580-668-0147 to check before retrying.';
         estimateOnlineSend.textContent = originalLabel;
         estimateOnlineSend.disabled = false;
         estimateSubmissionPending = false;
+      } finally {
+        clearTimeout(timeout);
+        pendingControls.forEach(({control, disabled}) => { control.disabled = disabled; });
+        updatePhotos();
       }
     });
 
@@ -2794,7 +2774,7 @@
     const phoneNumber = '580-668-0147';
     let lastContactTrigger = null;
 
-    const isPhoneOrTablet = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    const isPhoneOrTablet = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
     function openContactModal(mode, trigger) {
       if (!contactModal) return;
@@ -2844,7 +2824,7 @@
       }
     }
 
-    document.querySelectorAll('a[href^="tel:"], a[href^="sms:"]:not([data-track="text_estimate"])').forEach((link) => {
+    document.querySelectorAll('a[href^="tel:"], a[href^="sms:"]:not([data-estimate-open])').forEach((link) => {
       link.addEventListener('click', (event) => {
         if (isPhoneOrTablet()) return;
         event.preventDefault();
@@ -2876,6 +2856,13 @@
         closeContactModal();
       }
 
+      if (event.key === 'Tab' && policyModal && !policyModal.hidden) {
+        const controls = [...policyDialog.querySelectorAll('button, [href]')];
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        return;
+      }
       if (event.key === 'Tab' && estimateModal && !estimateModal.hidden && estimateDialog) {
         const focusable = [...estimateDialog.querySelectorAll('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])')]
           .filter((element) => !element.disabled && !element.closest('[hidden]'));
