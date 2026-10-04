@@ -1,33 +1,31 @@
-CarPET Friendly - estimate conversion update
+CarPET Friendly - polished two-step estimate update
 
-Back up the existing index.html, cfs-analytics.js and estimate.html first.
-Upload these four files to the existing website root:
+This replaces the plain single-page form with the familiar guided design.
+Back up your existing index.html, estimate.html and cfs-analytics.js.
+Upload ALL THREE website files to the existing website root:
   index.html
   estimate.html
-  estimate-request.js
   cfs-analytics.js
-Keep your existing images, service pages, privacy page and other files.
-This package does not deploy automatically.
+Keep existing images, service pages, privacy page and other files.
+The old estimate-request.js is no longer used by these pages and may remain.
 
-Google Business Profile estimate/appointment destination after upload:
+IMPORTANT: Upload index.html too. The last live check found the older homepage.
+Homepage and landing now share the same two-step estimate experience:
+  1. Cleaning service, approximate size, city and optional details.
+  2. Contact details and photos; online submission or text instead.
+Requests without photos are allowed; photos improve quote accuracy.
+The supplied Facebook page appears near homepage reviews and in the footer.
+
+Google Business Profile destination after upload:
 https://carpetfriendlysolutions.com/estimate.html?utm_source=google&utm_medium=organic&utm_campaign=business_profile
-This requests an estimate; it does not reserve a confirmed appointment.
+An estimate request does not reserve an appointment.
 
-Example Eric's display QR destination:
-https://carpetfriendlysolutions.com/estimate.html?utm_source=erics&utm_medium=offline&utm_campaign=partner_display
-Use source values google, erics, facebook, van or referral for email attribution.
+Checks passed: mobile/desktop layouts, homepage wizard, direct landing,
+two-step navigation, online/text switch, Facebook links, invalid-photo rejection,
+failed-send recovery and accepted request payload. Submissions were mocked;
+no real request was emailed. After upload, submit one genuine request and
+confirm email/photo delivery before promoting the link.
 
-The existing FormSubmit endpoint is retained. Browser checks mocked successful
-and failed responses; no test request was emailed to your business. After upload,
-submit one real request with a photo and confirm it reaches your inbox before
-publishing QR codes or updating Google. Confirm by calling if delivery is uncertain.
-
-Analytics: click_estimate_page, quote_start, generate_lead and
-quote_submit_error. Existing consent and owner/test exclusions are retained.
-A generate_lead event means the form provider accepted a request, not a booking
-or independently confirmed email delivery. Calls/text clicks are separate events.
-Track actual bookings/revenue in your customer log.
-
-Facebook: the supplied business page link is included near reviews and in the footer.
-Clicks are tracked as click_facebook when analytics consent is granted.
-Homepage photos/reviews are preserved; no new customer photos were invented.
+Existing FormSubmit endpoint and analytics consent/exclusions are retained.
+Accepted requests produce generate_lead; this is not a confirmed booking or
+independently confirmed inbox delivery. Facebook clicks use click_facebook.
