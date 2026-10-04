@@ -1881,8 +1881,8 @@
 #estimate-photo-status{overflow-wrap:anywhere;font-size:14px}.estimate-no-photos{display:flex!important;gap:10px;align-items:flex-start;font-size:14px!important;margin-top:14px}.estimate-no-photos input{width:auto!important;flex:none;margin-top:4px}
 .estimate-delivery-choice{display:flex;gap:10px;flex-wrap:wrap}
 </style>
-<script src="cfs-analytics.js?v=20261004-polished"></script>
-<style>.estimate-progress{grid-template-columns:repeat(2,1fr)} .estimate-step h3{margin-top:18px} .estimate-option{min-height:58px}</style></head>
+<script src="cfs-analytics.js?v=20261004-popup"></script>
+</head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <div class="announcement-bar"><div class="shell announcement-inner"><span>5-Star Rated</span><span class="announcement-dot">•</span><span>Family owned &amp; operated</span><span class="announcement-dot">•</span><span>Fast, easy estimates</span></div></div>
@@ -1902,7 +1902,7 @@
 <a href="#reviews">Reviews</a>
 <a data-track="order_cleaner" href="order-cleaner.html">Order Cleaner</a>
 <a class="button button-outline" data-track="call" href="tel:+15806680147">Call</a>
-<button class="button button-primary" data-email-estimate="" data-track="email_estimate" type="button">Free Estimate</button>
+<button class="button button-primary desktop-email-only" data-email-estimate="" data-track="email_estimate" type="button">Free Estimate</button>
 </nav>
 <a aria-label="Call CarPET Friendly Solutions" class="button button-primary header-call" data-track="call" href="tel:+15806680147">
 <svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z" fill="currentColor"></path></svg>
@@ -1925,7 +1925,8 @@
 <span class="hero-pill">Safe for people &amp; pets</span>
 </div>
 <div class="hero-actions">
-<button class="button button-primary" data-email-estimate="" data-track="email_estimate" id="hero-email-estimate" type="button">Free Estimate</button>
+<a class="button button-primary mobile-text-only" data-estimate-open="" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Free Estimate</a>
+<button class="button button-primary desktop-email-estimate" data-email-estimate="" data-track="email_estimate" id="hero-email-estimate" type="button">Free Estimate</button>
 <a class="button button-outline mobile-call-estimate" data-track="call" href="tel:+15806680147">Call 580-668-0147</a>
 </div>
 <p class="hero-note">Serving Ardmore, Lone Grove, Dickson, Sulphur, Wilson, Marietta, and nearby communities.</p>
@@ -2023,7 +2024,8 @@
 <h2>Know the starting point before we arrive.</h2>
 <div class="price-line"><strong>$125</strong><span>service minimum</span></div>
 <p>Most full residential appointments range from $150–$300. Text photos for a quick estimate based on your space and cleaning needs.</p>
-<button class="button button-light" data-email-estimate="" data-track="email_estimate" type="button">Free Estimate</button>
+<a class="button button-light mobile-text-only" data-estimate-open="" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Free Estimate</a>
+<button class="button button-light desktop-email-only" data-email-estimate="" data-track="email_estimate" type="button">Free Estimate</button>
 <p class="pricing-policy-notice">Please <a data-policy-open="" href="#service-policies">review our Service Policies</a> for payment terms, cleaning-result limitations, travel fees, and service concerns.</p>
 </div>
 <div class="pricing-details">
@@ -2174,13 +2176,13 @@
 <button aria-label="Close fast estimate" class="estimate-close" data-estimate-close="" type="button">×</button>
 <div class="estimate-head">
 <p class="eyebrow">Smart photo estimate</p>
-<h2 id="estimate-title">Get your estimate in two easy steps.</h2>
-<p>Choose your cleaning needs, then send your details. William or Rebecca will confirm pricing and appointment availability.</p>
-<div aria-label="Estimate progress" class="estimate-progress"><span class="is-active"></span><span></span></div>
+<h2 id="estimate-title">Get an estimate in three quick steps.</h2>
+<p>No account, no long form, and no information is sent until you choose to send it.</p>
+<div aria-label="Estimate progress" class="estimate-progress"><span class="is-active"></span><span></span><span></span></div>
 </div>
 <div class="estimate-body">
 <div class="estimate-step" data-estimate-step="1">
-<p class="estimate-step-label">Step 1 of 2</p>
+<p class="estimate-step-label">Step 1 of 3</p>
 <h3>What needs cleaned?</h3>
 <p class="estimate-help">Choose everything that applies. Tap a selection again to remove it.</p>
 <div class="estimate-options" data-estimate-group="service">
@@ -2191,17 +2193,24 @@
 </div>
 <div class="estimate-recommendation" hidden="" id="estimate-recommendation"></div>
 <p class="estimate-resume-note" hidden="" id="estimate-resume-note">Your previous choices are ready to continue.</p>
-<h3>How much and where?</h3><p class="estimate-help">This gives William and Rebecca enough context to estimate faster.</p><div class="estimate-options" data-estimate-group="size">
+</div>
+<div class="estimate-step" data-estimate-step="2" hidden="">
+<p class="estimate-step-label">Step 2 of 3</p>
+<h3>How much and where?</h3>
+<p class="estimate-help">This gives William and Rebecca enough context to estimate faster.</p>
+<div class="estimate-options" data-estimate-group="size">
 <button class="estimate-option" data-value="1 room or small item" type="button">1 room / small item</button>
 <button class="estimate-option" data-value="2–3 rooms or medium item" type="button">2–3 rooms / medium</button>
 <button class="estimate-option" data-value="4 or more rooms / whole home" type="button">Whole home / large</button>
 <button class="estimate-option" data-value="I need help measuring the job" type="button">Not sure yet</button>
-</div><div class="estimate-fields" style="margin-top:14px">
+</div>
+<div class="estimate-fields" style="margin-top:14px">
 <div class="estimate-field"><label for="estimate-city">City</label><input autocomplete="address-level2" id="estimate-city" maxlength="120" placeholder="Ardmore, Lone Grove, Marietta…" type="text"/></div>
 <div class="estimate-field"><label for="estimate-details">Problem spots or details</label><textarea id="estimate-details" maxlength="3000" placeholder="Pet odor, traffic lanes, sofa size, stairs, mystery stain…"></textarea></div>
-</div></div>
+</div>
+</div>
 <div class="estimate-step" data-estimate-step="3" hidden="">
-<p class="estimate-step-label">Step 2 of 2</p>
+<p class="estimate-step-label">Step 3 of 3</p>
 <h3>Review your estimate request.</h3>
 <p class="estimate-help">Send details and photos together online, or open Messages and attach photos before sending your text.</p>
 <div class="estimate-summary" data-clarity-mask="true" hidden="" id="estimate-summary"></div>
@@ -2228,15 +2237,15 @@
 <p class="estimate-help" id="estimate-photo-help">Choose up to 3 JPG, PNG or WebP photos, 8 MB total. Include a wide view and any problem spots. Photos are sent only when you submit.</p>
 <p data-clarity-mask="true" id="estimate-photo-status" role="status">No photos selected.</p>
 <button class="button button-outline" hidden="" id="estimate-photos-clear" type="button">Remove selected photos</button>
-<label class="estimate-no-photos"><input checked="" id="estimate-no-photos" type="checkbox"/> I don’t have photos right now. Please contact me to discuss the job.</label>
+<label class="estimate-no-photos"><input id="estimate-no-photos" type="checkbox"/> I don’t have photos right now. Please contact me to discuss the job.</label>
 </div>
 <button class="button button-primary" id="estimate-online-send" type="button">Send Estimate Request</button>
-<p class="online-estimate-note">William or Rebecca will review your request and contact you about pricing and available appointments. Sending this request does not book an appointment.</p>
+<p class="online-estimate-note">William or Rebecca will contact you with pricing and available appointments. Your appointment is confirmed after we speak with you.</p>
 </div>
 </div>
 <div class="estimate-actions">
 <button class="button button-outline" hidden="" id="estimate-back" type="button">Back</button>
-<button class="button button-primary estimate-next" id="estimate-next" type="button">Continue to Contact &amp; Photos</button>
+<button class="button button-primary estimate-next" id="estimate-next" type="button">Next</button>
 </div>
 <p aria-live="polite" class="estimate-status" id="estimate-status" role="status"></p>
 </div>
@@ -2270,7 +2279,7 @@
 </div>
 <div aria-label="Quick contact" class="mobile-cta">
 <a class="button button-light" data-track="call" href="tel:+15806680147">Call</a>
-<a class="button button-primary" data-estimate-open="" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Free Estimate</a>
+<a class="button button-primary" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Text Photos</a>
 </div>
 <script>
     const mobileCta = document.querySelector('.mobile-cta');
@@ -2402,7 +2411,7 @@
       } catch (error) { return false; }
     }
 
-    let estimatePreferredDelivery = 'online';
+    let estimatePreferredDelivery = 'text';
     document.querySelectorAll('[data-email-estimate]').forEach(button => {
       button.addEventListener('click', () => { estimatePreferredDelivery='online'; openEstimateWizard(button); });
     });
@@ -2436,8 +2445,7 @@
       try { hasDraft = Boolean(sessionStorage.getItem(estimateStorageKey)); } catch (error) {}
     document.querySelectorAll('a[data-estimate-open]').forEach((link) => {
         if (!link.dataset.originalText) link.dataset.originalText = link.textContent.trim();
-        if (hasDraft && !link.closest('.product-actions')) link.textContent = 'Continue Your Estimate';
-        else link.textContent = link.dataset.originalText;
+        link.textContent = link.dataset.originalText;
       });
     }
 
@@ -2489,10 +2497,11 @@
 
     function updateEstimateUi() {
       estimateSteps.forEach((panel) => { panel.hidden = Number(panel.dataset.estimateStep) !== estimateState.step; });
-      estimateProgress.forEach((bar, index) => bar.classList.toggle('is-active', index < (estimateState.step === 3 ? 2 : 1)));
+      estimateProgress.forEach((bar, index) => bar.classList.toggle('is-active', index < estimateState.step));
       estimateBack.hidden = estimateState.step === 1;
       estimateNext.hidden = estimateState.step === 3;
       estimateStatus.textContent = '';
+      if (estimateDialog) estimateDialog.scrollTop = 0;
       if (estimateState.step === 3) {
         estimateSummary.textContent = buildEstimateMessage();
         renderEstimateReview();
@@ -2548,6 +2557,7 @@
     function closeEstimateWizard() {
       if (!estimateModal) return;
       estimateModal.hidden = true;
+      if (location.hash === '#estimate') history.replaceState(null, '', location.pathname + location.search);
       unlockEstimatePageScroll();
       lastEstimateTrigger?.focus({ preventScroll: true });
     }
@@ -2555,7 +2565,7 @@
     document.querySelectorAll('a[data-estimate-open]').forEach((link) => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
-        estimatePreferredDelivery = 'online';
+        estimatePreferredDelivery = 'text';
         openEstimateWizard(link);
       });
     });
@@ -2592,16 +2602,16 @@
         estimateStatus.textContent = 'Choose what needs cleaned first.';
         return;
       }
-      if (estimateState.step === 1 && !estimateState.size) {
+      if (estimateState.step === 2 && !estimateState.size) {
         estimateStatus.textContent = 'Choose the closest job size first.';
         return;
       }
-      estimateState.step = 3;
+      estimateState.step = Math.min(3, estimateState.step + 1);
       updateEstimateUi();
     });
 
     estimateBack?.addEventListener('click', () => {
-      estimateState.step = 1;
+      estimateState.step = Math.max(1, estimateState.step - 1);
       updateEstimateUi();
     });
 
@@ -2686,7 +2696,7 @@
       Object.entries(payload).forEach(([key,value])=>formData.append(key,value));
       files.forEach((file,index)=>formData.append(index===0?'attachment':'attachment'+(index+1),file,file.name));
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 60000);
+      const timeout = setTimeout(() => controller.abort(), 25000);
       try {
         const response = await fetch('https://formsubmit.co/ajax/CarpetFriendlySolutions@gmail.com', {
           signal: controller.signal, method: 'POST', headers: { 'Accept': 'application/json' }, body: formData
@@ -2694,7 +2704,7 @@
         if (!response.ok) throw new Error('Submission failed');
         const result = await response.json();
         if (result.success !== true && result.success !== 'true') throw new Error('Request not accepted');
-        estimateStatus.textContent = files.length ? 'Your request and '+files.length+' photo(s) were accepted. William or Rebecca will follow up with pricing and availability. Your appointment is not booked yet.' : 'Your request was accepted without photos. We’ll contact you to discuss the job.';
+        estimateStatus.textContent = files.length ? 'Your request and '+files.length+' photo(s) were accepted. William or Rebecca will follow up with pricing and availability. Your appointment is not booked yet.' : 'Your request was accepted without photos. William or Rebecca will contact you to discuss pricing and availability. Your appointment is not booked yet.';
         estimatePhotos.value=''; noPhotos.checked=false; updatePhotos();
         estimateOnlineSend.textContent = 'Request Sent ✓';
         trackAction('generate_lead', { contact_method:'online', service_count: estimateState.services.length, photo_count: files.length });
@@ -2918,6 +2928,21 @@
       });
     }
 
-  </script>
+  
+    // Google estimate link opens the existing homepage popup after setup finishes.
+    let estimateHashActive = false;
+    function handleEstimateHash() {
+      const active = location.hash === '#estimate';
+      if (active && estimateModal.hidden) {
+        estimatePreferredDelivery = 'online';
+        openEstimateWizard(document.querySelector(isPhoneOrTablet() ? '.hero-actions [data-estimate-open]' : '.hero-actions [data-email-estimate]'));
+      } else if (!active && estimateHashActive && !estimateModal.hidden) {
+        closeEstimateWizard();
+      }
+      estimateHashActive = active;
+    }
+    window.addEventListener('hashchange', handleEstimateHash);
+    handleEstimateHash();
+</script>
 </body>
 </html>

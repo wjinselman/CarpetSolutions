@@ -11,7 +11,7 @@
   const excluded = !production || internal || navigator.webdriver === true;
   let consent = read('cfs_analytics_consent');
   let started = false;
-  const allowedEvents = new Set(['click_call','click_text','open_estimate_wizard','open_online_estimate_form','generate_lead','quote_submit_error','copy_phone_number','click_reviews','click_service_page','click_location_page','click_order_cleaner','click_checkout','click_estimate_page','quote_start','click_facebook']);
+  const allowedEvents = new Set(['click_call','click_text','open_estimate_wizard','open_online_estimate_form','generate_lead','quote_submit_error','copy_phone_number','click_reviews','click_service_page','click_location_page','click_order_cleaner','click_checkout','click_facebook']);
   const safeKeys = new Set(['contact_method','placement','service_count','photo_count','page_type','failure_type']);
   function start() {
     if (started || excluded || consent !== 'granted') return;
@@ -71,7 +71,7 @@
       if(href.startsWith('tel:')) track('click_call',{contact_method:'phone',placement});
       else if(href.startsWith('sms:')) track('click_text',{contact_method:'sms',placement});
       else if(href.startsWith('https://square.link/')) track('click_checkout',{placement});
-      else { const action=el.dataset.track; const names={reviews:'click_reviews',service_page:'click_service_page',location_page:'click_location_page',order_cleaner:'click_order_cleaner',estimate_page:'click_estimate_page',facebook:'click_facebook'}; if(names[action]) track(names[action],{placement}); }
+      else { const action=el.dataset.track; const names={reviews:'click_reviews',service_page:'click_service_page',location_page:'click_location_page',order_cleaner:'click_order_cleaner',facebook:'click_facebook'}; if(names[action]) track(names[action],{placement}); }
     });
   }
   start();
