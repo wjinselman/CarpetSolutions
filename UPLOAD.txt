@@ -1,0 +1,33 @@
+CarPET Friendly - estimate conversion update
+
+Back up the existing index.html, cfs-analytics.js and estimate.html first.
+Upload these four files to the existing website root:
+  index.html
+  estimate.html
+  estimate-request.js
+  cfs-analytics.js
+Keep your existing images, service pages, privacy page and other files.
+This package does not deploy automatically.
+
+Google Business Profile estimate/appointment destination after upload:
+https://carpetfriendlysolutions.com/estimate.html?utm_source=google&utm_medium=organic&utm_campaign=business_profile
+This requests an estimate; it does not reserve a confirmed appointment.
+
+Example Eric's display QR destination:
+https://carpetfriendlysolutions.com/estimate.html?utm_source=erics&utm_medium=offline&utm_campaign=partner_display
+Use source values google, erics, facebook, van or referral for email attribution.
+
+The existing FormSubmit endpoint is retained. Browser checks mocked successful
+and failed responses; no test request was emailed to your business. After upload,
+submit one real request with a photo and confirm it reaches your inbox before
+publishing QR codes or updating Google. Confirm by calling if delivery is uncertain.
+
+Analytics: click_estimate_page, quote_start, generate_lead and
+quote_submit_error. Existing consent and owner/test exclusions are retained.
+A generate_lead event means the form provider accepted a request, not a booking
+or independently confirmed email delivery. Calls/text clicks are separate events.
+Track actual bookings/revenue in your customer log.
+
+Facebook: the supplied business page link is included near reviews and in the footer.
+Clicks are tracked as click_facebook when analytics consent is granted.
+Homepage photos/reviews are preserved; no new customer photos were invented.
