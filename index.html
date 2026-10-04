@@ -2170,7 +2170,7 @@
 </div>
 </section>
 </div>
-<div class="estimate-modal" hidden="" id="estimate-wizard"><div class="estimate-backdrop" data-estimate-close=""></div><section aria-labelledby="estimate-title" aria-modal="true" class="estimate-dialog" role="dialog"><button aria-label="Close estimate" class="estimate-close" data-estimate-close="" type="button">×</button><div class="estimate-head"><p class="eyebrow">Free Estimate · Direct to Rebecca</p><h2 id="estimate-title">Tell us what needs cleaned.</h2><p>Your details will open in a text to 580-668-0147. Add a picture in Messages, then tap Send.</p></div><div class="estimate-body"><form id="text-estimate-form"><div class="online-estimate-grid"><div class="estimate-field"><label for="text-name">Your name</label><input autocomplete="name" id="text-name" maxlength="120" placeholder="Your name" required=""/></div><div class="estimate-field"><label for="text-phone">Phone number</label><input autocomplete="tel" id="text-phone" maxlength="30" placeholder="580-555-1234" required="" type="tel"/></div></div><div class="estimate-field" style="margin-top:12px"><label for="text-service">What needs cleaned?</label><select id="text-service" required=""><option value="">Choose cleaning type</option><option>Carpet</option><option>Upholstery</option><option>Area rug</option><option>Pet stains / odor</option><option>Carpet + upholstery</option><option>Commercial carpet</option><option>Other / not sure</option></select></div><div class="estimate-field" style="margin-top:12px"><label for="text-rooms">Number of rooms / items</label><input id="text-rooms" maxlength="120" placeholder="3 rooms, 1 sofa, or not sure" required=""/></div><p class="estimate-help" style="margin-top:14px">Have a picture? Attach it in Messages after continuing. You can still request an estimate without one.</p><button class="button button-primary" id="text-continue" style="width:100%" type="submit">Continue to Text</button><p aria-live="polite" class="estimate-status" id="estimate-status" role="status"></p><p class="online-estimate-note">Nothing is sent until you tap Send in Messages. Rebecca will reply with pricing and availability.</p><div class="text-desktop-help" hidden=""><p>On a phone, text your photos and these details to <strong>580-668-0147</strong>.</p><textarea aria-label="Your prepared estimate text" id="text-preview" readonly=""></textarea><button class="button button-outline" id="text-copy" type="button">Copy my request</button></div></form></div></section></div>
+<div class="estimate-modal" hidden="" id="estimate-wizard"><div class="estimate-backdrop" data-estimate-close=""></div><section aria-labelledby="estimate-title" aria-modal="true" class="estimate-dialog" role="dialog"><button aria-label="Close estimate" class="estimate-close" data-estimate-close="" type="button">×</button><div class="estimate-head"><p class="eyebrow">Free Estimate · Local owner-operators</p><h2 id="estimate-title">Tell us what needs cleaned.</h2><p id="estimate-delivery-intro">Your details will open in a text to 580-668-0147. Add a picture in Messages, then tap Send.</p></div><div class="estimate-body"><form id="text-estimate-form"><div class="online-estimate-grid"><div class="estimate-field"><label for="text-name">Your name</label><input autocomplete="name" id="text-name" maxlength="120" placeholder="Your name" required=""/></div><div class="estimate-field"><label for="text-phone">Phone number</label><input autocomplete="tel" id="text-phone" maxlength="30" placeholder="580-555-1234" required="" type="tel"/></div></div><div class="estimate-field" style="margin-top:12px"><label for="text-service">What needs cleaned?</label><select id="text-service" required=""><option value="">Choose cleaning type</option><option>Carpet</option><option>Upholstery</option><option>Area rug</option><option>Pet stains / odor</option><option>Carpet + upholstery</option><option>Commercial carpet</option><option>Other / not sure</option></select></div><div class="estimate-field" style="margin-top:12px"><label for="text-rooms">Number of rooms / items</label><input id="text-rooms" maxlength="120" placeholder="3 rooms, 1 sofa, or not sure" required=""/></div><p class="estimate-help" id="mobile-photo-help" style="margin-top:14px">You can add a picture in Messages before sending. Photos are optional—Rebecca can ask for them if needed.</p><div hidden="" id="desktop-email-fields"><div class="estimate-field" style="margin-top:12px"><label for="desktop-photos">Photos (optional)</label><input accept="image/jpeg,image/png,image/webp" id="desktop-photos" multiple="" type="file"/><p class="estimate-help">Up to 3 JPG, PNG or WebP photos, 8 MB total. You can request an estimate without photos.</p></div></div><button class="button button-primary" id="text-continue" style="width:100%" type="submit">Continue to Text</button><p aria-live="polite" class="estimate-status" id="estimate-status" role="status"></p><p class="online-estimate-note" id="estimate-delivery-note">Nothing is sent until you tap Send in Messages. Rebecca will reply with pricing and availability.</p><div class="text-desktop-help" hidden=""><p>On a phone, text your photos and these details to <strong>580-668-0147</strong>.</p><textarea aria-label="Your prepared estimate text" id="text-preview" readonly=""></textarea><button class="button button-outline" id="text-copy" type="button">Copy my request</button></div></form></div></section></div>
 <div class="contact-modal" hidden="" id="desktop-contact-modal">
 <div class="contact-modal-backdrop" data-contact-close=""></div>
 <section aria-describedby="contact-dialog-description" aria-labelledby="contact-dialog-title" aria-modal="true" class="contact-dialog" role="dialog">
@@ -2279,6 +2279,7 @@
       document.body.style.width = '100%';
       document.body.classList.add('modal-open');
       estimateModal.hidden = false;
+      configureEstimateDelivery();
       estimateDialog.scrollTop = 0;
       requestAnimationFrame(() => document.querySelector('#text-name').focus());
       trackAction('open_estimate_wizard', {contact_method:'sms'});
@@ -2310,13 +2311,8 @@
       const rooms=document.querySelector('#text-rooms').value.trim();
       if (!name || !rooms) {estimateStatus.textContent='Please add your name and the rooms or items to clean.';return;}
       if (phone.replace(/\D/g,'').length<10) {estimateStatus.textContent='Please enter your phone number including area code.';document.querySelector('#text-phone').focus();return;}
-      const message=['Hi Rebecca, I’d like a free cleaning estimate.', 'Name: '+name, 'Phone: '+phone,'Cleaning: '+document.querySelector('#text-service').value,'Rooms / items: '+rooms,'I can attach photos here, or we can discuss the estimate without photos.'].join('\n');
-      if (!isPhoneOrTablet()) {
-        document.querySelector('.text-desktop-help').hidden=false;
-        document.querySelector('#text-preview').value=message;
-        estimateStatus.textContent='Text this request and any photos to 580-668-0147 from your phone.';
-        return;
-      }
+      const message=['Hi Rebecca, I’d like a free cleaning estimate.', 'Name: '+name, 'Phone: '+phone,'Cleaning: '+document.querySelector('#text-service').value,'Rooms / items: '+rooms].join('\n');
+      if (!isPhoneOrTablet()) { sendDesktopEstimate({name,phone,service:document.querySelector('#text-service').value,rooms}); return; }
       estimateStatus.textContent='Messages will open with your details. Add a picture if you have one, then tap Send. Your details stay here if you return.';
       trackAction('click_text',{contact_method:'sms',placement:'quote'});
       window.location.href=buildEstimateSmsLink(message);
@@ -2326,6 +2322,50 @@
       try {await navigator.clipboard.writeText(field.value);estimateStatus.textContent='Request copied. Text it to 580-668-0147.';}
       catch {field.focus();field.select();estimateStatus.textContent='Select and copy the request, then text it to 580-668-0147.';}
     });
+
+
+    let desktopEmailPending = false;
+    let desktopEmailAccepted = false;
+    function configureEstimateDelivery() {
+      const mobile = isPhoneOrTablet();
+      document.querySelector('#desktop-email-fields').hidden = mobile;
+      document.querySelector('#mobile-photo-help').hidden = !mobile;
+      document.querySelector('#text-continue').textContent = mobile ? 'Continue to Text' : desktopEmailAccepted ? 'Request Sent' : 'Send Estimate Request';
+      document.querySelector('#text-continue').disabled = !mobile && (desktopEmailPending || desktopEmailAccepted);
+      document.querySelector('#estimate-delivery-intro').textContent = mobile ? 'Your details will open in a text to 580-668-0147. Add a picture in Messages, then tap Send.' : 'Add your details and optional photos. William will review your request and contact you about pricing and availability.';
+      document.querySelector('#estimate-delivery-note').textContent = mobile ? 'Nothing is sent until you tap Send in Messages. Rebecca will reply with pricing and availability.' : 'Your request is emailed to William. Your appointment is confirmed after we contact you. Prefer to call? 580-668-0147.';
+    }
+    async function sendDesktopEstimate(details) {
+      if (desktopEmailPending || desktopEmailAccepted) return;
+      const files = [...document.querySelector('#desktop-photos').files];
+      if (files.length > 3 || files.reduce((n,f)=>n+f.size,0)>8000000 || files.some(f=>!['image/jpeg','image/png','image/webp'].includes(f.type) || !f.size)) {
+        estimateStatus.textContent='Choose up to 3 JPG, PNG or WebP photos, 8 MB total, or send without photos.';return;
+      }
+      const data = new FormData();
+      Object.entries({...details, _subject:'CarPET Friendly Desktop Estimate Request - '+details.name, _template:'table', _captcha:'false', request_source:'Desktop website'}).forEach(([k,v])=>data.append(k,v));
+      files.forEach((f,i)=>data.append(i?'attachment'+(i+1):'attachment',f,f.name));
+      desktopEmailPending=true;
+      const controls=[...textForm.querySelectorAll('input, select, button')];
+      controls.forEach(el=>el.disabled=true);
+      const button=document.querySelector('#text-continue');button.textContent='Sending…';
+      estimateStatus.textContent='Sending your estimate request…';
+      const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),25000);
+      try {
+        const response=await fetch('https://formsubmit.co/ajax/wjinselman@gmail.com',{method:'POST',headers:{Accept:'application/json'},body:data,signal:controller.signal});
+        const result=await response.json();
+        if (!response.ok || ![true,'true'].includes(result.success)) throw new Error('Unconfirmed');
+        desktopEmailAccepted=true;
+        estimateStatus.textContent='Your request was accepted for email delivery. William will follow up about pricing and availability. If you don’t hear back, call 580-668-0147. Your appointment is not booked yet.';
+        trackAction('generate_lead',{contact_method:'email',placement:'quote',photo_count:files.length});
+      } catch(error) {
+        estimateStatus.textContent='We couldn’t confirm your request. Your details and photos are still here. Call 580-668-0147 to check before retrying.';
+        trackAction('quote_submit_error',{failure_type:error.name==='AbortError'?'timeout':'unconfirmed'});
+      } finally {
+        clearTimeout(timer);desktopEmailPending=false;
+        controls.forEach(el=>el.disabled=desktopEmailAccepted);
+        button.textContent=desktopEmailAccepted?'Request Sent':'Send Estimate Request';
+      }
+    }
 
     const contactModal = document.querySelector('#desktop-contact-modal');
     const contactDialog = contactModal?.querySelector('.contact-dialog');
