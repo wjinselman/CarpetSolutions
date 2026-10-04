@@ -1925,7 +1925,7 @@
 <span class="hero-pill">Safe for people &amp; pets</span>
 </div>
 <div class="hero-actions">
-<a class="button button-primary mobile-text-only" data-estimate-open="" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Free Estimate</a>
+<a class="button button-primary mobile-text-only" data-estimate-open="" data-track="text_estimate" href="#estimate">Free Estimate</a>
 <button class="button button-primary desktop-email-estimate" data-email-estimate="" data-track="email_estimate" id="hero-email-estimate" type="button">Free Estimate</button>
 <a class="button button-outline mobile-call-estimate" data-track="call" href="tel:+15806680147">Call 580-668-0147</a>
 </div>
@@ -2024,7 +2024,7 @@
 <h2>Know the starting point before we arrive.</h2>
 <div class="price-line"><strong>$125</strong><span>service minimum</span></div>
 <p>Most full residential appointments range from $150–$300. Text photos for a quick estimate based on your space and cleaning needs.</p>
-<a class="button button-light mobile-text-only" data-estimate-open="" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Free Estimate</a>
+<a class="button button-light mobile-text-only" data-estimate-open="" data-track="text_estimate" href="#estimate">Free Estimate</a>
 <button class="button button-light desktop-email-only" data-email-estimate="" data-track="email_estimate" type="button">Free Estimate</button>
 <p class="pricing-policy-notice">Please <a data-policy-open="" href="#service-policies">review our Service Policies</a> for payment terms, cleaning-result limitations, travel fees, and service concerns.</p>
 </div>
@@ -2131,7 +2131,7 @@
 <a href="commercial-carpet-cleaning-ardmore-ok.html">Commercial</a>
 <a data-track="order_cleaner" href="order-cleaner.html">Order Cleaner</a>
 <a data-track="call" href="tel:+15806680147">580-668-0147</a>
-<a data-estimate-open="" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Free Estimate</a>
+<a data-estimate-open="" data-track="text_estimate" href="#estimate">Free Estimate</a>
 <a class="" data-track="facebook" href="https://www.facebook.com/profile.php?id=61581152262219" rel="noopener noreferrer" target="_blank">Facebook</a></div>
 </div>
 <div class="footer-bottom">
@@ -2279,7 +2279,7 @@
 </div>
 <div aria-label="Quick contact" class="mobile-cta">
 <a class="button button-light" data-track="call" href="tel:+15806680147">Call</a>
-<a class="button button-primary" data-track="text_estimate" href="sms:+15806680147?body=Hi%2C%20I%27m%20interested%20in%20a%20carpet%20cleaning%20estimate.">Text Photos</a>
+<a class="button button-primary" data-estimate-open="" data-track="open_estimate_wizard" href="#estimate">Free Estimate</a>
 </div>
 <script>
     const mobileCta = document.querySelector('.mobile-cta');
@@ -2411,7 +2411,7 @@
       } catch (error) { return false; }
     }
 
-    let estimatePreferredDelivery = 'text';
+    let estimatePreferredDelivery = 'online';
     document.querySelectorAll('[data-email-estimate]').forEach(button => {
       button.addEventListener('click', () => { estimatePreferredDelivery='online'; openEstimateWizard(button); });
     });
@@ -2565,7 +2565,7 @@
     document.querySelectorAll('a[data-estimate-open]').forEach((link) => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
-        estimatePreferredDelivery = 'text';
+        estimatePreferredDelivery = 'online';
         openEstimateWizard(link);
       });
     });
