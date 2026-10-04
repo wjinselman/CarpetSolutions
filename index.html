@@ -1882,7 +1882,9 @@
 .estimate-delivery-choice{display:flex;gap:10px;flex-wrap:wrap}
 </style>
 <script src="cfs-analytics.js?v=20261004-popup"></script>
-</head>
+<style>
+.estimate-review-fold,.estimate-email-fold{margin:12px 0;color:var(--muted);font-size:.85rem}.estimate-review-fold summary,.estimate-email-fold summary{cursor:pointer;padding:8px 0;text-decoration:underline}.estimate-no-photos[hidden]{display:none!important}.estimate-dialog[data-current-step="3"] .estimate-head{padding:12px 20px}.estimate-dialog[data-current-step="3"] .estimate-head>.eyebrow,.estimate-dialog[data-current-step="3"] .estimate-head>h2,.estimate-dialog[data-current-step="3"] .estimate-head>p{display:none}.estimate-dialog[data-current-step="3"] .estimate-progress{margin-top:0}.estimate-dialog[data-current-step="3"] .estimate-body{padding:16px 20px}.estimate-dialog[data-current-step="3"] .online-estimate-panel{margin-top:12px;padding:16px}.estimate-dialog[data-current-step="3"] .online-estimate-grid{grid-template-columns:1fr 1fr;gap:10px}.estimate-dialog[data-current-step="3"] .estimate-photo-field{margin-top:12px}.estimate-dialog[data-current-step="3"] #estimate-photo-help{font-size:.78rem;line-height:1.4;margin:6px 0}.estimate-dialog[data-current-step="3"] #estimate-online-toggle{min-height:36px;padding:6px 0;background:transparent;border:0;box-shadow:none;text-decoration:underline;font-size:.8rem;font-weight:600;color:var(--muted)}.estimate-dialog[data-current-step="3"] .estimate-delivery-choice{margin-top:4px}.estimate-dialog[data-current-step="3"] .online-estimate-note{font-size:.78rem;line-height:1.4}.estimate-dialog[data-current-step="3"] .estimate-actions{margin-top:12px;padding-top:12px}
+</style></head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <div class="announcement-bar"><div class="shell announcement-inner"><span>5-Star Rated</span><span class="announcement-dot">•</span><span>Family owned &amp; operated</span><span class="announcement-dot">•</span><span>Fast, easy estimates</span></div></div>
@@ -2211,37 +2213,37 @@
 </div>
 <div class="estimate-step" data-estimate-step="3" hidden="">
 <p class="estimate-step-label">Step 3 of 3</p>
-<h3>Review your estimate request.</h3>
-<p class="estimate-help">Send details and photos together online, or open Messages and attach photos before sending your text.</p>
+<h3>Your details &amp; photos</h3>
+<p class="estimate-help">Add your name, number and photos, then send your request.</p>
 <div class="estimate-summary" data-clarity-mask="true" hidden="" id="estimate-summary"></div>
-<div aria-live="polite" class="estimate-review" data-clarity-mask="true" id="estimate-review"></div>
+
 <div class="estimate-field" id="mobile-estimate-name-wrap" style="margin-top:14px">
 <label for="mobile-estimate-name">Your name</label>
 <input autocomplete="name" id="mobile-estimate-name" maxlength="120" placeholder="First and last name" type="text"/>
 </div>
 <p class="estimate-privacy">Nothing has been sent yet. For a text request, add photos in Messages before tapping Send. To upload photos here, choose Send Online with Photos.</p>
-<div class="estimate-delivery-choice" id="estimate-delivery-choice">
-<button class="button button-primary" id="estimate-send" type="button">Open Messages &amp; Add Photos</button>
-<button aria-controls="online-estimate-panel" aria-expanded="false" class="button button-outline" id="estimate-online-toggle" type="button">Send Online with Photos</button></div>
+
 <div class="online-estimate-panel" hidden="" id="online-estimate-panel">
-<h4>Send your estimate request online</h4>
-<p>Add your contact details and photos below. They’ll be sent together with this request.</p>
+
+
 <div class="online-estimate-grid">
 <div class="estimate-field"><label for="online-estimate-name">Name</label><input autocomplete="name" id="online-estimate-name" maxlength="120" placeholder="Your name" type="text"/></div>
 <div class="estimate-field"><label for="online-estimate-phone">Phone</label><input autocomplete="tel" id="online-estimate-phone" maxlength="30" placeholder="580-555-1234" type="tel"/></div>
-<div class="estimate-field"><label for="online-estimate-email">Email <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input autocomplete="email" id="online-estimate-email" maxlength="254" placeholder="you@example.com" type="email"/></div>
+
 </div>
 <div class="estimate-field estimate-photo-field">
 <label for="estimate-photos">Photos of the rooms or furniture</label>
 <input accept="image/jpeg,image/png,image/webp" aria-describedby="estimate-photo-help estimate-photo-status" id="estimate-photos" multiple="" type="file"/>
-<p class="estimate-help" id="estimate-photo-help">Choose up to 3 JPG, PNG or WebP photos, 8 MB total. Include a wide view and any problem spots. Photos are sent only when you submit.</p>
+<p class="estimate-help" id="estimate-photo-help">Optional: up to 3 JPG, PNG or WebP photos, 8 MB total. No photos? We can follow up.</p>
 <p data-clarity-mask="true" id="estimate-photo-status" role="status">No photos selected.</p>
 <button class="button button-outline" hidden="" id="estimate-photos-clear" type="button">Remove selected photos</button>
-<label class="estimate-no-photos"><input id="estimate-no-photos" type="checkbox"/> I don’t have photos right now. Please contact me to discuss the job.</label>
-</div>
-<button class="button button-primary" id="estimate-online-send" type="button">Send Estimate Request</button>
+<label class="estimate-no-photos" hidden=""><input id="estimate-no-photos" type="checkbox"/> I don’t have photos right now. Please contact me to discuss the job.</label>
+</div><details class="estimate-email-fold"><summary>Add email (optional)</summary><div class="estimate-field"><label for="online-estimate-email">Email <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input autocomplete="email" id="online-estimate-email" maxlength="254" placeholder="you@example.com" type="email"/></div></details>
+<button class="button button-primary" id="estimate-online-send" type="button">Send Request</button>
 <p class="online-estimate-note">William or Rebecca will contact you with pricing and available appointments. Your appointment is confirmed after we speak with you.</p>
-</div>
+</div><details class="estimate-review-fold"><summary>Review cleaning details</summary><div aria-live="polite" class="estimate-review" data-clarity-mask="true" id="estimate-review"></div></details><div class="estimate-delivery-choice" id="estimate-delivery-choice">
+<button class="button button-primary" id="estimate-send" type="button">Open Messages &amp; Add Photos</button>
+<button aria-controls="online-estimate-panel" aria-expanded="false" class="button button-outline" id="estimate-online-toggle" type="button">Send Online with Photos</button></div>
 </div>
 <div class="estimate-actions">
 <button class="button button-outline" hidden="" id="estimate-back" type="button">Back</button>
@@ -2496,6 +2498,7 @@
     }
 
     function updateEstimateUi() {
+      estimateDialog.dataset.currentStep = String(estimateState.step);
       estimateSteps.forEach((panel) => { panel.hidden = Number(panel.dataset.estimateStep) !== estimateState.step; });
       estimateProgress.forEach((bar, index) => bar.classList.toggle('is-active', index < estimateState.step));
       estimateBack.hidden = estimateState.step === 1;
@@ -2511,7 +2514,7 @@
         document.querySelector('.estimate-privacy').hidden=online;
         onlineEstimatePanel.hidden=!online;
         estimateOnlineToggle.setAttribute('aria-expanded',String(online));
-        estimateOnlineToggle.textContent=online ? 'Text photos instead' : 'Send online instead';
+        estimateOnlineToggle.textContent=online ? 'Having trouble uploading? Text us instead' : 'Return to online request';
         document.querySelector('#mobile-estimate-name-wrap').hidden=online;
         estimateSend.hidden=online || !isPhoneOrTablet();
         renderEstimateReview();
@@ -2652,7 +2655,7 @@
       const willOpen = onlineEstimatePanel?.hidden !== false;
       if (onlineEstimatePanel) onlineEstimatePanel.hidden = !willOpen;
       estimateOnlineToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-      estimateOnlineToggle.textContent = willOpen ? 'Text photos instead' : 'Send online instead';
+      estimateOnlineToggle.textContent = willOpen ? 'Having trouble uploading? Text us instead' : 'Return to online request';
       estimatePreferredDelivery=willOpen?'online':'text';
       document.querySelector('.estimate-privacy').hidden=willOpen;
       document.querySelector('#mobile-estimate-name-wrap').hidden=willOpen;
@@ -2672,7 +2675,7 @@
       const files=[...estimatePhotos.files];
       const issue=photoError(files);
       if(issue){estimateStatus.textContent=issue;estimatePhotos.focus();return;}
-      if(!files.length && !noPhotos.checked){estimateStatus.textContent='Add photos, or check the box to request a follow-up without photos.';estimatePhotos.focus();return;}
+      // Photos are optional; a request without them asks for follow-up.
       estimateSubmissionPending = true;
       const originalLabel = estimateOnlineSend.textContent;
       estimateOnlineSend.disabled = true;
