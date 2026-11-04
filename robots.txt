@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# Only canonical, public pages are listed in this sitemap.
 Sitemap: https://carpetfriendlysolutions.com/sitemap.xml
