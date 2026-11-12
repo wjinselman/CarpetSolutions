@@ -52,6 +52,8 @@
     document.addEventListener('click',event=>{
       const el=event.target.closest('a,button'); if(!el || el.hasAttribute('data-estimate-open') || el.hasAttribute('data-email-estimate')) return;
       const href=el.getAttribute('href')||'';
+      // Desktop contact links open instructions or copy the number instead of launching a handler.
+      if (event.defaultPrevented && /^(tel|sms):/.test(href)) return;
       const placement=el.closest('.mobile-cta,.mobilebar')?'sticky':el.closest('header')?'header':el.closest('footer')?'footer':'content';
       if(href.startsWith('tel:')) track('click_call',{contact_method:'phone',placement});
       else if(href.startsWith('sms:')) track('click_text',{contact_method:'sms',placement});
