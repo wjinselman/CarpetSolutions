@@ -19,7 +19,7 @@
     started = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
-    window.gtag('consent', 'default', {analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+    window.gtag('consent', 'default', {analytics_storage:read('cfs_analytics_consent') === 'granted' ? 'granted' : 'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
     window.gtag('js', new Date());
     const cleanUrl = new URL(location.origin + location.pathname);
     ['utm_source','utm_medium','utm_campaign'].forEach(key => { const value=params.get(key); if(value && /^[a-z0-9_. -]{1,100}$/i.test(value)) cleanUrl.searchParams.set(key,value); });
@@ -44,6 +44,24 @@
     privacy.href = '/privacy.html';
     privacy.textContent = 'Privacy policy';
     area.appendChild(privacy);
+    if (production && !internal && navigator.webdriver !== true && navigator.globalPrivacyControl !== true && navigator.doNotTrack !== '1') {
+      const preference = read('cfs_analytics_consent');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.style.cssText = 'margin-left:12px;font:inherit;color:inherit;background:none;border:0;text-decoration:underline;cursor:pointer';
+      button.textContent = preference === 'granted' ? 'Disable analytics' : 'Enable analytics cookies';
+      button.addEventListener('click', () => {
+        const choice = preference === 'granted' ? 'denied' : 'granted';
+        write('cfs_analytics_consent', choice);
+        if (read('cfs_analytics_consent') !== choice) return;
+        if (choice === 'denied' && typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', {analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+          window['ga-disable-' + measurementId] = true;
+        }
+        location.reload();
+      });
+      area.appendChild(button);
+    }
     if (internal) area.appendChild(document.createTextNode(' — Owner/testing mode: your visits are excluded.'));
     document.body.appendChild(area);
     document.querySelectorAll('a[href^="sms:"]').forEach(link=>{
